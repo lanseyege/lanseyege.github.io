@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Soft Reinforcement Learning: More DetailsSoft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy.">
+  <meta name="description" content="Soft Reinforcement Learning: More Details">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Soft Reinforcement Learning: More Details">
 <meta property="og:url" content="http://lanseyege.github.io/posts/2020/08/blog-post-2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Soft Reinforcement Learning: More DetailsSoft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy.">
+<meta property="og:description" content="Soft Reinforcement Learning: More Details">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-04T22:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-07T11:33:03.103Z">
+<meta property="article:modified_time" content="2021-02-04T02:03:25.441Z">
 <meta property="article:author" content="Ye Yuan">
 <meta property="article:tag" content="soft">
 <meta property="article:tag" content="entropy-regularized">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 13:33:03" itemprop="dateModified" datetime="2020-08-07T13:33:03+02:00">2020-08-07</time>
+                <time title="Modified: 2021-02-04 03:03:25" itemprop="dateModified" datetime="2021-02-04T03:03:25+01:00">2021-02-04</time>
               </span>
 
           
@@ -196,7 +196,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Soft-Reinforcement-Learning-More-Details"><a href="#Soft-Reinforcement-Learning-More-Details" class="headerlink" title="Soft Reinforcement Learning: More Details"></a>Soft Reinforcement Learning: More Details</h1><p>Soft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy. Here, we look into the certify process. </p>
+        <h1 id="Soft-Reinforcement-Learning-More-Details"><a href="#Soft-Reinforcement-Learning-More-Details" class="headerlink" title="Soft Reinforcement Learning: More Details"></a>Soft Reinforcement Learning: More Details</h1><a id="more"></a>
+<p>Soft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy. Here, we look into the certify process. </p>
 <h3 id="Soft-Q-iteration"><a href="#Soft-Q-iteration" class="headerlink" title="Soft Q-iteration"></a>Soft Q-iteration</h3><p><strong><em>Theorem: soft Q-iteration.</em></strong> Let $Q<em>\text{soft}(\cdot, \cdot)$ and $V</em>\text{soft}(\cdot)$ be bounded and assume that $\int<em>A \exp (\frac{1}{\alpha}Q</em>\text{soft}(\cdot, a^\prime))da^\prime &lt; \infty$ and that $Q_\text{soft}^\star &lt; \infty$ exists. Then the fixed-point iteration</p>
 <script type="math/tex; mode=display">
 \begin{equation}
@@ -232,11 +233,11 @@ V_\text{soft}(s_t) \leftarrow \alpha \log \int_A \exp (\frac{1}{\alpha}Q_\text{s
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2021/02/04/hello-world/" rel="next" title="Hello World">
-      Hello World <i class="fa fa-chevron-right"></i>
+    <a href="/2020/08/01/2020-08-01-blog-post-1/" rel="prev" title="Soft Reinforcement Learning: A Shallow Overview ">
+      <i class="fa fa-chevron-left"></i> Soft Reinforcement Learning: A Shallow Overview 
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     

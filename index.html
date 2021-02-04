@@ -145,72 +145,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/2021/02/04/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Ye Yuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/04/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-04 01:04:12 / Modified: 02:50:55" itemprop="dateCreated datePublished" datetime="2021-02-04T01:04:12+01:00">2021-02-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/04/hello-world/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2020/08/blog-post-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -242,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 13:33:03" itemprop="dateModified" datetime="2020-08-07T13:33:03+02:00">2020-08-07</time>
+                <time title="Modified: 2021-02-04 03:03:25" itemprop="dateModified" datetime="2021-02-04T03:03:25+01:00">2021-02-04</time>
               </span>
 
           
@@ -256,25 +190,87 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Soft-Reinforcement-Learning-More-Details"><a href="#Soft-Reinforcement-Learning-More-Details" class="headerlink" title="Soft Reinforcement Learning: More Details"></a>Soft Reinforcement Learning: More Details</h1><p>Soft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy. Here, we look into the certify process. </p>
-<h3 id="Soft-Q-iteration"><a href="#Soft-Q-iteration" class="headerlink" title="Soft Q-iteration"></a>Soft Q-iteration</h3><p><strong><em>Theorem: soft Q-iteration.</em></strong> Let $Q<em>\text{soft}(\cdot, \cdot)$ and $V</em>\text{soft}(\cdot)$ be bounded and assume that $\int<em>A \exp (\frac{1}{\alpha}Q</em>\text{soft}(\cdot, a^\prime))da^\prime &lt; \infty$ and that $Q_\text{soft}^\star &lt; \infty$ exists. Then the fixed-point iteration</p>
-<script type="math/tex; mode=display">
-\begin{equation}
-Q_\text{soft}(s_t, a_t) \leftarrow r_t + \gamma \mathbb{E}_{s_{t+1}\sim p_s}[V_\text{soft}(s_{t+1})], \forall s_t, a_t
-\end{equation}</script><script type="math/tex; mode=display">
-\begin{equation}
-V_\text{soft}(s_t) \leftarrow \alpha \log \int_A \exp (\frac{1}{\alpha}Q_\text{soft}(s_t, a^\prime))da^\prime, \forall s_t
-\end{equation}</script><p>converges to $Q^\star<em>\text{soft}$ and $V</em>\text{soft}^\star$, respectively. </p>
-<h3 id="“Soft”-Bellman-Operator"><a href="#“Soft”-Bellman-Operator" class="headerlink" title="“Soft” Bellman Operator"></a>“Soft” Bellman Operator</h3><p>Soft value iteration operator $\mathcal{T}$ is defined as</p>
-<script type="math/tex; mode=display">
-\begin{equation}
-\mathcal{T} Q(s, a) \triangleq r(s, a) + \gamma \mathbb{E}_{s^\prime \sim p_s}[\log \int \exp Q(s^\prime, a^\prime) da^\prime]
-\end{equation}</script><p>This is a contraction mapping. This result is certified in <a href="#1">[1]</a>, that we can get  $\left|\mathcal{T} Q<em>{1}-\mathcal{T} Q</em>{2}\right| \leq \gamma \varepsilon=\gamma | Q<em>{1}-Q</em>{2} \mid$. Since the soft Bellman backup is a contraction, the optimal value function is the fixed point of the Bellman backup, and it can be found by optimizing for a Q-function for which the soft Bellman error $|\mathcal{T}Q-Q|$ is minimized at all states and actions. </p>
-<h3 id="Simple-from-the-Soft-Q-function"><a href="#Simple-from-the-Soft-Q-function" class="headerlink" title="Simple from the Soft Q-function"></a>Simple from the Soft Q-function</h3><p>Soft Q-learning needs to sample from the policy, $\pi(a<em>t|s_t) \propto \exp (\frac{1}{\alpha}Q</em>\text{soft}^\theta(s<em>t, a_t))$, both to take on-policy actions and to generate action samples for estimating the soft value function. Since the form of the policy is so general, the direct sampling is intractable. The paper adopt an approximate way to do this, let’s see, Stein variational gradient descent (SVGD) <a href="#3">[3]</a>. <strong><em>firstly</em></strong>, they learn a state-conditioned stochastic neural network $a_t = f^\phi(\xi; s_t)$, parametrized by $\phi$, that maps noise samples $\xi$ drawn from a distribution into unbiased action samples from the target EBM corresponding to $Q</em>\text{soft}^\theta$. (<strong>secondly,</strong>) The induced distribution of the actions are $\pi^\phi(a_t | s_t)$, the goal is to find parameters $\phi$ so that the induced distribution approximates the energy-based distribution in terms of the KL divergence. <strong>We will list the details of SVGD in another blog.</strong> The paper also indicates the relation of their algos $f^\phi(\xi;s_t)$ and policy-gradient based methods, which you can find more details in<br> <a href="#2">[2]</a> (maybe we will organize these in another blog). </p>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
-<p><a id="2">[2]</a><br>Schulman, J., Abbeel, P., and Chen, X.  Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
-<p><a id="3">[3]</a><br>Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
+          <h1 id="Soft-Reinforcement-Learning-More-Details"><a href="#Soft-Reinforcement-Learning-More-Details" class="headerlink" title="Soft Reinforcement Learning: More Details"></a>Soft Reinforcement Learning: More Details</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/2020/08/blog-post-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/2020/08/01/2020-08-01-blog-post-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/01/2020-08-01-blog-post-1/" class="post-title-link" itemprop="url">Soft Reinforcement Learning: A Shallow Overview </a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-01 01:19:37" itemprop="dateCreated datePublished" datetime="2020-08-01T01:19:37+02:00">2020-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-04 03:05:15" itemprop="dateModified" datetime="2021-02-04T03:05:15+01:00">2021-02-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Soft-Reinforcement-Learning-A-Shallow-Overview"><a href="#Soft-Reinforcement-Learning-A-Shallow-Overview" class="headerlink" title="Soft Reinforcement Learning: A Shallow Overview"></a>Soft Reinforcement Learning: A Shallow Overview</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/01/2020-08-01-blog-post-1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
