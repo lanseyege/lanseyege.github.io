@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="A Brief Summary on Inverse Reinforcement Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Brief Summary on Inverse Reinforcement Learning">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2020/09/blog-post-9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="A Brief Summary on Inverse Reinforcement Learning">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-28T22:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T03:14:27.463Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Maximum Entropy">
+<meta property="article:tag" content="Inverse RL">
+<meta property="article:tag" content="Causal">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2020/09/blog-post-9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>A Brief Summary on Inverse Reinforcement Learning | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2020/09/blog-post-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A Brief Summary on Inverse Reinforcement Learning
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-29 00:00:00" itemprop="dateCreated datePublished" datetime="2020-09-29T00:00:00+02:00">2020-09-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-04 04:14:27" itemprop="dateModified" datetime="2021-02-04T04:14:27+01:00">2021-02-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="a-brief-summary-on-inverse-reinforcement-learning">A Brief Summary on Inverse Reinforcement Learning</h1>
+<a id="more"></a>
+<h2 id="inverse-reinforcement-learning">Inverse Reinforcement Learning</h2>
+<p>In Inverse Reinforcement Learning (IRL) setting, the reward function is not given explictly but the expert demonstrations are exposed to us. IRL seeks to recover a reward function from (near-)expert demonstration. In <a href="#3">[3]</a>, the task of learning from an expert is called apprenticeship learning (also leaning by watching, imitation leaning, or learning from demonstration).</p>
+<h2 id="algorithms-for-inverse-reinforcement-learning">Algorithms for Inverse Reinforcement Learning</h2>
+<p><a href="#3">[3]</a> propose a linear programming method to solve the problem by formulating origin question as a linearly, constrained optimization problem.</p>
+<p><strong><em>Theory</em></strong> Let a finite state space <span class="math inline">\(S\)</span>, a set of actions <span class="math display">\[A = \left\{a_1, \cdots, a_k\right\}\]</span>, transition probability matrices <span class="math display">\[\left\{ P_a \right\}\]</span>, and a discount factor <span class="math inline">\(\gamma \in (0, 1)\)</span> be given. Then the policy <span class="math inline">\(\pi\)</span> given by <span class="math inline">\(\pi(s)=a_1\)</span> is optimal if and only if, for all <span class="math inline">\(a = a_2, \cdots, a_k\)</span>, the reward <span class="math inline">\(R\)</span> satisfies:</p>
+<p><span class="math display">\[
+(P_{a_1} - P_a) (I - \gamma P_{a_1})^{-1}R \succeq 0 
+\]</span></p>
+<p>It’s easy to see that the condition <span class="math inline">\((P_{a_1} - P_a) (I - \gamma P_{a_1})^{-1}R \succ 0\)</span> is necessary and sufficient for <span class="math inline">\(\pi = a_1\)</span> to be the unique optimal policy. It represents the gap of expected value on each state between acting optimally and acting suboptimally.</p>
+<p>The <strong><em>key idea</em></strong> in this paper is to find a reward function <span class="math inline">\(R(s)\)</span> such that it maximize the gap between expert policy and any other policies. To do so, on each state, we want to maximize the gap of expected value of acting optimally and the <strong><em>best</em></strong> expected value of taking suboptimal actions. In other words, we seek to maximize the sum of the differences between the quality of the optimal action and the quality of the <strong><em>next-best</em></strong> action:</p>
+<p><span class="math display">\[
+\sum_{s \in S}(Q^\pi(s, a_1) - \max_{a\in A\setminus a_1}Q^\pi (s, a))
+\]</span></p>
+<p>The objective is:</p>
+<p><span class="math display">\[
+\max \sum_{i=1}^{N} \min_{a\in A\setminus a^\star} \left\{ P_{a^\star}(i) - P_a(i) \right\}(I - \gamma P_{a^\star})^{-1}R
+\]</span></p>
+<p>For large state space, the linear programming formulation is</p>
+<p><span class="math display">\[
+\begin{split}
+\max &amp;\sum_{s \in S_0} \min_{a \in \left\{a_2, \cdots, a_k\right\}}\left\{p(E_{s^\prime \sim P_{sa_1}}[V^\pi (s^\prime)] - E_{s^\prime \sim P_{sa}}[V^\pi (s^\prime)] )\right\} \\
+\textbf{s.t. } &amp;|\alpha_i| \leq 1, i = 1, \cdots, d \\
+\end{split}
+\]</span></p>
+<p>. This will be solved by Monte-Carlo simulation and LP method.</p>
+<h2 id="apprenticeship-learning-via-inverse-reinforcement-learning">Apprenticeship Learning via Inverse Reinforcement Learning</h2>
+<p>Feature expectations is expressed as</p>
+<p><span class="math display">\[
+\mu(\pi) = E[\sum_{t=0}^\infty \gamma^t \phi(s_t)|\pi] \in R^k
+\]</span></p>
+<p>Using this notation, the value of a policy may be written <span class="math inline">\(E_{s_0 \sim D}[V^\pi (s_0)] = w \cdot \mu(\pi)\)</span>. Given the trajectories generated by the expert, we denote the empirical estimate for <span class="math inline">\(\mu_E\)</span> by</p>
+<p><span class="math display">\[
+\hat{\mu}_E = \frac{1}{m} \sum_{i=1}^m \sum_{t=0}^{\infty} \gamma^t \phi(s_t^{(i)})
+\]</span></p>
+<p>The <strong><em>problem</em></strong> is the following: we seeks to find a policy whose performance is close to that of the expert’s, on the unknown reward function <span class="math inline">\(R^\star = {w^{\star}}^\top \phi\)</span>. To accomplish this, we will find a policy <span class="math inline">\(\tilde{\pi}\)</span> such that <span class="math inline">\(\left\|\mu(\tilde{\pi}) - \mu_E \right\|_2 \leq \epsilon\)</span>.</p>
+<p><span class="math display">\[
+\begin{split}
+\max_{t,w} &amp; \quad t \\
+\textbf{s.t.} &amp; w^\top \mu_E \geq w^\top \mu^{(j)} + t, j = 0, \cdots, i-1 \\
+&amp; ||w||_2 \leq 1 \\
+\end{split}
+\]</span></p>
+<p>One important step of the algorithm is: <span class="math display">\[t^{(i)} = \max_{w:\left\| w \right\|_{2} \leq 1} \min_{j \in \left\{0, \cdots, i-1 \right\}} w^\top (\mu_E - \mu^{j})\]</span>.</p>
+<p>This is equivalent to finding the maximum margin hyperplane separating two sets of points. So, an SVM solver can be used to find <span class="math inline">\(w^{(i)}\)</span>. A simpler algorithm is <strong><em>projection method</em></strong>, as descripted in paper.</p>
+<h2 id="max-margin-planning-and-learn-to-search">Max Margin Planning and Learn to Search</h2>
+<p><a href="#4">[4]</a> propose maximum margin planning method to do imitation learning. It frames the IL problem as a maximum margin structured prediction problem over a space of policies.</p>
+<p>The input to the algorithm is a set of training instances <span class="math inline">\(\mathcal{D} = \left\{ (\mathcal{X}_i, \mathcal{A}_i, p_i, F_i, y_i, \mathcal{L}_i) \right\}_{i=1}^{n}\)</span>. - <span class="math inline">\(\mathcal{X}\)</span>: State space - <span class="math inline">\(\mathcal{A}\)</span>: Action space - <span class="math inline">\(p_i\)</span>: transition probabilities - <span class="math inline">\(F_i\)</span>: d-dimensional feature vectors in the form of <span class="math inline">\(d\times \lvert\mathcal{X}\rvert \lvert\mathcal{A}\rvert\)</span> - <span class="math inline">\(y_i\)</span>: the desired trajectory - <span class="math display">\[\mathcal{L}_i : \mathcal{Y}\times\mathcal{Y}\rightarrow R_{+}\]</span>, here, <span class="math inline">\(\mathcal{L}(y, y_i)=\mathcal{L}_i(y) = l_i^\top \mu\)</span>. - Intuitively, a loss vector is placed over state-action pairs that defines for each state-action pair how much the learner pays for failing to match the behavior of an example policy <span class="math inline">\(y_i\)</span> as the cumulative loss of the learned policy through this MDP.</p>
+<p>Maximum Margin Planning constrained optimization formulation:</p>
+<p><span class="math display">\[
+\begin{split}
+\min_{w, \zeta_i, v_i} \frac{1}{2}\left\|w\right\|^2 + \frac{\gamma}{n}\sum_i\beta_i\zeta_i^q  \\
+\text{s.t.} \quad \forall i w^\top F_i\mu_i + \zeta_i \geq s_i^T v_i \\
+\forall i, x, a \quad v_i^x \geq (w^\top F_i+ l_i)^{x,a} + \sum_{x^\prime} p_i(x^\prime | x, a )v_i^{x^\prime} \\
+\end{split}
+\]</span></p>
+<p>In fact, inverse reinforcement learning is an ill-defined problem: there are many optimal policies that can explain a set of demonstrations, and many rewards that can explain an optimal policy. Max-Ent IRL is to handles the former ambiguity.</p>
+<h2 id="maximum-entropy-principle">Maximum Entropy Principle</h2>
+<p>Entropy is an old concept in physicals that is used to describe the randomness in environments. The greater the entropy, the more random the actions the policy gives. The discrete form of entropy is:</p>
+<p><span class="math display">\[
+\begin{equation}
+H(X) = \mathbb{E}_X [I(x)] = - \sum_{x \in X} p(x) \log p(x) 
+\end{equation}
+\]</span></p>
+<p>Similarity, the entropy term for policy has this form:</p>
+<p><span class="math display">\[\begin{equation}
+H(\pi(\cdot | s_t)) = - \sum_{a\in A} \pi(a|s_t) \log \pi(a|s_t)
+\end{equation}\]</span></p>
+<p>The entropy term of policy can help the policy to increase the expoloration ability, by adding more possibilities to some rare actions. That could avoid the agent get stuck into local optimum and attain global optimum, to some extend. The idea of learning such maximum entropy model has its origin in statistical modeling, in which the goal is to find the probability distribution that has the highest entropy while still satisfying the observed statistics <a href="#1">[1]</a>. The <strong>principle of maximum entropy</strong> states that the probability distribution with the highest entropy, is the one that best represents the current state of knowledge in the context of precisely stated prior data <a href="#2">[2]</a>.</p>
+<h2 id="apprenticeship-learning-using-linear-programming">Apprenticeship Learning Using Linear Programming</h2>
+<p><a href="#5">[5]</a> One contribution, if one uses the linear programming approach for finding an MDP’s optimal policy as a subroutine, then one can modify <a href="#6">[6]</a> algorithm so that it outputs a stationary policy instead of a mixed policy. Second contribution is the formulation of the apprenticeship learning problem as a linear program.</p>
+<p>We say a policy <span class="math inline">\(\pi\)</span> is <span class="math inline">\(\epsilon\)</span>-optimal if <span class="math inline">\(V(\pi^star) - V(\pi) \leq \epsilon\)</span>. A policy <span class="math inline">\(\pi\)</span> has occupancy measure <span class="math inline">\(x^\pi\)</span> if</p>
+<p><span class="math display">\[
+x_{s,a}^\pi = E[\sum_{t=0}^\infty \gamma^t \mathbb{1}_{(s_t=s \wedge a_t =a)}\vert \alpha, \pi, \theta]
+\]</span></p>
+<p>for all <span class="math inline">\(s,a\)</span>. The goal of apprenticeship learning is to find an apprentice policy <span class="math inline">\(\pi^A\)</span> such that <span class="math inline">\(V(\pi^A) \geq V(\pi^E)\)</span>.</p>
+<h2 id="a-game-theoretic-approach-to-apprenticeship-learning">A Game-Theoretic Approach to Apprenticeship Learning</h2>
+<p><a href="#6">[6]</a> propose a method to produce a policy that may substantially better than the expert’s based on a game-theoretic view of the problem. They pose the problem as learning to play a two-player zero-sum game in which the apprentice chooses a policy, and the environment chooses a reward function. The goal of the apprentice is to maximize performance relative to the expert, even though the reward function may be adversarially selected by the environment with respect to this goal.</p>
+<h3 id="references">References</h3>
+<p><a id="1">[1]</a> <span class="citation" data-cites="article">@article</span>{haarnoja2017reinforcement, title={Reinforcement learning with deep energy-based policies}, author={Haarnoja, Tuomas and Tang, Haoran and Abbeel, Pieter and Levine, Sergey}, journal={arXiv preprint arXiv:1702.08165}, year={2017} }</p>
+<p><a id="2">[2]</a> https://towardsdatascience.com/entropy-regularization-in-reinforcement-learning-a6fa6d7598df</p>
+<p><a id="3">[3]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{abbeel2004apprenticeship, title={Apprenticeship learning via inverse reinforcement learning}, author={Abbeel, Pieter and Ng, Andrew Y}, booktitle={Proceedings of the twenty-first international conference on Machine learning}, pages={1}, year={2004} }</p>
+<p><a id="4">[4]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{ratliff2006maximum, title={Maximum margin planning}, author={Ratliff, Nathan D and Bagnell, J Andrew and Zinkevich, Martin A}, booktitle={Proceedings of the 23rd international conference on Machine learning}, pages={729–736}, year={2006} }</p>
+<p><a id="5">[5]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{syed2008apprenticeship, title={Apprenticeship learning using linear programming}, author={Syed, Umar and Bowling, Michael and Schapire, Robert E}, booktitle={Proceedings of the 25th international conference on Machine learning}, pages={1032–1039}, year={2008} }</p>
+<p><a id="6">[6]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{syed2008game, title={A game-theoretic approach to apprenticeship learning}, author={Syed, Umar and Schapire, Robert E}, booktitle={Advances in neural information processing systems}, pages={1449–1456}, year={2008} }</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Maximum-Entropy/" rel="tag"># Maximum Entropy</a>
+              <a href="/tags/Inverse-RL/" rel="tag"># Inverse RL</a>
+              <a href="/tags/Causal/" rel="tag"># Causal</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2020/08/blog-post-8/" rel="prev" title="A Generalized Algorithm for Multi-ObjectiveReinforcement Learning and Policy Adaptation">
+      <i class="fa fa-chevron-left"></i> A Generalized Algorithm for Multi-ObjectiveReinforcement Learning and Policy Adaptation
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2020/10/blog-post-10/" rel="next" title="Maximum Margin Methods">
+      Maximum Margin Methods <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#a-brief-summary-on-inverse-reinforcement-learning"><span class="nav-number">1.</span> <span class="nav-text">A Brief Summary on Inverse Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inverse-reinforcement-learning"><span class="nav-number">1.1.</span> <span class="nav-text">Inverse Reinforcement Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#algorithms-for-inverse-reinforcement-learning"><span class="nav-number">1.2.</span> <span class="nav-text">Algorithms for Inverse Reinforcement Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apprenticeship-learning-via-inverse-reinforcement-learning"><span class="nav-number">1.3.</span> <span class="nav-text">Apprenticeship Learning via Inverse Reinforcement Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max-margin-planning-and-learn-to-search"><span class="nav-number">1.4.</span> <span class="nav-text">Max Margin Planning and Learn to Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-entropy-principle"><span class="nav-number">1.5.</span> <span class="nav-text">Maximum Entropy Principle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apprenticeship-learning-using-linear-programming"><span class="nav-number">1.6.</span> <span class="nav-text">Apprenticeship Learning Using Linear Programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-game-theoretic-approach-to-apprenticeship-learning"><span class="nav-number">1.7.</span> <span class="nav-text">A Game-Theoretic Approach to Apprenticeship Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.7.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

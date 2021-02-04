@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Graph Convlutional Network">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph Convolutional Networks">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2020/11/blog-post-13/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Graph Convlutional Network">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-04T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T03:15:23.969Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Graph">
+<meta property="article:tag" content="Convolution">
+<meta property="article:tag" content="Laplacian">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2020/11/blog-post-13/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Graph Convolutional Networks | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2020/11/blog-post-13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Graph Convolutional Networks
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-11-05 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-05T00:00:00+01:00">2020-11-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-04 04:15:23" itemprop="dateModified" datetime="2021-02-04T04:15:23+01:00">2021-02-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="graph-convlutional-network">Graph Convlutional Network</h1>
+<a id="more"></a>
+<h2 id="classical-wavelet-transform-cwt">Classical Wavelet Transform (CWT)</h2>
+<p>In general, the CWT will be generated by the choice of a single “mother” wavelet <span class="math inline">\(\psi\)</span>. Wavelets at different locations and spatial scales are formed by translating and scaling the mother wavelet. We write this by</p>
+<p><span class="math display">\[
+\psi_{s,a}(x) = \frac{1}{s}\psi(\frac{x-1}{s})
+\]</span></p>
+<p>This scaling convention preserves the <span class="math inline">\(L^1\)</span> norm of the wavelets. <span class="math inline">\(s&gt;0\)</span>. For a given signal <span class="math inline">\(f\)</span>, the wavelet coefficient at scale <span class="math inline">\(s\)</span> and location <span class="math inline">\(a\)</span> is given by the inner product of <span class="math inline">\(f\)</span> with the wavelet <span class="math inline">\(\psi_{s,a}\)</span>, i.e.</p>
+<p><span class="math display">\[
+W_f(s,a) = \int_{-\infty}^{\infty}\frac{1}{s}\psi^\star(\frac{x-a}{s})f(x)dx
+\]</span></p>
+<p>The CWT satisfies the admissibility condition</p>
+<p><span class="math display">\[
+\int_0^\infty \frac{\lvert \hat{\psi}(\omega)\rvert^2}{\omega}d\omega = C_{\psi} &lt; \infty
+\]</span></p>
+<h3 id="comparisons-with-fourier-transform-continuous-time-6">Comparisons with Fourier transform (continuous-time) <a href="#6">[6]</a></h3>
+<p>The wavelet transform is often compared with the Fourier transform, in which signals are represented as a sum of sinusoids. In fact, the Fourier transform can be viewed as a special case of the continuous wavelet transform with the choice of the mother wavelet <span class="math inline">\(\phi(t) = e ^{-2\pi i t}\)</span>. <strong><em>The main difference</em></strong> in general is that wavelets are localized in both time and frequency whereas the standard Fourier transform is only localized in frequency.</p>
+<p><strong><em>Conjugate Transpose</em></strong>: The conjugate transpose (or Hermitian transpose) of an m-by-n matrix <span class="math inline">\(\mathbf{A}\)</span> with complex entries, is the n-by-m matrix obtained from <span class="math inline">\(\mathbf{A}\)</span> by taking the transpose and then taking the complex conjugate of each entry (the complex conjugate of <span class="math inline">\(a + ib\)</span> being <span class="math inline">\(a - ib\)</span>, for real numbers a and b). It is often denoted as <span class="math inline">\(\mathbf{A}^H\)</span> or <span class="math inline">\(\mathbf{A}^\star\)</span>. For real matrices, the conjugate transpose is just the transpose, <span class="math inline">\(\mathbf{A}^H = \mathbf{A}^\top\)</span>.</p>
+<p><strong><em>Complex Conjugate</em></strong>: the complex conjugate of a complex number is the number with an equal real part and an imaginary part equal in magnitude, but opposite in sign. Given a complex number <span class="math inline">\(z = a + bi\)</span>, the complex conjugate of <span class="math inline">\(z\)</span>, often denoted as <span class="math inline">\(\bar{z} = a - bi\)</span>. For matrices of complex numbers, <span class="math inline">\(\bar{\mathbf{AB}} = (\bar{\mathbf{A}})(\bar{\mathbf{B}})\)</span>, where <span class="math inline">\(\bar{\mathbf{A}}\)</span> represents the element-by-element conjugation of <span class="math inline">\(\mathbf{A}\)</span>. Contrast this to the property <span class="math inline">\((\mathbf{AB})^\star = \mathbf{B}^\star \mathbf{A}^\star\)</span>, where <span class="math inline">\(\mathbf{A}^\star\)</span> represents the conjugate transpose of <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<h2 id="vanilla-graph-convlutional-network">Vanilla Graph Convlutional Network</h2>
+<p>A multi-layer Graph Convolutional Network (GCN) with the following layer-wise propagation rule:</p>
+<p><span class="math display">\[
+H^{(l+1)} = \sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H^{(l)}W^{(l)})
+\]</span></p>
+<p>Here, <span class="math inline">\(\tilde{A} = A + I_N\)</span> is the adjacency matrix of the undirected graph <span class="math inline">\(\mathcal{G}\)</span> with added self-connections. <span class="math inline">\(I_N\)</span> is the identity matrix, $  _{ii} = <em>j  </em>{ij}$ and <span class="math inline">\(W^{(l)}\)</span> is a layer-specific trainable weight matrix. <span class="math inline">\(\sigma(\cdot)\)</span> denotes an activation function, such as <span class="math inline">\(\text{ReLU}(\cdot) = \text{max} (0, \cdot) . \quad H^{(l)} \in \mathbb{R}^{N\times D}\)</span> is the matrix of activations in the <span class="math inline">\(l^\text{th}\)</span> layer; <span class="math inline">\(H^{(0)} = X\)</span>.</p>
+<h3 id="spectral-graph-convolutions">Spectral Graph Convolutions</h3>
+<p>We consider spectral convolutions on graphs defined as the multiplication of a signal <span class="math inline">\(x \in \mathbb{R}^N\)</span> (a scalar for every node) with a filter <span class="math inline">\(g_\theta = \text{diag}(\theta)\)</span> parameterized by <span class="math inline">\(\theta \in \mathbb{R}^N\)</span> in the Fourier domain,</p>
+<p><span class="math display">\[
+g_\theta \star x = U g_\theta U^\top x
+\]</span></p>
+<p>where <span class="math inline">\(U\)</span> is the matrix of eigenvectors of the normalized graph Laplacian <span class="math inline">\(L = I_N - D^{-\frac{1}{2}}AD^{-\frac{1}{2}} = U\Lambda U^\top\)</span>, with a diagonal matrix of its eigenvalues <span class="math inline">\(\Lambda\)</span> and <span class="math inline">\(U^\top x\)</span> being the graph Fourier transform of <span class="math inline">\(x\)</span>. <strong><em>Drawbacks</em></strong> of this formulation are:</p>
+<ul>
+<li>Computationally expensive, as multiplication with the eigenvector matrix <span class="math inline">\(U\)</span> is <span class="math inline">\(\mathcal{O}(N^2)\)</span>;</li>
+<li>Computing the eigendecompositon of <span class="math inline">\(L\)</span> in the first place might be prohibitively expensive for large graphs</li>
+</ul>
+<h3 id="graph-fourier-transform">Graph Fourier Transform</h3>
+<p>We are interested in processing signals defined on undirected and connected graphs <span class="math inline">\(\mathcal{G} = (\mathcal{V}, \mathcal{E}, W)\)</span>, where <span class="math inline">\(\mathcal{V}\)</span> is a finite set of <span class="math inline">\(\lvert \mathcal{V} \rvert = n\)</span> vertices, <span class="math inline">\(\mathcal{E}\)</span> is a set of edges and <span class="math inline">\(W \in \mathbb{E}^{n\times n}\)</span> is a weighted adjacency matrix encoding the connection weight between two vertices. A signal <span class="math inline">\(x : \mathcal{V} \rightarrow \mathbb{R}\)</span> defined on the nodes of the graph may be regarded as a vector $ x ^n $ where <span class="math inline">\(x_i\)</span> is the value of <span class="math inline">\(x\)</span> at the <span class="math inline">\(i^{\text{th}}\)</span> node. An essential operator in spectral graph analysis is the graph Laplacian, which combinatorial definition is <span class="math inline">\(L = D - W \in \mathbb{R}^{n \times n}\)</span> where <span class="math inline">\(D \in \mathbb{R}^{n \times n}\)</span> is the diagonal degree matrix with <span class="math inline">\(D_{ii} = \sum_j W_{ij}\)</span>, and normalized definition is <span class="math inline">\(L = I_n - D^{-1/2}W D^{-1/2}\)</span> where <span class="math inline">\(I_n\)</span> is the identity matrix. As <span class="math inline">\(L\)</span> is a real symmetric positive semidefinite matrix, it has a complete set of orthonormal eigenvectors <span class="math display">\[\left\{ u_l \right\} _{l=0}^{n-1} \in \mathcal{R}^n\]</span>, known as the <strong><em>graph Fourier modes</em></strong>, and their associated ordered real nonnegative eigenvalues <span class="math display">\[\left\{ \lambda_l \right\} _{l=0}^{n-1}\]</span>, identified as the <strong><em>frequencies of the graph</em></strong>. The Laplacian is indeed diagonalized by the Fourier basis <span class="math display">\[U = \left[u_0, \ldots, u _{n-1}\right] \in \mathbb{R}^{n \times n}\]</span> such that <span class="math display">\[L = U\Lambda U^\top\]</span> where <span class="math display">\[\Lambda=\operatorname{diag}\left(\left[\lambda_{0}, \ldots, \lambda_{n-1}\right]\right) \in \mathbb{R}^{n \times n}\]</span>. The <strong><em>graph Fourier transform</em></strong> of a signal <span class="math display">\[x \in \mathbb{R}^n\]</span> is then defined as <span class="math display">\[\hat{x} = U^\top x \in \mathbb{R}^n\]</span>, and its <strong><em>inverse</em></strong> as <span class="math display">\[x = U \hat{x}\]</span>. As on Euclidean spaces, that transform enables the formulation of fundamental operations such as filtering. <a href="#1">[1]</a></p>
+<h3 id="spectral-filtering-of-graph-signals">Spectral filtering of graph signals</h3>
+<p>As we cannot express a meaningful translation operator in the vertex domain, the <strong>convolution operator on graph</strong> <span class="math inline">\(\star_{\mathcal{G}}\)</span> is defined in the Fourier domain such that $ x _{} y = U((U^x) (Uy)) $, where $ $ is the element-wise Hadamard product. It follows that a signal <span class="math inline">\(x\)</span> is filtered by <span class="math inline">\(g_\theta\)</span> as</p>
+<p><span class="math display">\[
+y = g_\theta(L)x = g_\theta(U\Lambda U^\top) x = U g_\theta (\Lambda) U^\top x.
+\]</span></p>
+<p>A non-parametric filter, i.e. a filter whose parameters are all free, would be defined as</p>
+<p><span class="math display">\[
+g_\theta (\Lambda) = \operatorname{diag}(\theta)
+\]</span></p>
+<p>where the paramter <span class="math inline">\(\theta \in \mathbb{R}^n\)</span> is a vector of Fourier coefficients.</p>
+<h2 id="another-perspective-to-gcn-2">Another Perspective to GCN <a href="#2">[2]</a></h2>
+<ul>
+<li><span class="math inline">\(A \in \mathbb{R}^{N\times N}\)</span> adjacency matrix of graph <span class="math inline">\(G\)</span></li>
+<li><span class="math inline">\(D \in \mathbb{R}^{N\times N}\)</span> degree matrix</li>
+<li><span class="math inline">\(L \in \mathbb{R}^{N\times N}\)</span> Laplacian matrix</li>
+<li><span class="math inline">\(g \in \mathbb{R}^{N}\)</span> convolutional kernel filter</li>
+<li><span class="math inline">\(x \in \mathbb{R}^{N}\)</span> signal on graph</li>
+</ul>
+<p>There are usually three kinds of Laplacian matrix <span class="math inline">\(L\)</span>: - Unnormalized Laplacian: <span class="math inline">\(L_{(1)} = D - A\)</span> - Symmetric normalized Laplacian: <span class="math inline">\(L_{(2)} = D^{-\frac{1}{2}}L_{(1)}D^{-\frac{1}{2}} = I - D^{-\frac{1}{2}} A D^{-\frac{1}{2}}\)</span> - Random walk normalized Laplacian: <span class="math inline">\(L_{(3)} = D^{-1}L_{(1)} = I - D^{-1}A\)</span></p>
+<h3 id="graph-convolution">Graph Convolution</h3>
+<p><span class="math display">\[
+g \otimes x = U((U^\top g) \odot (U^\top x))
+\]</span></p>
+<p><span class="math inline">\(\otimes\)</span> is convolutional operator, <span class="math inline">\(\odot\)</span> is Hadamard product. Laplacian matrix <span class="math inline">\(L = U\Lambda U^\top, U \in \mathbb{R}^{N\times N}\)</span> is L’s eigenvectors, <span class="math inline">\(\Lambda \in \mathbb{R}^{N \times N }\)</span> is eigenmatrix. <span class="math inline">\(U^\top g\)</span> and <span class="math inline">\(U^\top x\)</span> is doing Fourier transform for <span class="math inline">\(g\)</span> and <span class="math inline">\(x\)</span>, respectively.</p>
+<h3 id="spectral-graph-convolution">Spectral Graph Convolution</h3>
+<p><span class="math display">\[
+g \otimes x = U((U^\top g) \odot (U^\top x)) = U \hat{g}U^\top x = U\hat{g}(\Lambda) U^\top x
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\hat{g} = \hat{g}(\Lambda) = \operatorname{diag}(\hat{g}(\lambda_l)) = \left(\begin{array}{llll}
+\hat{g}\left(\lambda_{1}\right) &amp; &amp; \\
+&amp; \ddots &amp; \\
+&amp; &amp; \hat{g}\left(\lambda_{n}\right)
+\end{array}\right) 
+\]</span></p>
+<p>is convolutional kernel <span class="math inline">\(g\)</span>’s Fourier tranform <span class="math inline">\(U^\top g\)</span>’s triangle form. <span class="math inline">\(\hat{g}(\lambda_l) = \sum_{i=1}^N u_l(i)g(i) = u_l^{\top} g\)</span>.</p>
+<h3 id="paramters-graph-convolution-3">Paramters Graph Convolution <a href="#3">[3]</a></h3>
+<p><span class="math display">\[
+g \otimes x = U g_\theta U^\top x
+\]</span></p>
+<p>This is replacement of <span class="math inline">\(\operatorname{diag}(\hat{g}(\lambda_l))\)</span> with <span class="math inline">\(\operatorname{diag}(\theta_l)\)</span>. And <span class="math inline">\(\theta\)</span> is the parameters we aims to learn. Drawbacks: - Huge computation, too complex - Amount of parameters is <span class="math inline">\(N\)</span> - Convolution kernel is not localized connected</p>
+<h3 id="polynomail-parameter-graph-convolution-4">Polynomail Parameter Graph Convolution <a href="#4">[4]</a></h3>
+<p><span class="math display">\[
+g \otimes x = \sum_{k=0}^{K} \alpha_k L^k x
+\]</span></p>
+<p>This smartly replace <span class="math inline">\(\hat{g}(\Lambda)\)</span> with <span class="math display">\[\hat{g}_{\alpha}(\Lambda) = \sum_{k=0}^K \alpha_k \Lambda^k\]</span>, where <span class="math inline">\(\hat{g}(\lambda_l)\)</span> is replaced by <span class="math display">\[\hat{g}_{\alpha}(\lambda_l) = \sum_{k=0}^K \alpha_k \lambda_l^k\]</span>.</p>
+<ul>
+<li>Reduce the parameter of convolution kernels from <span class="math inline">\(N\)</span> to <span class="math inline">\(K+1\)</span></li>
+<li>Convolutional Kernal has localized property</li>
+<li><span class="math inline">\(K\)</span> is convolutional kernel’s reaction range</li>
+<li>but, calculation is still highly complex</li>
+</ul>
+<h3 id="chebyshev-polynomial-graph-convolution-5">Chebyshev Polynomial Graph Convolution <a href="#5">[5]</a></h3>
+<p><span class="math display">\[
+g \otimes x = \sum_{k=0}^K \beta_k T_k (\hat{L})x
+\]</span></p>
+<p>where <span class="math inline">\(\hat{L} = \frac{2}{\lambda_{\max}}L - I_N\)</span>. This consider the Chebyshev polynomial <span class="math inline">\(T_k(x)\)</span>’s K-cut to approximate <span class="math inline">\(\hat{g}(\Lambda)\)</span>: <span class="math display">\[\hat{g}(\Lambda) \approx \hat{g}_{\beta}(\hat{\Lambda}) = \sum_{k=0}^{K}\beta_k T_k (\hat{\Lambda})\]</span>, where <span class="math display">\[\hat{\Lambda}=\frac{2}{\lambda_{\max}}\Lambda - I_N\]</span>, <span class="math display">\[\beta_k\]</span> is Chebyshev coefficient, which is paramter in graph network. The Chebyshev polynomial can be defined recursively: <span class="math inline">\(T_k(x) = 2x T_{k-1}(x) - T_{k-2}(x)\)</span>, where <span class="math inline">\(T_0 (x) = 1\)</span> and <span class="math inline">\(T_1 (x) = x\)</span>. So we can get:</p>
+<p><span class="math display">\[
+g \otimes x = U\hat{g}_{\beta}(\hat{\Lambda})U^\top x = U[\sum_{k=0}^{K} \beta_k T_k (\hat(\Lambda))] U^\top x = \sum_{k=0}^K \beta_k U T_k (\hat{\Lambda})U^\top x = \sum_{k=0}^{K} \beta_k T_k(\hat{L})x 
+\]</span></p>
+<ul>
+<li>similar to above, convolutional operator don’t rely on whole graph, but on K-neighbors to center</li>
+<li>avoid eigen decomposition of Laplacian matrix</li>
+<li>but still perform K-order calculation on <span class="math inline">\(\hat{L}\)</span></li>
+</ul>
+<h3 id="one-order-chebyshev-polynomial-graph-convolution-6">One-order Chebyshev Polynomial Graph Convolution <a href="#6">[6]</a></h3>
+<p><span class="math display">\[
+g \otimes x = \gamma \hat{D}^{-\frac{1}{2}} \hat{A} \hat{D}^{-\frac{1}{2}} x
+\]</span></p>
+<p>This is a special case in above equation that we set <span class="math inline">\(K=1\)</span>. For simplification, we set <span class="math inline">\(\lambda_\max \approx 2\)</span>, we have</p>
+<p><span class="math display">\[
+g \otimes x \approx \beta_0 x + \beta_1 (L - I_N) x = \beta_0 x - \beta_1 D^{-\frac{1}{2}} A D^{-\frac{1}{2}} x 
+\]</span></p>
+<p>Further step, we set <span class="math inline">\(\beta_0 = -\beta_1 = \gamma\)</span>, we can get:</p>
+<p><span class="math display">\[
+g \otimes x \approx \beta_0 x - \beta_1 D^{-\frac{1}{2}} A D^{-\frac{1}{2}}x = \gamma (I_N + D^{-\frac{1}{2}} A D^{-\frac{1}{2}}) x
+\]</span></p>
+<p>This operator will fall into number unstable and gradient issues, so it proposes renormalization trick:</p>
+<p><span class="math display">\[
+I_N + D^{-\frac{1}{2}} A D^{-\frac{1}{2}} \rightarrow \hat{D}^{-\frac{1}{2}} \hat{A} \hat{D}^{-\frac{1}{2}}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{A} = A + I_N\)</span>, and <span class="math display">\[\hat{D}_{ii} = \sum_j \hat{A}_{ij}\]</span>. Here <span class="math display">\[\hat{A}\]</span> and <span class="math display">\[\hat{D}\]</span> is the adjacency matrix and degree matrix adding self-loop. Finally, we get <span class="math display">\[g \otimes x = \gamma \hat{D}^{-\frac{1}{2}}\hat{A}\hat{D}^{-\frac{1}{2}}x\]</span>.</p>
+<p>Next, we can get:</p>
+<p><span class="math display">\[
+Z = \hat{D}^{-\frac{1}{2}} \hat{A} \hat{D}^{-\frac{1}{2}} X W = \tilde{A}XW
+\]</span></p>
+<p>where <span class="math inline">\(X \in \mathbb{R}^{N\times C}\)</span> is representation of input, and <span class="math inline">\(W \in \mathbb{R}^{C\times F}\)</span> is paramter matrix, which is the part to learn in networks, <span class="math inline">\(Z \in \mathbb{R}^{N \times F}\)</span> is corresponding convolutional result.</p>
+<h3 id="references">References</h3>
+<p><a id="1">[1]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{defferrard2016convolutional, title={Convolutional neural networks on graphs with fast localized spectral filtering}, author={Defferrard, Micha{"e}l and Bresson, Xavier and Vandergheynst, Pierre}, booktitle={Advances in neural information processing systems}, pages={3844–3852}, year={2016} }</p>
+<p><a id="2">[2]</a> https://zhuanlan.zhihu.com/p/126687306</p>
+<p><a id="3">[3]</a> <span class="citation" data-cites="article">@article</span>{bruna2013spectral, title={Spectral networks and locally connected networks on graphs}, author={Bruna, Joan and Zaremba, Wojciech and Szlam, Arthur and LeCun, Yann}, journal={arXiv preprint arXiv:1312.6203}, year={2013} }</p>
+<p><a id="4">[4]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{defferrard2016convolutional, title={Convolutional neural networks on graphs with fast localized spectral filtering}, author={Defferrard, Micha{"e}l and Bresson, Xavier and Vandergheynst, Pierre}, booktitle={Advances in neural information processing systems}, pages={3844–3852}, year={2016} }</p>
+<p><a id="5">[5]</a> <span class="citation" data-cites="article">@article</span>{hammond2011wavelets, title={Wavelets on graphs via spectral graph theory}, author={Hammond, David K and Vandergheynst, Pierre and Gribonval, R{'e}mi}, journal={Applied and Computational Harmonic Analysis}, volume={30}, number={2}, pages={129–150}, year={2011}, publisher={Elsevier} }</p>
+<p><a id="6">[6]</a> <span class="citation" data-cites="article">@article</span>{kipf2016semi, title={Semi-supervised classification with graph convolutional networks}, author={Kipf, Thomas N and Welling, Max}, journal={arXiv preprint arXiv:1609.02907}, year={2016} }</p>
+<p><a id="7">[7]</a> https://en.wikipedia.org/wiki/Wavelet</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Graph/" rel="tag"># Graph</a>
+              <a href="/tags/Convolution/" rel="tag"># Convolution</a>
+              <a href="/tags/Laplacian/" rel="tag"># Laplacian</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2020/11/blog-post-12/" rel="prev" title="Online Learning Algorithms">
+      <i class="fa fa-chevron-left"></i> Online Learning Algorithms
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2020/11/blog-post-14/" rel="next" title="Spectral Graph Theory">
+      Spectral Graph Theory <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#graph-convlutional-network"><span class="nav-number">1.</span> <span class="nav-text">Graph Convlutional Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#classical-wavelet-transform-cwt"><span class="nav-number">1.1.</span> <span class="nav-text">Classical Wavelet Transform (CWT)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#comparisons-with-fourier-transform-continuous-time-6"><span class="nav-number">1.1.1.</span> <span class="nav-text">Comparisons with Fourier transform (continuous-time) [6]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vanilla-graph-convlutional-network"><span class="nav-number">1.2.</span> <span class="nav-text">Vanilla Graph Convlutional Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spectral-graph-convolutions"><span class="nav-number">1.2.1.</span> <span class="nav-text">Spectral Graph Convolutions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#graph-fourier-transform"><span class="nav-number">1.2.2.</span> <span class="nav-text">Graph Fourier Transform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spectral-filtering-of-graph-signals"><span class="nav-number">1.2.3.</span> <span class="nav-text">Spectral filtering of graph signals</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#another-perspective-to-gcn-2"><span class="nav-number">1.3.</span> <span class="nav-text">Another Perspective to GCN [2]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#graph-convolution"><span class="nav-number">1.3.1.</span> <span class="nav-text">Graph Convolution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spectral-graph-convolution"><span class="nav-number">1.3.2.</span> <span class="nav-text">Spectral Graph Convolution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#paramters-graph-convolution-3"><span class="nav-number">1.3.3.</span> <span class="nav-text">Paramters Graph Convolution [3]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#polynomail-parameter-graph-convolution-4"><span class="nav-number">1.3.4.</span> <span class="nav-text">Polynomail Parameter Graph Convolution [4]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chebyshev-polynomial-graph-convolution-5"><span class="nav-number">1.3.5.</span> <span class="nav-text">Chebyshev Polynomial Graph Convolution [5]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#one-order-chebyshev-polynomial-graph-convolution-6"><span class="nav-number">1.3.6.</span> <span class="nav-text">One-order Chebyshev Polynomial Graph Convolution [6]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.3.7.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
