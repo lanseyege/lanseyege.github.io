@@ -196,25 +196,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Soft-Reinforcement-Learning-More-Details"><a href="#Soft-Reinforcement-Learning-More-Details" class="headerlink" title="Soft Reinforcement Learning: More Details"></a>Soft Reinforcement Learning: More Details</h1><a id="more"></a>
-<p>Soft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy. Here, we look into the certify process. </p>
-<h3 id="Soft-Q-iteration"><a href="#Soft-Q-iteration" class="headerlink" title="Soft Q-iteration"></a>Soft Q-iteration</h3><p><strong><em>Theorem: soft Q-iteration.</em></strong> Let $Q<em>\text{soft}(\cdot, \cdot)$ and $V</em>\text{soft}(\cdot)$ be bounded and assume that $\int<em>A \exp (\frac{1}{\alpha}Q</em>\text{soft}(\cdot, a^\prime))da^\prime &lt; \infty$ and that $Q_\text{soft}^\star &lt; \infty$ exists. Then the fixed-point iteration</p>
-<script type="math/tex; mode=display">
+        <h1 id="soft-reinforcement-learning-more-details">Soft Reinforcement Learning: More Details</h1>
+<a id="more"></a>
+<p>Soft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy. Here, we look into the certify process.</p>
+<h3 id="soft-q-iteration">Soft Q-iteration</h3>
+<p><strong><em>Theorem: soft Q-iteration.</em></strong> Let <span class="math inline">\(Q_\text{soft}(\cdot, \cdot)\)</span> and <span class="math inline">\(V_\text{soft}(\cdot)\)</span> be bounded and assume that <span class="math inline">\(\int_A \exp (\frac{1}{\alpha}Q_\text{soft}(\cdot, a^\prime))da^\prime &lt; \infty\)</span> and that <span class="math inline">\(Q_\text{soft}^\star &lt; \infty\)</span> exists. Then the fixed-point iteration</p>
+<p><span class="math display">\[
 \begin{equation}
 Q_\text{soft}(s_t, a_t) \leftarrow r_t + \gamma \mathbb{E}_{s_{t+1}\sim p_s}[V_\text{soft}(s_{t+1})], \forall s_t, a_t
-\end{equation}</script><script type="math/tex; mode=display">
+\end{equation}
+\]</span></p>
+<p><span class="math display">\[
 \begin{equation}
 V_\text{soft}(s_t) \leftarrow \alpha \log \int_A \exp (\frac{1}{\alpha}Q_\text{soft}(s_t, a^\prime))da^\prime, \forall s_t
-\end{equation}</script><p>converges to $Q^\star<em>\text{soft}$ and $V</em>\text{soft}^\star$, respectively. </p>
-<h3 id="“Soft”-Bellman-Operator"><a href="#“Soft”-Bellman-Operator" class="headerlink" title="“Soft” Bellman Operator"></a>“Soft” Bellman Operator</h3><p>Soft value iteration operator $\mathcal{T}$ is defined as</p>
-<script type="math/tex; mode=display">
+\end{equation}
+\]</span></p>
+<p>converges to <span class="math inline">\(Q^\star_\text{soft}\)</span> and <span class="math inline">\(V_\text{soft}^\star\)</span>, respectively.</p>
+<h3 id="soft-bellman-operator">&quot;Soft&quot; Bellman Operator</h3>
+<p>Soft value iteration operator <span class="math inline">\(\mathcal{T}\)</span> is defined as</p>
+<p><span class="math display">\[
 \begin{equation}
 \mathcal{T} Q(s, a) \triangleq r(s, a) + \gamma \mathbb{E}_{s^\prime \sim p_s}[\log \int \exp Q(s^\prime, a^\prime) da^\prime]
-\end{equation}</script><p>This is a contraction mapping. This result is certified in <a href="#1">[1]</a>, that we can get  $\left|\mathcal{T} Q<em>{1}-\mathcal{T} Q</em>{2}\right| \leq \gamma \varepsilon=\gamma | Q<em>{1}-Q</em>{2} \mid$. Since the soft Bellman backup is a contraction, the optimal value function is the fixed point of the Bellman backup, and it can be found by optimizing for a Q-function for which the soft Bellman error $|\mathcal{T}Q-Q|$ is minimized at all states and actions. </p>
-<h3 id="Simple-from-the-Soft-Q-function"><a href="#Simple-from-the-Soft-Q-function" class="headerlink" title="Simple from the Soft Q-function"></a>Simple from the Soft Q-function</h3><p>Soft Q-learning needs to sample from the policy, $\pi(a<em>t|s_t) \propto \exp (\frac{1}{\alpha}Q</em>\text{soft}^\theta(s<em>t, a_t))$, both to take on-policy actions and to generate action samples for estimating the soft value function. Since the form of the policy is so general, the direct sampling is intractable. The paper adopt an approximate way to do this, let’s see, Stein variational gradient descent (SVGD) <a href="#3">[3]</a>. <strong><em>firstly</em></strong>, they learn a state-conditioned stochastic neural network $a_t = f^\phi(\xi; s_t)$, parametrized by $\phi$, that maps noise samples $\xi$ drawn from a distribution into unbiased action samples from the target EBM corresponding to $Q</em>\text{soft}^\theta$. (<strong>secondly,</strong>) The induced distribution of the actions are $\pi^\phi(a_t | s_t)$, the goal is to find parameters $\phi$ so that the induced distribution approximates the energy-based distribution in terms of the KL divergence. <strong>We will list the details of SVGD in another blog.</strong> The paper also indicates the relation of their algos $f^\phi(\xi;s_t)$ and policy-gradient based methods, which you can find more details in<br> <a href="#2">[2]</a> (maybe we will organize these in another blog). </p>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
-<p><a id="2">[2]</a><br>Schulman, J., Abbeel, P., and Chen, X.  Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
-<p><a id="3">[3]</a><br>Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
+\end{equation}
+\]</span></p>
+<p>This is a contraction mapping. This result is certified in <a href="#1">[1]</a>, that we can get <span class="math inline">\(\left\|\mathcal{T} Q_{1}-\mathcal{T} Q_{2}\right\| \leq \gamma \varepsilon=\gamma \| Q_{1}-Q_{2} \mid\)</span>. Since the soft Bellman backup is a contraction, the optimal value function is the fixed point of the Bellman backup, and it can be found by optimizing for a Q-function for which the soft Bellman error <span class="math inline">\(\|\mathcal{T}Q-Q\|\)</span> is minimized at all states and actions.</p>
+<h3 id="simple-from-the-soft-q-function">Simple from the Soft Q-function</h3>
+<p>Soft Q-learning needs to sample from the policy, <span class="math inline">\(\pi(a_t|s_t) \propto \exp (\frac{1}{\alpha}Q_\text{soft}^\theta(s_t, a_t))\)</span>, both to take on-policy actions and to generate action samples for estimating the soft value function. Since the form of the policy is so general, the direct sampling is intractable. The paper adopt an approximate way to do this, let's see, Stein variational gradient descent (SVGD) <a href="#3">[3]</a>. <strong><em>firstly</em></strong>, they learn a state-conditioned stochastic neural network <span class="math inline">\(a_t = f^\phi(\xi; s_t)\)</span>, parametrized by <span class="math inline">\(\phi\)</span>, that maps noise samples <span class="math inline">\(\xi\)</span> drawn from a distribution into unbiased action samples from the target EBM corresponding to <span class="math inline">\(Q_\text{soft}^\theta\)</span>. (<strong>secondly,</strong>) The induced distribution of the actions are <span class="math inline">\(\pi^\phi(a_t | s_t)\)</span>, the goal is to find parameters <span class="math inline">\(\phi\)</span> so that the induced distribution approximates the energy-based distribution in terms of the KL divergence. <strong>We will list the details of SVGD in another blog.</strong> The paper also indicates the relation of their algos <span class="math inline">\(f^\phi(\xi;s_t)\)</span> and policy-gradient based methods, which you can find more details in <a href="#2">[2]</a> (maybe we will organize these in another blog).</p>
+<h3 id="references">References</h3>
+<p><a id="1">[1]</a> Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
+<p><a id="2">[2]</a> Schulman, J., Abbeel, P., and Chen, X. Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
+<p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
 
     </div>
 
@@ -296,7 +307,7 @@ V_\text{soft}(s_t) \leftarrow \alpha \log \int_A \exp (\frac{1}{\alpha}Q_\text{s
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-Reinforcement-Learning-More-Details"><span class="nav-number">1.</span> <span class="nav-text">Soft Reinforcement Learning: More Details</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Q-iteration"><span class="nav-number">1.0.1.</span> <span class="nav-text">Soft Q-iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9CSoft%E2%80%9D-Bellman-Operator"><span class="nav-number">1.0.2.</span> <span class="nav-text">“Soft” Bellman Operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-from-the-Soft-Q-function"><span class="nav-number">1.0.3.</span> <span class="nav-text">Simple from the Soft Q-function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.0.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#soft-reinforcement-learning-more-details"><span class="nav-number">1.</span> <span class="nav-text">Soft Reinforcement Learning: More Details</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#soft-q-iteration"><span class="nav-number">1.0.1.</span> <span class="nav-text">Soft Q-iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#soft-bellman-operator"><span class="nav-number">1.0.2.</span> <span class="nav-text">&quot;Soft&quot; Bellman Operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#simple-from-the-soft-q-function"><span class="nav-number">1.0.3.</span> <span class="nav-text">Simple from the Soft Q-function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.0.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
