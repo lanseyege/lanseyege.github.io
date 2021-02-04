@@ -196,8 +196,8 @@
       
         <h1 id="soft-reinforcement-learning-a-shallow-overview">Soft Reinforcement Learning: A Shallow Overview</h1>
 <a id="more"></a>
-<h2 id="what-does-soft-mean">What does &quot;Soft&quot; mean?</h2>
-<p><strong>Soft Q-learning</strong> <a href="#1">[1]</a> is classical Q-learning with a entropy-regularized item. The &quot;Soft&quot; is relative to conventional approach, which uses a &quot;hard&quot; max in Bellman equation. Comparing to &quot;hard&quot; approach, the &quot;soft&quot; can provide some benefits <a href="#2">[2]</a>: - Better Exploration - Fine-tuning Maximum Entropy Policies - Compositionality - Robustness</p>
+<h2 id="what-does-soft-mean">What does “Soft” mean?</h2>
+<p><strong>Soft Q-learning</strong> <a href="#1">[1]</a> is classical Q-learning with a entropy-regularized item. The “Soft” is relative to conventional approach, which uses a “hard” max in Bellman equation. Comparing to “hard” approach, the “soft” can provide some benefits <a href="#2">[2]</a>: - Better Exploration - Fine-tuning Maximum Entropy Policies - Compositionality - Robustness</p>
 <p><strong>Traditional Bellman Equation</strong> In MDPs, the action-value function of a state-action pair <span class="math inline">\((s,a)\)</span> under policy <span class="math inline">\(\pi\)</span>, denoted as <span class="math inline">\(Q_\pi (s, a)\)</span>, is the expected return when starting from <span class="math inline">\(s\)</span>, following action <span class="math inline">\(a\)</span> and <span class="math inline">\(\pi\)</span> thereafter. The action-value Bellman equation and Bellman optimality equation are defined as:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -205,10 +205,9 @@ Q(s, a) = \sum_a \pi(a|s) \sum_{s^\prime,r}\mathbb{T}(s^\prime,r|s,a)[r+\gamma Q
 Q^\star(s, a) = \max_a \sum_{s^\prime,r}\mathbb{T}(s^\prime,r|s,a)[r+\gamma Q^\star(s^\prime, a)] \\
 \end{split}
 \]</span></p>
-The optimal policy can be derived by:
-<span class="math display">\[\begin{equation}
+<p>The optimal policy can be derived by: <span class="math display">\[\begin{equation}
 \pi(s) = \arg \max_a Q^\star (s, a) 
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <h2 id="maximum-entropy-policies">Maximum Entropy Policies</h2>
 <p><strong>Entropy and Max Entropy Principle</strong> Entropy is an old concept in physicals that is used to describe the randomness in environments. The greater the entropy, the more random the actions the policy gives. The discrete form of entropy is:</p>
 <p><span class="math display">\[
@@ -217,11 +216,11 @@ H(X) = \mathbb{E}_X [I(x)] = - \sum_{x \in X} p(x) \log p(x)
 \end{equation}
 \]</span></p>
 <p>Similarity, the entropy term for policy has this form:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
 H(\pi(\cdot | s_t)) = - \sum_{a\in A} \pi(a|s_t) \log \pi(a|s_t)
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>The entropy term of policy can help the policy to increase the expoloration ability, by adding more possibilities to some rare actions. That could avoid the agent get stuck into local optimum and attain global optimum, to some extend. The idea of learning such maximum entropy model has its origin in statistical modeling, in which the goal is to find the probability distribution that has the highest entropy while still satisfying the observed statistics <a href="#1">[1]</a>. The <strong>principle of maximum entropy</strong> states that the probability distribution with the highest entropy, is the one that best represents the current state of knowledge in the context of precisely stated prior data <a href="#4">[4]</a>.</p>
-<p><strong>Stochastic Policy and Maximum Entropy Policies</strong> Conventional RL approach is to specify a unimodal policy distribution, centered at the maximal Q-value and extending to the neighbouring actions to provide noise for exploration. Usually, there would be a sampling process which employ a Gaussian distribution, <span class="math inline">\(\pi(a_t|s_t) = N(u(s_t), \sum)\)</span>. This would make the policy ignore the action area with low Q-value and thus reduce the exploration ability. Do we have a method to solve this problem? Yes! An obvious solution is to ensure the agent explores all promising states while prioritizing the more promising ones. One way to formalize this idea is to define the policy directly in terms of exponentiated Q-values: <span class="math inline">\(\pi(a\mid s) \propto\exp Q(s, a)\)</span>. This density has the form of the Boltzman distribution. What's more, the policy defined through the energy form is an optimal solution for the maximum-entropy RL objective</p>
+<p><strong>Stochastic Policy and Maximum Entropy Policies</strong> Conventional RL approach is to specify a unimodal policy distribution, centered at the maximal Q-value and extending to the neighbouring actions to provide noise for exploration. Usually, there would be a sampling process which employ a Gaussian distribution, <span class="math inline">\(\pi(a_t|s_t) = N(u(s_t), \sum)\)</span>. This would make the policy ignore the action area with low Q-value and thus reduce the exploration ability. Do we have a method to solve this problem? Yes! An obvious solution is to ensure the agent explores all promising states while prioritizing the more promising ones. One way to formalize this idea is to define the policy directly in terms of exponentiated Q-values: <span class="math inline">\(\pi(a\mid s) \propto\exp Q(s, a)\)</span>. This density has the form of the Boltzman distribution. What’s more, the policy defined through the energy form is an optimal solution for the maximum-entropy RL objective</p>
 <p><span class="math display">\[
 \begin{equation}
 \pi^\star_\text{MaxEnt} = \arg \max_\pi \mathbb{E}_\pi [\sum_{t=0}^T r_t + H(\pi(\cdot | s_t))]
@@ -251,9 +250,9 @@ Q(s_t, a_t) = \mathbb{E}[r_t + \gamma \text{softmax}_a Q(s_{t+1}, a)]
 <p><strong>Two Challenges in Continuous Domains</strong> The first challenge is exact dynamic programming is infeasible, since the soft Bellman equation needs to hold for every state and action, and the softmax involves integrating over the entire action space. The solution is to employ expressive neural network function approximators.</p>
 <p>The second is the optimal policy is defined by an intractable energy-based distribution, which is difficult to sample from. To address this problem, it can employ approximate inference techniques, such as MCMC. TO accelerate inference, the amortized Stein variational gradient descent <a href="#3">[3]</a> can be used to train an inference network to generate approximate samples.</p>
 <h2 id="references">References</h2>
-<p><a id="1">[1]</a> <span class="citation">@article</span>{haarnoja2017reinforcement, title={Reinforcement learning with deep energy-based policies}, author={Haarnoja, Tuomas and Tang, Haoran and Abbeel, Pieter and Levine, Sergey}, journal={arXiv preprint arXiv:1702.08165}, year={2017} }</p>
+<p><a id="1">[1]</a> <span class="citation" data-cites="article">@article</span>{haarnoja2017reinforcement, title={Reinforcement learning with deep energy-based policies}, author={Haarnoja, Tuomas and Tang, Haoran and Abbeel, Pieter and Levine, Sergey}, journal={arXiv preprint arXiv:1702.08165}, year={2017} }</p>
 <p><a id="2">[2]</a> https://bair.berkeley.edu/blog/2017/10/06/soft-q-learning/</p>
-<p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016.</p>
+<p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016.</p>
 <p><a id="4">[4]</a> https://towardsdatascience.com/entropy-regularization-in-reinforcement-learning-a6fa6d7598df</p>
 
     </div>
@@ -332,7 +331,7 @@ Q(s_t, a_t) = \mathbb{E}[r_t + \gamma \text{softmax}_a Q(s_{t+1}, a)]
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#soft-reinforcement-learning-a-shallow-overview"><span class="nav-number">1.</span> <span class="nav-text">Soft Reinforcement Learning: A Shallow Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-does-soft-mean"><span class="nav-number">1.1.</span> <span class="nav-text">What does &quot;Soft&quot; mean?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-entropy-policies"><span class="nav-number">1.2.</span> <span class="nav-text">Maximum Entropy Policies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#soft-reinforcement-learning-a-shallow-overview"><span class="nav-number">1.</span> <span class="nav-text">Soft Reinforcement Learning: A Shallow Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-does-soft-mean"><span class="nav-number">1.1.</span> <span class="nav-text">What does “Soft” mean?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-entropy-policies"><span class="nav-number">1.2.</span> <span class="nav-text">Maximum Entropy Policies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
