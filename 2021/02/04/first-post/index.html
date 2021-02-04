@@ -70,23 +70,37 @@
 <li>Robustness</li>
 </ul>
 <p><strong>Traditional Bellman Equation</strong><br>In MDPs, the action-value function of a state-action pair $(s,a)$ under policy $\pi$, denoted as $Q_\pi (s, a)$, is the expected return when starting from $s$, following action $a$ and $\pi$ thereafter. The  action-value Bellman equation and Bellman optimality equation are defined as: </p>
-<p>$$<br>\begin{split}<br>Q(s, a) = \sum_a \pi(a|s) \sum_{s^\prime,r}\mathbb{T}(s^\prime,r|s,a)[r+\gamma Q(s^\prime, a)] \<br>Q^\star(s, a) = \max_a \sum_{s^\prime,r}\mathbb{T}(s^\prime,r|s,a)[r+\gamma Q^\star(s^\prime, a)] \<br>\end{split}<br>$$</p>
-<p>The optimal policy can be derived by:<br>\begin{equation}<br>\pi(s) = \arg \max_a Q^\star (s, a)<br>\end{equation}</p>
+<script type="math/tex; mode=display">
+\begin{split}
+Q(s, a) = \sum_a \pi(a|s) \sum_{s^\prime,r}\mathbb{T}(s^\prime,r|s,a)[r+\gamma Q(s^\prime, a)] \\
+Q^\star(s, a) = \max_a \sum_{s^\prime,r}\mathbb{T}(s^\prime,r|s,a)[r+\gamma Q^\star(s^\prime, a)] \\
+\end{split}</script><p>The optimal policy can be derived by:<br>\begin{equation}<br>\pi(s) = \arg \max_a Q^\star (s, a)<br>\end{equation}</p>
 <h2 id="Maximum-Entropy-Policies"><a href="#Maximum-Entropy-Policies" class="headerlink" title="Maximum Entropy Policies"></a>Maximum Entropy Policies</h2><p><strong>Entropy and Max Entropy Principle</strong><br>Entropy is an old concept in physicals that is used to describe the randomness in environments. The greater the entropy, the more random the actions the policy gives. The discrete form of entropy is: </p>
-<p>$$<br>\begin{equation}<br>H(X) = \mathbb{E}<em>X [I(x)] = - \sum</em>{x \in X} p(x) \log p(x)<br>\end{equation}<br>$$</p>
-<p>Similarity, the entropy term for policy has this form:</p>
-<p>\begin{equation}<br>H(\pi(\cdot | s_t)) = - \sum_{a\in A} \pi(a|s_t) \log \pi(a|s_t)<br>\end{equation}</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+H(X) = \mathbb{E}_X [I(x)] = - \sum_{x \in X} p(x) \log p(x) 
+\end{equation}</script><p>Similarity, the entropy term for policy has this form:</p>
+<p>\begin{equation}<br>H(\pi(\cdot | s<em>t)) = - \sum</em>{a\in A} \pi(a|s_t) \log \pi(a|s_t)<br>\end{equation}</p>
 <p>The entropy term of policy can help the policy to increase the expoloration ability, by adding more possibilities to some rare actions. That could avoid the agent get stuck into local optimum and attain global optimum, to some extend. The idea of learning such maximum entropy model has its origin in statistical modeling, in which the goal is to find the probability distribution that has the highest entropy while still satisfying the observed statistics <a href="#1">[1]</a>. The <strong>principle of maximum entropy</strong> states that the probability distribution with the highest entropy, is the one that best represents the current state of knowledge in the context of precisely stated prior data <a href="#4">[4]</a>. </p>
 <p><strong>Stochastic Policy and Maximum Entropy Policies</strong><br>Conventional RL approach is to specify a unimodal policy distribution, centered at the maximal Q-value and extending to the neighbouring actions to provide noise for exploration. Usually, there would be a sampling process which employ a Gaussian distribution, $\pi(a_t|s_t) = N(u(s_t), \sum)$. This would make the policy ignore the action area with low Q-value and thus reduce the exploration ability. Do we have a method to solve this problem? Yes! An obvious solution is to ensure the agent explores all promising states while prioritizing the more promising ones. One way to formalize this idea is to define the policy directly in terms of exponentiated Q-values: $\pi(a\mid s) \propto\exp Q(s, a)$. This density has the form of the Boltzman distribution. What’s more, the policy defined through the energy form is an optimal solution for the maximum-entropy RL objective</p>
-<p>$$<br>\begin{equation}<br>\pi^\star_\text{MaxEnt} = \arg \max_\pi \mathbb{E}<em>\pi [\sum</em>{t=0}^T r_t + H(\pi(\cdot | s_t))]<br>\end{equation}<br>$$</p>
-<p>As showed in the paper, the optimal policy for this equation is given by </p>
-<p>$$<br>\begin{equation}<br>\pi_\text{MaxEnt}^\star (a_t | s_t) = \exp (\frac{1}{\alpha}(Q_\text{soft}^\star(s_t, a_t) - V_\text{soft}^\star(s_t)))<br>\end{equation}<br>$$</p>
-<p>where soft Q-function $Q^\star_\text{soft}(s_t, a_t)$ and soft value function $V^\star_\text{soft}(s_t)$ are defined by:</p>
-<p>$$<br>\begin{split}<br>Q^\star_\text{soft}(s_t, a_t) &amp;= r_t + \mathbb{E}<em>{(s</em>{t+1}, \cdots)\sim \rho_\pi}[\sum_{l=1}^\infty \gamma^l (r_{t+l} + \alpha H(\pi^\star_\text{MaxEnt}(\cdot | s_{t+l})))] \<br>V^\star_\text{soft}(s_t) &amp;= \alpha \log \int_{A} \exp(\frac{1}{\alpha}Q^\star_\text{soft}(s_t, a_t) - V^\star_\text{soft}(s_t)) \<br>\end{split}<br>$$</p>
-<p>The idea of learning such maximum entropy models has its origin in statistical modeling, in which the goal is to find the probability distribution that has the highest entropy while still satisfying the observed statistics.</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\pi^\star_\text{MaxEnt} = \arg \max_\pi \mathbb{E}_\pi [\sum_{t=0}^T r_t + H(\pi(\cdot | s_t))]
+\end{equation}</script><p>As showed in the paper, the optimal policy for this equation is given by </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\pi_\text{MaxEnt}^\star (a_t | s_t) = \exp (\frac{1}{\alpha}(Q_\text{soft}^\star(s_t, a_t) - V_\text{soft}^\star(s_t)))
+\end{equation}</script><p>where soft Q-function $Q^\star<em>\text{soft}(s_t, a_t)$ and soft value function $V^\star</em>\text{soft}(s_t)$ are defined by:</p>
+<script type="math/tex; mode=display">
+\begin{split}
+Q^\star_\text{soft}(s_t, a_t) &= r_t + \mathbb{E}_{(s_{t+1}, \cdots)\sim \rho_\pi}[\sum_{l=1}^\infty \gamma^l (r_{t+l} + \alpha H(\pi^\star_\text{MaxEnt}(\cdot | s_{t+l})))] \\
+V^\star_\text{soft}(s_t) &= \alpha \log \int_{A} \exp(\frac{1}{\alpha}Q^\star_\text{soft}(s_t, a_t) - V^\star_\text{soft}(s_t)) \\
+\end{split}</script><p>The idea of learning such maximum entropy models has its origin in statistical modeling, in which the goal is to find the probability distribution that has the highest entropy while still satisfying the observed statistics.</p>
 <p><strong>Soft Bellman Equation and Soft Q-Learning</strong><br>The soft Bellman equation can be obtained</p>
-<p>$$<br>\begin{equation}<br>Q(s_t, a_t) = \mathbb{E}[r_t + \gamma \text{softmax}<em>a Q(s</em>{t+1}, a)]<br>\end{equation}<br>$$</p>
-<p>where $\text{softmax}_a f(a) = \log \int \exp f(a)da$. The soft Bellman equation satisfy contraction property, that means it can convergence to optimal value. We can adopt conventional algorithms for the soft. </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+Q(s_t, a_t) = \mathbb{E}[r_t + \gamma \text{softmax}_a Q(s_{t+1}, a)]
+\end{equation}</script><p>where $\text{softmax}_a f(a) = \log \int \exp f(a)da$. The soft Bellman equation satisfy contraction property, that means it can convergence to optimal value. We can adopt conventional algorithms for the soft. </p>
 <p><strong>Two Challenges in Continuous Domains</strong><br>The first challenge is exact dynamic programming is infeasible, since the soft Bellman equation needs to hold for every state and action, and the softmax involves integrating over the entire action space. The solution is to employ expressive neural network function approximators.  </p>
 <p>The second is the optimal policy is defined by an intractable energy-based distribution, which is difficult to sample from. To address this problem, it can employ approximate inference techniques, such as MCMC. TO accelerate inference, the amortized Stein variational gradient descent <a href="#3">[3]</a> can be used to train an inference network to generate approximate samples.  </p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a id="1">[1]</a><br>@article{haarnoja2017reinforcement,<br>  title={Reinforcement learning with deep energy-based policies},<br>  author={Haarnoja, Tuomas and Tang, Haoran and Abbeel, Pieter and Levine, Sergey},<br>  journal={arXiv preprint arXiv:1702.08165},<br>  year={2017}<br>} </p>
