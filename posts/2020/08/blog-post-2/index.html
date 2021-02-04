@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+  <meta name="description" content="Soft Reinforcement Learning: More DetailsSoft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://lanseyege.github.io/2021/02/04/hello-world/index.html">
+<meta property="og:title" content="Soft Reinforcement Learning: More Details">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2020/08/blog-post-2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="Soft Reinforcement Learning: More DetailsSoft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-04T00:04:12.954Z">
-<meta property="article:modified_time" content="2021-02-04T01:50:55.440Z">
+<meta property="article:published_time" content="2020-08-04T22:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-07T11:33:03.103Z">
 <meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="soft">
+<meta property="article:tag" content="entropy-regularized">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://lanseyege.github.io/2021/02/04/hello-world/">
+<link rel="canonical" href="http://lanseyege.github.io/posts/2020/08/blog-post-2/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>Hello World | Hexo</title>
+  <title>Soft Reinforcement Learning: More Details | Hexo</title>
   
 
 
@@ -150,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/2021/02/04/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2020/08/blog-post-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          Soft Reinforcement Learning: More Details
         </h1>
 
         <div class="post-meta">
@@ -172,10 +174,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-02-04 01:04:12 / Modified: 02:50:55" itemprop="dateCreated datePublished" datetime="2021-02-04T01:04:12+01:00">2021-02-04</time>
+              <time title="Created: 2020-08-05 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-05T00:00:00+02:00">2020-08-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 13:33:03" itemprop="dateModified" datetime="2020-08-07T13:33:03+02:00">2020-08-07</time>
+              </span>
 
           
 
@@ -188,16 +196,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h1 id="Soft-Reinforcement-Learning-More-Details"><a href="#Soft-Reinforcement-Learning-More-Details" class="headerlink" title="Soft Reinforcement Learning: More Details"></a>Soft Reinforcement Learning: More Details</h1><p>Soft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy. Here, we look into the certify process. </p>
+<h3 id="Soft-Q-iteration"><a href="#Soft-Q-iteration" class="headerlink" title="Soft Q-iteration"></a>Soft Q-iteration</h3><p><strong><em>Theorem: soft Q-iteration.</em></strong> Let $Q<em>\text{soft}(\cdot, \cdot)$ and $V</em>\text{soft}(\cdot)$ be bounded and assume that $\int<em>A \exp (\frac{1}{\alpha}Q</em>\text{soft}(\cdot, a^\prime))da^\prime &lt; \infty$ and that $Q_\text{soft}^\star &lt; \infty$ exists. Then the fixed-point iteration</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+Q_\text{soft}(s_t, a_t) \leftarrow r_t + \gamma \mathbb{E}_{s_{t+1}\sim p_s}[V_\text{soft}(s_{t+1})], \forall s_t, a_t
+\end{equation}</script><script type="math/tex; mode=display">
+\begin{equation}
+V_\text{soft}(s_t) \leftarrow \alpha \log \int_A \exp (\frac{1}{\alpha}Q_\text{soft}(s_t, a^\prime))da^\prime, \forall s_t
+\end{equation}</script><p>converges to $Q^\star<em>\text{soft}$ and $V</em>\text{soft}^\star$, respectively. </p>
+<h3 id="“Soft”-Bellman-Operator"><a href="#“Soft”-Bellman-Operator" class="headerlink" title="“Soft” Bellman Operator"></a>“Soft” Bellman Operator</h3><p>Soft value iteration operator $\mathcal{T}$ is defined as</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\mathcal{T} Q(s, a) \triangleq r(s, a) + \gamma \mathbb{E}_{s^\prime \sim p_s}[\log \int \exp Q(s^\prime, a^\prime) da^\prime]
+\end{equation}</script><p>This is a contraction mapping. This result is certified in <a href="#1">[1]</a>, that we can get  $\left|\mathcal{T} Q<em>{1}-\mathcal{T} Q</em>{2}\right| \leq \gamma \varepsilon=\gamma | Q<em>{1}-Q</em>{2} \mid$. Since the soft Bellman backup is a contraction, the optimal value function is the fixed point of the Bellman backup, and it can be found by optimizing for a Q-function for which the soft Bellman error $|\mathcal{T}Q-Q|$ is minimized at all states and actions. </p>
+<h3 id="Simple-from-the-Soft-Q-function"><a href="#Simple-from-the-Soft-Q-function" class="headerlink" title="Simple from the Soft Q-function"></a>Simple from the Soft Q-function</h3><p>Soft Q-learning needs to sample from the policy, $\pi(a<em>t|s_t) \propto \exp (\frac{1}{\alpha}Q</em>\text{soft}^\theta(s<em>t, a_t))$, both to take on-policy actions and to generate action samples for estimating the soft value function. Since the form of the policy is so general, the direct sampling is intractable. The paper adopt an approximate way to do this, let’s see, Stein variational gradient descent (SVGD) <a href="#3">[3]</a>. <strong><em>firstly</em></strong>, they learn a state-conditioned stochastic neural network $a_t = f^\phi(\xi; s_t)$, parametrized by $\phi$, that maps noise samples $\xi$ drawn from a distribution into unbiased action samples from the target EBM corresponding to $Q</em>\text{soft}^\theta$. (<strong>secondly,</strong>) The induced distribution of the actions are $\pi^\phi(a_t | s_t)$, the goal is to find parameters $\phi$ so that the induced distribution approximates the energy-based distribution in terms of the KL divergence. <strong>We will list the details of SVGD in another blog.</strong> The paper also indicates the relation of their algos $f^\phi(\xi;s_t)$ and policy-gradient based methods, which you can find more details in<br> <a href="#2">[2]</a> (maybe we will organize these in another blog). </p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
+<p><a id="2">[2]</a><br>Schulman, J., Abbeel, P., and Chen, X.  Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
+<p><a id="3">[3]</a><br>Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
 
     </div>
 
@@ -206,17 +222,21 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/soft/" rel="tag"># soft</a>
+              <a href="/tags/entropy-regularized/" rel="tag"># entropy-regularized</a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/2020/08/blog-post-2/" rel="prev" title="Soft Reinforcement Learning: More Details">
-      <i class="fa fa-chevron-left"></i> Soft Reinforcement Learning: More Details
-    </a></div>
       <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/04/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -275,7 +295,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-Reinforcement-Learning-More-Details"><span class="nav-number">1.</span> <span class="nav-text">Soft Reinforcement Learning: More Details</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Q-iteration"><span class="nav-number">1.0.1.</span> <span class="nav-text">Soft Q-iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9CSoft%E2%80%9D-Bellman-Operator"><span class="nav-number">1.0.2.</span> <span class="nav-text">“Soft” Bellman Operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-from-the-Soft-Q-function"><span class="nav-number">1.0.3.</span> <span class="nav-text">Simple from the Soft Q-function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.0.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
