@@ -28,7 +28,7 @@
 <meta property="og:description" content="Soft Reinforcement Learning: A Shallow Overview">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-31T23:19:37.000Z">
-<meta property="article:modified_time" content="2021-02-04T03:09:02.109Z">
+<meta property="article:modified_time" content="2021-02-04T09:59:56.627Z">
 <meta property="article:author" content="Ye Yuan">
 <meta name="twitter:card" content="summary">
 
@@ -117,9 +117,34 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
 
   </li>
   </ul>
@@ -180,7 +205,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 04:09:02" itemprop="dateModified" datetime="2021-02-04T04:09:02+01:00">2021-02-04</time>
+                <time title="Modified: 2021-02-04 10:59:56" itemprop="dateModified" datetime="2021-02-04T10:59:56+01:00">2021-02-04</time>
               </span>
 
           
@@ -197,7 +222,13 @@
         <h1 id="soft-reinforcement-learning-a-shallow-overview">Soft Reinforcement Learning: A Shallow Overview</h1>
 <a id="more"></a>
 <h2 id="what-does-soft-mean">What does “Soft” mean?</h2>
-<p><strong>Soft Q-learning</strong> <a href="#1">[1]</a> is classical Q-learning with a entropy-regularized item. The “Soft” is relative to conventional approach, which uses a “hard” max in Bellman equation. Comparing to “hard” approach, the “soft” can provide some benefits <a href="#2">[2]</a>: - Better Exploration - Fine-tuning Maximum Entropy Policies - Compositionality - Robustness</p>
+<p><strong>Soft Q-learning</strong> <a href="#1">[1]</a> is classical Q-learning with a entropy-regularized item. The “Soft” is relative to conventional approach, which uses a “hard” max in Bellman equation. Comparing to “hard” approach, the “soft” can provide some benefits <a href="#2">[2]</a>:</p>
+<ul>
+<li>Better Exploration</li>
+<li>Fine-tuning Maximum Entropy Policies</li>
+<li>Compositionality</li>
+<li>Robustness</li>
+</ul>
 <p><strong>Traditional Bellman Equation</strong> In MDPs, the action-value function of a state-action pair <span class="math inline">\((s,a)\)</span> under policy <span class="math inline">\(\pi\)</span>, denoted as <span class="math inline">\(Q_\pi (s, a)\)</span>, is the expected return when starting from <span class="math inline">\(s\)</span>, following action <span class="math inline">\(a\)</span> and <span class="math inline">\(\pi\)</span> thereafter. The action-value Bellman equation and Bellman optimality equation are defined as:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -205,7 +236,8 @@ Q(s, a) = \sum_a \pi(a|s) \sum_{s^\prime,r}\mathbb{T}(s^\prime,r|s,a)[r+\gamma Q
 Q^\star(s, a) = \max_a \sum_{s^\prime,r}\mathbb{T}(s^\prime,r|s,a)[r+\gamma Q^\star(s^\prime, a)] \\
 \end{split}
 \]</span></p>
-<p>The optimal policy can be derived by: <span class="math display">\[\begin{equation}
+<p>The optimal policy can be derived by:</p>
+<p><span class="math display">\[\begin{equation}
 \pi(s) = \arg \max_a Q^\star (s, a) 
 \end{equation}\]</span></p>
 <h2 id="maximum-entropy-policies">Maximum Entropy Policies</h2>
@@ -249,7 +281,7 @@ Q(s_t, a_t) = \mathbb{E}[r_t + \gamma \text{softmax}_a Q(s_{t+1}, a)]
 <p>where <span class="math inline">\(\text{softmax}_a f(a) = \log \int \exp f(a)da\)</span>. The soft Bellman equation satisfy contraction property, that means it can convergence to optimal value. We can adopt conventional algorithms for the soft.</p>
 <p><strong>Two Challenges in Continuous Domains</strong> The first challenge is exact dynamic programming is infeasible, since the soft Bellman equation needs to hold for every state and action, and the softmax involves integrating over the entire action space. The solution is to employ expressive neural network function approximators.</p>
 <p>The second is the optimal policy is defined by an intractable energy-based distribution, which is difficult to sample from. To address this problem, it can employ approximate inference techniques, such as MCMC. TO accelerate inference, the amortized Stein variational gradient descent <a href="#3">[3]</a> can be used to train an inference network to generate approximate samples.</p>
-<h2 id="references">References</h2>
+<h1 id="references">References</h1>
 <p><a id="1">[1]</a> <span class="citation" data-cites="article">@article</span>{haarnoja2017reinforcement, title={Reinforcement learning with deep energy-based policies}, author={Haarnoja, Tuomas and Tang, Haoran and Abbeel, Pieter and Levine, Sergey}, journal={arXiv preprint arXiv:1702.08165}, year={2017} }</p>
 <p><a id="2">[2]</a> https://bair.berkeley.edu/blog/2017/10/06/soft-q-learning/</p>
 <p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016.</p>
@@ -331,7 +363,7 @@ Q(s_t, a_t) = \mathbb{E}[r_t + \gamma \text{softmax}_a Q(s_{t+1}, a)]
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#soft-reinforcement-learning-a-shallow-overview"><span class="nav-number">1.</span> <span class="nav-text">Soft Reinforcement Learning: A Shallow Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-does-soft-mean"><span class="nav-number">1.1.</span> <span class="nav-text">What does “Soft” mean?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-entropy-policies"><span class="nav-number">1.2.</span> <span class="nav-text">Maximum Entropy Policies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#soft-reinforcement-learning-a-shallow-overview"><span class="nav-number">1.</span> <span class="nav-text">Soft Reinforcement Learning: A Shallow Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-does-soft-mean"><span class="nav-number">1.1.</span> <span class="nav-text">What does “Soft” mean?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-entropy-policies"><span class="nav-number">1.2.</span> <span class="nav-text">Maximum Entropy Policies</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -345,7 +377,7 @@ Q(s_t, a_t) = \mathbb{E}[r_t + \gamma \text{softmax}_a Q(s_{t+1}, a)]
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

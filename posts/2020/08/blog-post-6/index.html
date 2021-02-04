@@ -20,17 +20,18 @@
     var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Stein Variational Gradient Descent: Stein’s Method">
+  <meta name="description" content="Stein’s Method">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stein Variational Gradient Decsent: Stein Method">
 <meta property="og:url" content="http://lanseyege.github.io/posts/2020/08/blog-post-6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Stein Variational Gradient Descent: Stein’s Method">
+<meta property="og:description" content="Stein’s Method">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-09T22:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-04T03:13:31.759Z">
+<meta property="article:published_time" content="2020-08-25T22:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T10:00:21.766Z">
 <meta property="article:author" content="Ye Yuan">
 <meta property="article:tag" content="Stein">
+<meta property="article:tag" content="SVGD">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://lanseyege.github.io/posts/2020/08/blog-post-6/">
@@ -118,9 +119,34 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
 
   </li>
   </ul>
@@ -174,14 +200,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-08-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-10T00:00:00+02:00">2020-08-10</time>
+              <time title="Created: 2020-08-26 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-26T00:00:00+02:00">2020-08-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 04:13:31" itemprop="dateModified" datetime="2021-02-04T04:13:31+01:00">2021-02-04</time>
+                <time title="Modified: 2021-02-04 11:00:21" itemprop="dateModified" datetime="2021-02-04T11:00:21+01:00">2021-02-04</time>
               </span>
 
           
@@ -195,30 +221,199 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="stein-variational-gradient-descent-steins-method">Stein Variational Gradient Descent: Stein’s Method</h1>
+        <h1 id="steins-method">Stein’s Method</h1>
 <a id="more"></a>
-<h2 id="steins-method">Stein’s Method</h2>
+<h2 id="steins-method-1">Stein’s Method</h2>
 <p>Stein’s method is a technique that can quantify the error in the approximation of one distribution by another in a variety of metrics. Stein’s method is a general theoretical tool for obtaining bounds on distances between distributions.</p>
-<h2 id="steins-methods">Stein’s Method’s</h2>
-<h2 id="steins-lemma">Stein’s Lemma</h2>
+<h2 id="foundation-of-steins-method">Foundation of Stein’s Method</h2>
+<p>(The following content is almost directly copied form <a href="#4">[4]</a>)</p>
+<p>Let <span class="math inline">\(Z\)</span> be a random variable on <span class="math inline">\(\mathbb{R}\)</span> with differentiable probability density <span class="math inline">\(p\)</span>. Our main emphasis here is for <span class="math inline">\(p\)</span> the standard normal density, but this argument works more generally. Now let <span class="math inline">\(\mathcal{F}\)</span> be the set of differentiable real functions <span class="math inline">\(f\)</span> such that <span class="math inline">\(f(x)p(x) \rightarrow 0\)</span> as <span class="math inline">\(\lvert x \rvert \rightarrow \infty\)</span>. Then clearly</p>
+<p><span class="math display">\[
+\begin{split}
+0 &amp;= \int_{-\infty}^\infty \frac{d}{dx}\left\{ f(x)p(x)\right\} dx  \\
+ &amp;= \int_{-\infty}^{\infty} \left\{ f^\prime(x) + \phi(x)f(x) \right\}p(x) dx \\
+\end{split}
+\]</span></p>
+<p>with <span class="math inline">\(\phi(x) := p^\prime(x) / p(x)\)</span>: for <span class="math inline">\(p\)</span> the standard normal density, <span class="math inline">\(\phi(x) = -x\)</span>. Hence any function <span class="math inline">\(h\)</span> of the form <span class="math inline">\(f^\prime + \phi f\)</span> with <span class="math inline">\(f \in \mathcal{F}\)</span> automatically has <span class="math inline">\(\mathbb{E} h(Z) = 0\)</span>. Conversely, given any continuous <span class="math inline">\(h\)</span> with <span class="math inline">\(\mathbb{E}\lvert h(Z) \rvert &lt; \infty\)</span>, the function <span class="math inline">\(h - \mathbb{E}h(Z)\)</span> can be written in the form <span class="math inline">\(f^\prime + \phi f\)</span> with <span class="math inline">\(f\in \mathcal{F}\)</span>. (Remark: is this Stein’s Lemma??)</p>
+<h2 id="one-example">One example:</h2>
+<p><strong>example: begin</strong> If <span class="math inline">\(g = f^\prime + \phi f\)</span>, then</p>
+<p><span class="math display">\[
+\begin{equation}
+\int_{-\infty}^{X} g(x) p(x) dx = \int_{-\infty}^{X} \frac{d}{dx} \left\{ f(x)p(x)\right\}dx = f(X)p(X)
+\end{equation}
+\]</span></p>
+<p>and that this argument can be reversed: <span class="math inline">\(f\)</span> so defined, for an arbitrary <span class="math inline">\(g\)</span> for which <span class="math inline">\(\mathbb{E}\lvert g(Z) \rvert &lt; \infty\)</span>, is such that <span class="math inline">\(g = f^\prime + \phi f\)</span>. Hence we can take <span class="math inline">\(f = f_h\)</span> to be defined by</p>
+<p><span class="math display">\[
+\begin{split}
+f_h(X)p(X) &amp;= \int_{-\infty}^X \left\{ h(x) - \mathbb{E}h(Z) \right\}p(x) dx
+&amp;= - \int_X^\infty \left\{ h(x) - \mathbb{E}h(Z) \right\} p(x) dx
+\end{split}
+\]</span></p>
+<p>noting that it’s then directly checked that <span class="math inline">\(f_h \in \mathcal{F}\)</span>. This allows us to write</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbb{E} h(W) - \mathbb{E}h(Z) = \mathbb{E}\left\{ f_h^\prime(W) + \phi(W)f_h(W) \right\}
+\end{equation}
+\]</span></p>
+<p>How to get the last equation? By derivating <span class="math inline">\(w\)</span> at both side,</p>
+<p><span class="math display">\[
+[f_h(x)p(x)]^\prime \vert_{x = W} = \left\{h(W)-\mathbb{E}h(Z)\right\}_{\vert_{x=W}}p(W)
+\]</span></p>
+<p>the left:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{split}
+\text{left} &amp;:= \int_{-\infty}^W [f_h(x)p(x)]^\prime dx  \\
+&amp;= \int f_h^\prime p + \int f_n p^\prime  \\
+&amp;= \mathbb{E}f_h^\prime + \int f_h \frac{p^\prime}{p} p dx \\
+&amp;= \mathbb{E}f_h^\prime + \mathbb{E}\phi f_h \\
+\end{split}
+\end{equation}
+\]</span></p>
+<p>the right:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{split}
+\text{right} &amp;:= \int_{-\infty}^W \left\{ h(x) - \mathbb{E}h(Z) \right\} p(x) dx \\
+&amp;= \mathbb{E}h(W) - \mathbb{E}h(Z) \\
+\end{split}
+\end{equation}
+\]</span></p>
+<p>for any random variable <span class="math inline">\(W\)</span> for which the expectations exist; in particular, for standard normal approximation,</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbb{E}h(W) - \mathbb{E}h(Z) = \mathbb{E}\left\{ f_h^\prime (W) - Wf_h(W) \right\}
+\end{equation}
+\]</span></p>
+<p><strong>example: end</strong></p>
+<p><strong><em>Important Conclusion!!</em></strong> Taking the supremum of the left hand side over test funcitons <span class="math inline">\(h \in \mathcal{H}\)</span> gives a measure of the distance between the distributions of <span class="math inline">\(W\)</span> and <span class="math inline">\(Z\)</span>. The distance can in turn be computed by taking the supremum of the right side over <span class="math inline">\(h \in \mathcal{H}\)</span>. …, in many many circumstances, <strong><em>expressing the difference <span class="math inline">\(\mathbb{E}h(W) - \mathbb{E}h(Z)\)</span> in the entirely equivalent form <span class="math display">\[\mathbb{E}\left\{ f_h^\prime (W) + \phi(W)f_h(W) \right\}\]</span> makes it easier to bound.</em></strong></p>
+<p><strong><em>Error Bounded</em></strong> <a href="#5">[5]</a> Let <span class="math inline">\(\mathcal{D}\)</span> be the set of all <span class="math inline">\(f : \mathbb{R}\rightarrow \mathbb{R}\)</span> that are twice continuously differentiable, and <span class="math inline">\(\lvert f(x) \rvert \leq 1, \lvert f^\prime(x) \rvert \leq 1\)</span> and <span class="math inline">\(\lvert f^{\prime\prime}(x) \rvert \leq 1\)</span> for all <span class="math inline">\(x \in \mathbb{R}\)</span>. Let <span class="math inline">\(Z\)</span> be a standard normal random variable and <span class="math inline">\(W\)</span> be any random variable. Then</p>
+<p><span class="math display">\[
+\begin{equation}
+\sup_{t\in \mathbb{R}} \lvert \mathbb{P}(W \leq t) - \mathbb{P}(Z \leq t) \rvert \leq 2 (\sup_{f\in \mathcal{D}} \lvert \mathbb{E}(f^\prime(W)) - Wf(W)) \rvert )^{1/2} 
+\end{equation}
+\]</span></p>
+<h2 id="steins-lemma-identity-and-operator">Stein’s Lemma, Identity and Operator</h2>
 <p><strong><em>Stein’s Lemma</em></strong> Define the functional operator <span class="math inline">\(\mathcal{A}\)</span> by</p>
 <p><span class="math display">\[\begin{equation}
 \mathcal{A}f(x) = f^\prime(x) - xf(x)
 \end{equation}\]</span></p>
 <ul>
-<li>If <span class="math inline">\(Z\)</span> has the standard normal distribution, then <span class="math inline">\(\mathbb{E}\mathcal{A}f(Z) = 0\)</span> for all absolutely continuous <span class="math inline">\(f\)</span> with <span class="math inline">\(\mathbb{E}|f^\prime(Z)|\)</span> &lt; $.</li>
-<li>If for some random variable <span class="math inline">\(W\)</span>, <span class="math inline">\(\mathbb{E}\mathcal{A}f(W) = 0\)</span> for all absolutely continuous functions <span class="math inline">\(f\)</span> with <span class="math inline">\(|| f^\prime || &lt; \infty\)</span>, then <span class="math inline">\(W\)</span> has the standard normal distribution. The operator <span class="math inline">\(\mathcal{A}\)</span> is referred to as a characterizing operator of the standard normal distribution.</li>
+<li>If <span class="math inline">\(Z\)</span> has the standard normal distribution, then <span class="math inline">\(\mathbb{E}\mathcal{A}f(Z) = 0\)</span> for all absolutely continuous <span class="math inline">\(f\)</span> with <span class="math inline">\(\mathbb{E} \lvert f^\prime(Z)\rvert &lt; \infty\)</span>.</li>
+<li>If for some random variable <span class="math inline">\(W\)</span>, <span class="math inline">\(\mathbb{E}\mathcal{A}f(W) = 0\)</span> for all absolutely continuous functions <span class="math inline">\(f\)</span> with <span class="math inline">\(|| f^\prime || &lt; \infty\)</span>, then <span class="math inline">\(W\)</span> has the standard normal distribution.</li>
 </ul>
-<p>*<strong>Lemma</strong> If</p>
-<p>Roughly speaking, it relies on the basic fact that two smooth densities <span class="math inline">\(p(x)\)</span> and <span class="math inline">\(q(x)\)</span> supported on <span class="math inline">\(\mathcal{R}\)</span> are <strong>identical</strong> if and only if</p>
+<p>The operator <span class="math inline">\(\mathcal{A}\)</span> is referred to as a characterizing operator of the standard normal distribution.</p>
+<p><strong><em>(Stein) score function</em></strong> Assume that <span class="math inline">\(\mathcal{X}\)</span> is a subset of <span class="math inline">\(\mathbb{R}^d\)</span> and <span class="math inline">\(p(x)\)</span> a continuous differentiable (also called smooth) density whose support is <span class="math inline">\(\mathcal{X}\)</span>. The (Stein) score function of <span class="math inline">\(p\)</span> is defined as</p>
+<p><span class="math display">\[
+\begin{equation}
+s_p = \nabla_x \log p(x) = \frac{\nabla_x p(x)}{p(x)}
+\end{equation}
+\]</span></p>
+<p>We say that a function <span class="math inline">\(f : \mathcal{X} \rightarrow \mathbb{R}\)</span> is in the <strong><em>Stein class</em></strong> of <span class="math inline">\(p\)</span> if <span class="math inline">\(f\)</span> is smooth and satisfies</p>
+<p><span class="math display">\[
+\begin{equation}
+\int_{x\in \mathcal{X}} \nabla_x(f(x)p(x))dx = 0
+\end{equation}
+\]</span></p>
+<p>It holds with a condition when <span class="math inline">\(\mathcal{X} = \mathbb{R}^d\)</span>, if</p>
+<p><span class="math display">\[
+\begin{equation}
+\lim_{||x|| \rightarrow \infty} f(x)p(x) = 0
+\end{equation}
+\]</span></p>
+<p><strong><em>Stein’s Operator</em></strong> The Stein’s operator of <span class="math inline">\(p\)</span> is a linear operator acting on the Stein class of <span class="math inline">\(p\)</span>, defined as</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathcal{A}_p f(x) = s_p(x)f(x) + \nabla_xf(x)
+\end{equation}
+\]</span></p>
+<p><strong><em>Stein’s Identity</em></strong> Assume <span class="math inline">\(p(x)\)</span> is a smooth density supported on <span class="math inline">\(\mathcal{X}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbb{E}_p[\mathcal{A}_p f(x)] = \mathbb{E}_p[s_p(x) f(x)^\top + \nabla f(x)] = 0
+\end{equation}
+\]</span></p>
+<p>for any <span class="math inline">\(f\)</span> that is in the Stein class of <span class="math inline">\(p\)</span>.</p>
+<p><strong><em>Lemma <a href="#6">[6]</a></em></strong> Assume <span class="math inline">\(p(x)\)</span> and <span class="math inline">\(q(x)\)</span> are smooth densities supported on <span class="math inline">\(\mathcal{X}\)</span> and <span class="math inline">\(f(x)\)</span> is in the Stein class of <span class="math inline">\(p\)</span>, we have</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbb{E}_p[\mathcal{A}_q f(x)] = \mathbb{E}_p[(s_q(x) - s_p(x))f(x)^\top]
+\end{equation}
+\]</span></p>
+<p><strong><em>Lemma Stein’s identity (again..)</em></strong><br />
+Roughly speaking, it relies on the basic fact that two smooth densities <span class="math inline">\(p(x)\)</span> and <span class="math inline">\(q(x)\)</span> supported on <span class="math inline">\(\mathcal{R}\)</span> are <strong>identical</strong> if and only if</p>
 <p><span class="math display">\[\begin{equation}
 \mathbb{E}_p [s_q(x)f(x) + \nabla_x f(x)] = 0
 \end{equation}\]</span></p>
 <p>for smooth functions <span class="math inline">\(f(x)\)</span> with proper zero-boudary conditions, where <span class="math inline">\(s_q(x) = \nabla_x \log q(x) = \nabla_x q(x) / q(x)\)</span> is called the (Stein) score function of <span class="math inline">\(q(x)\)</span>. The equation is known as <strong>Stein’s identity</strong>.</p>
+<h2 id="stein-discrepancy-measure-and-kernelized-stein-discrepancy-ksd">Stein Discrepancy Measure and Kernelized Stein Discrepancy (KSD)</h2>
+<p><strong><em>Stein discrepancy measure</em></strong> between <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> is</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbb{S}(p, q) = \max_{f \in \mathcal{F}} (\mathbb{E}_p[s_q(x)f(x) + \nabla_xf(x)])^2
+\end{equation}
+\]</span></p>
+<p>where <span class="math inline">\(\mathcal{F}\)</span> is a set of smooth functions that satisfies <span class="math display">\[\mathbb{E}_p[s_q(x)f(x) + \nabla_xf(x)]=0\]</span> and is also rich enough to ensure <span class="math inline">\(\mathbb{S}(p,q)&gt;0\)</span> whenever <span class="math inline">\(p \neq q\)</span>.</p>
+<p><strong><em>Kernelized Stein Discrepancy (KSD)</em></strong> <span class="math inline">\(\mathbb{S}(p, q)\)</span> between distribution <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> is defined as</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbb{S}(p, q) = \mathbb{E}_{x, x^\prime \sim p}[\delta_{q,p}(x)^\top k(x, x^\prime)\delta_{q,p}(x^\prime)]
+\end{equation}
+\]</span></p>
+<p>where <span class="math inline">\(\delta_{q,p}(x) = s_q(x) - s_p(x)\)</span> is the score difference between <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>, and <span class="math inline">\(x, x^\prime\)</span> are i.i.d draws from <span class="math inline">\(p(x)\)</span>.</p>
+<p><strong><em>Proposition</em></strong> Define <span class="math inline">\(g_{p,q}(x)=p(x)(s_q(x)-s_p(x))\)</span>. Assume <span class="math inline">\(k(x,x^\prime)\)</span> is integrally strictly positive definite, and <span class="math inline">\(p, q\)</span> are continuous densities with <span class="math display">\[\left\|\boldsymbol{g}_{p, q}\right\|_{2}^{2}&lt;\infty\]</span>, we have <span class="math display">\[\mathbb{S}(p,q) \geq 0\]</span> and <span class="math display">\[\mathbb{S}(p, q) = 0\]</span> if and only if <span class="math display">\[p=q\]</span>. (This establishes <span class="math display">\[\mathbb{S}(p,q)\]</span> as a valid discrepancy measure.)</p>
+<p><strong><em>Definition</em></strong> A kernel <span class="math inline">\(k(x,x^\prime)\)</span> is said to be in the Stein class of <span class="math inline">\(p\)</span> if <span class="math inline">\(k(x, x^\prime)\)</span> has a continuous second order partial derivatives, and both <span class="math inline">\(k(x, \cdot)\)</span> and <span class="math inline">\(k(\cdot, x)\)</span> are in the Stein class of <span class="math inline">\(p\)</span> for any fixed <span class="math inline">\(x\)</span>.</p>
+<p><strong><em>Theorem</em></strong> Assume <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are smooth densities and <span class="math inline">\(k(x, x^\prime)\)</span> is in the Stein class of <span class="math inline">\(p\)</span>. Define</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{split}
+u_q(x,x^\prime) &amp;= s_q(x)^\top k(x,x^\prime)s_q(x^\prime) + s_q(x)^\top \nabla_{x^\prime}k(x,x^\prime) \\
+&amp; \quad \quad + \nabla_x k(x,x^\prime)^\top s_q(x^\prime) + \text{trace}(\nabla_{x,x^\prime}k(x,x^\prime)) \\
+\end{split}
+\end{equation}
+\]</span></p>
+<p>then, <span class="math display">\[\mathbb{S}(p,q) = \mathbb{E}_{x,x^\prime \sim p}[u_q(x, x^\prime)]\]</span></p>
+<p><strong><em>Theorem</em></strong> Assume <span class="math inline">\(k(x, x^\prime)\)</span> is a positive definite kernel in the Stein class of <span class="math inline">\(p\)</span>, with positive eigenvalues <span class="math display">\[\left\{\lambda_j\right\}\]</span> and eigenfunctions <span class="math display">\[\left\{e_j(x)\right\}\]</span>, then <span class="math inline">\(u_q(x, x^\prime)\)</span> is also a positive definite kernel, and can be rewritten into</p>
+<p><span class="math display">\[
+\begin{equation}
+u_q(x, x^\prime) = \sum_j \lambda_j [\mathcal{A}_q e_j(x)]^\top [\mathcal{A}_q e_j(x^\prime)]
+\end{equation}
+\]</span></p>
+<p>where <span class="math display">\[\mathcal{A}_qe_j(x) = s_q(x)e_j(x) + \nabla_xe_j(x)\]</span> is the Stein’s operator acted on <span class="math inline">\(e_j\)</span>. In addition,</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbb{S}(p, q) = \sum_j \lambda_j || \mathbb{E}_{x\sim p}[\mathcal{A}_qe_j(x)] ||_2^2 
+\end{equation}
+\]</span></p>
+<p>Note that although <span class="math display">\[\left\{e_j\right\}\]</span> are orthonormal, the <span class="math display">\[\left\{\mathcal{A}_qe_j(x)\right\}\]</span> are no longer othonormal in general.</p>
+<p><strong><em>Theorem</em></strong> Let <span class="math inline">\(\mathcal{H}\)</span> be the RKHS related to a positive definite kernel <span class="math inline">\(k(x, x^\prime)\)</span> in the Stein class of <span class="math inline">\(p\)</span>. Denote by <span class="math display">\[\beta(x^\prime) = \mathbb{E}_{x\sim p}[\mathcal{A}_q k_{x^\prime}(x)]\]</span>, then</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbb{S}(p, q) = ||\beta||_{\mathcal{H}^d}^2
+\end{equation}
+\]</span></p>
+<p>Further, we have <span class="math inline">\(\langle f, \beta \rangle_{\mathcal{H}^d} = \mathbb{E}_x[\text{trace}(\mathcal{A}_qf)]\)</span> for <span class="math inline">\(f \in \mathcal{H}^d\)</span>, and hence</p>
+<p><span class="math display">\[
+\begin{equation}
+\sqrt{S(p, q)}=\max _{f \in \mathcal{H}^{d}}\left\{\mathbb{E}_{x}\left[\operatorname{trace}\left(\mathcal{A}_{q} f\right)\right] \text { s.t. }\|f\|_{\mathcal{H}^{d}} \leq 1\right\}
+\end{equation}
+\]</span></p>
+<p>where the maximum is achieved when <span class="math display">\[f = \beta / \left\|\beta\right\|_{\mathcal{H}^d}\]</span>.</p>
+<h2 id="how-to-use-ksd-goodness-of-fit-testing-based-on-ksd">How to Use KSD? (Goodness-of-fit Testing Based on KSD)</h2>
+<p>The form in - allows efficient estimation of <span class="math inline">\(\mathbb{S}(p, q)\)</span> in practice. Given i.i.d sample <span class="math display">\[\left\{ x_i \sim p \right\}\]</span> (<span class="math inline">\(p\)</span> is unknown) and the score function <span class="math inline">\(s_q(x)\)</span>, we can estimate <span class="math inline">\(\mathbb{S}(p, q)\)</span> by</p>
+<p><span class="math display">\[
+\begin{equation}
+\hat{\mathbb{S}}_u(p, q) = \frac{1}{n(n-1)}\sum_{1\leq i \neq j \leq n}u_q(x_i, x_j)
+\end{equation}
+\]</span></p>
+<p>where <span class="math display">\[\hat{\mathbb{S}}_u(p, q)\]</span> is a form of U-statistics. <span class="math display">\[\mathbb{S}(p, q)\]</span> can also be estimated using a V-statistics of form <span class="math display">\[\frac{1}{n^2}\sum_{i,j=1}^n u_q(x_i, x_j)\]</span>, which provides a biased estimator.</p>
 <h3 id="references">References</h3>
 <p><a id="1">[1]</a> Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
 <p><a id="2">[2]</a> Schulman, J., Abbeel, P., and Chen, X. Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
 <p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
+<p><a id="4">[4]</a> Barbour, Andrew D., and Louis HY Chen. “Steins (magic) method.” arXiv preprint arXiv:1411.1179 (2014).</p>
+<p><a id="5">[5]</a> Reinert, Gesine. “A short introduction to Stein’s method.” Lecture Notes (2011).</p>
+<p><a id="6">[6]</a> Ley, Christophe, and Yvik Swan. “Stein’s density approach and information inequalities.” Electronic Communications in Probability 18 (2013).</p>
 
     </div>
 
@@ -229,6 +424,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Stein/" rel="tag"># Stein</a>
+              <a href="/tags/SVGD/" rel="tag"># SVGD</a>
           </div>
 
         
@@ -237,12 +433,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/2020/08/blog-post-3/" rel="prev" title="程序员数学防忽悠备忘录">
-      <i class="fa fa-chevron-left"></i> 程序员数学防忽悠备忘录
+    <a href="/posts/2020/08/blog-post-5/" rel="prev" title="Stein Variational Gradient Decsent: RHKS">
+      <i class="fa fa-chevron-left"></i> Stein Variational Gradient Decsent: RHKS
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/2020/08/blog-post-5/" rel="next" title="Stein Variational Gradient Decsent: RHKS">
-      Stein Variational Gradient Decsent: RHKS <i class="fa fa-chevron-right"></i>
+    <a href="/posts/2020/08/blog-post-7/" rel="next" title="Offline Reinforcement Learning">
+      Offline Reinforcement Learning <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -302,7 +498,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#stein-variational-gradient-descent-steins-method"><span class="nav-number">1.</span> <span class="nav-text">Stein Variational Gradient Descent: Stein’s Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-method"><span class="nav-number">1.1.</span> <span class="nav-text">Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-methods"><span class="nav-number">1.2.</span> <span class="nav-text">Stein’s Method’s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-lemma"><span class="nav-number">1.3.</span> <span class="nav-text">Stein’s Lemma</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.3.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#steins-method"><span class="nav-number">1.</span> <span class="nav-text">Stein’s Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-method-1"><span class="nav-number">1.1.</span> <span class="nav-text">Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foundation-of-steins-method"><span class="nav-number">1.2.</span> <span class="nav-text">Foundation of Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#one-example"><span class="nav-number">1.3.</span> <span class="nav-text">One example:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-lemma-identity-and-operator"><span class="nav-number">1.4.</span> <span class="nav-text">Stein’s Lemma, Identity and Operator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stein-discrepancy-measure-and-kernelized-stein-discrepancy-ksd"><span class="nav-number">1.5.</span> <span class="nav-text">Stein Discrepancy Measure and Kernelized Stein Discrepancy (KSD)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-use-ksd-goodness-of-fit-testing-based-on-ksd"><span class="nav-number">1.6.</span> <span class="nav-text">How to Use KSD? (Goodness-of-fit Testing Based on KSD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.6.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -316,7 +512,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
