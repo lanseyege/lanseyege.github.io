@@ -28,7 +28,7 @@
 <meta property="og:description" content="Stein’s Method">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-25T22:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-04T10:19:32.802Z">
+<meta property="article:modified_time" content="2021-02-04T12:34:45.116Z">
 <meta property="article:author" content="Ye Yuan">
 <meta property="article:tag" content="Stein">
 <meta property="article:tag" content="SVGD">
@@ -207,7 +207,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 11:19:32" itemprop="dateModified" datetime="2021-02-04T11:19:32+01:00">2021-02-04</time>
+                <time title="Modified: 2021-02-04 13:34:45" itemprop="dateModified" datetime="2021-02-04T13:34:45+01:00">2021-02-04</time>
               </span>
 
           
@@ -363,7 +363,7 @@ Roughly speaking, it relies on the basic fact that two smooth densities <span cl
 \end{equation}
 \]</span></p>
 <p>where <span class="math inline">\(\delta_{q,p}(x) = s_q(x) - s_p(x)\)</span> is the score difference between <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>, and <span class="math inline">\(x, x^\prime\)</span> are i.i.d draws from <span class="math inline">\(p(x)\)</span>.</p>
-<p><strong><em>Proposition</em></strong> Define <span class="math inline">\(g_{p,q}(x)=p(x)(s_q(x)-s_p(x))\)</span>. Assume <span class="math inline">\(k(x,x^\prime)\)</span> is integrally strictly positive definite, and <span class="math inline">\(p, q\)</span> are continuous densities with <span class="math display">\[\left\|\boldsymbol{g}_{p, q}\right\|_{2}^{2}&lt;\infty\]</span>, we have <span class="math display">\[\mathbb{S}(p,q) \geq 0\]</span> and <span class="math display">\[\mathbb{S}(p, q) = 0\]</span> if and only if <span class="math display">\[p=q\]</span>. (This establishes <span class="math display">\[\mathbb{S}(p,q)\]</span> as a valid discrepancy measure.)</p>
+<p><strong><em>Proposition</em></strong> Define <span class="math inline">\(g_{p,q}(x)=p(x)(s_q(x)-s_p(x))\)</span>. Assume <span class="math inline">\(k(x,x^\prime)\)</span> is integrally strictly positive definite, and <span class="math inline">\(p, q\)</span> are continuous densities with <span class="math inline">\(\left\|\boldsymbol{g}_{p, q}\right\|_{2}^{2}&lt;\infty\)</span>, we have <span class="math inline">\(\mathbb{S}(p,q) \geq 0\)</span> and <span class="math inline">\(\mathbb{S}(p, q) = 0\)</span> if and only if <span class="math display">\[p=q\]</span>. (This establishes <span class="math inline">\(\mathbb{S}(p,q)\)</span> as a valid discrepancy measure.)</p>
 <p><strong><em>Definition</em></strong> A kernel <span class="math inline">\(k(x,x^\prime)\)</span> is said to be in the Stein class of <span class="math inline">\(p\)</span> if <span class="math inline">\(k(x, x^\prime)\)</span> has a continuous second order partial derivatives, and both <span class="math inline">\(k(x, \cdot)\)</span> and <span class="math inline">\(k(\cdot, x)\)</span> are in the Stein class of <span class="math inline">\(p\)</span> for any fixed <span class="math inline">\(x\)</span>.</p>
 <p><strong><em>Theorem</em></strong> Assume <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are smooth densities and <span class="math inline">\(k(x, x^\prime)\)</span> is in the Stein class of <span class="math inline">\(p\)</span>. Define</p>
 <p><span class="math display">\[
@@ -375,20 +375,20 @@ u_q(x,x^\prime) &amp;= s_q(x)^\top k(x,x^\prime)s_q(x^\prime) + s_q(x)^\top \nab
 \end{equation}
 \]</span></p>
 <p>then, <span class="math display">\[\mathbb{S}(p,q) = \mathbb{E}_{x,x^\prime \sim p}[u_q(x, x^\prime)]\]</span></p>
-<p><strong><em>Theorem</em></strong> Assume <span class="math inline">\(k(x, x^\prime)\)</span> is a positive definite kernel in the Stein class of <span class="math inline">\(p\)</span>, with positive eigenvalues <span class="math display">\[\left\{\lambda_j\right\}\]</span> and eigenfunctions <span class="math display">\[\left\{e_j(x)\right\}\]</span>, then <span class="math inline">\(u_q(x, x^\prime)\)</span> is also a positive definite kernel, and can be rewritten into</p>
+<p><strong><em>Theorem</em></strong> Assume <span class="math inline">\(k(x, x^\prime)\)</span> is a positive definite kernel in the Stein class of <span class="math inline">\(p\)</span>, with positive eigenvalues <span class="math inline">\(\left\{\lambda_j\right\}\)</span> and eigenfunctions <span class="math inline">\(\left\{e_j(x)\right\}\)</span>, then <span class="math inline">\(u_q(x, x^\prime)\)</span> is also a positive definite kernel, and can be rewritten into</p>
 <p><span class="math display">\[
 \begin{equation}
 u_q(x, x^\prime) = \sum_j \lambda_j [\mathcal{A}_q e_j(x)]^\top [\mathcal{A}_q e_j(x^\prime)]
 \end{equation}
 \]</span></p>
-<p>where <span class="math display">\[\mathcal{A}_qe_j(x) = s_q(x)e_j(x) + \nabla_xe_j(x)\]</span> is the Stein’s operator acted on <span class="math inline">\(e_j\)</span>. In addition,</p>
+<p>where <span class="math inline">\(\mathcal{A}_qe_j(x) = s_q(x)e_j(x) + \nabla_xe_j(x)\)</span> is the Stein’s operator acted on <span class="math inline">\(e_j\)</span>. In addition,</p>
 <p><span class="math display">\[
 \begin{equation}
 \mathbb{S}(p, q) = \sum_j \lambda_j || \mathbb{E}_{x\sim p}[\mathcal{A}_qe_j(x)] ||_2^2 
 \end{equation}
 \]</span></p>
-<p>Note that although <span class="math display">\[\left\{e_j\right\}\]</span> are orthonormal, the <span class="math display">\[\left\{\mathcal{A}_qe_j(x)\right\}\]</span> are no longer othonormal in general.</p>
-<p><strong><em>Theorem</em></strong> Let <span class="math inline">\(\mathcal{H}\)</span> be the RKHS related to a positive definite kernel <span class="math inline">\(k(x, x^\prime)\)</span> in the Stein class of <span class="math inline">\(p\)</span>. Denote by <span class="math display">\[\beta(x^\prime) = \mathbb{E}_{x\sim p}[\mathcal{A}_q k_{x^\prime}(x)]\]</span>, then</p>
+<p>Note that although <span class="math inline">\(\left\{e_j\right\}\)</span> are orthonormal, the <span class="math inline">\(\left\{\mathcal{A}_qe_j(x)\right\}\)</span> are no longer othonormal in general.</p>
+<p><strong><em>Theorem</em></strong> Let <span class="math inline">\(\mathcal{H}\)</span> be the RKHS related to a positive definite kernel <span class="math inline">\(k(x, x^\prime)\)</span> in the Stein class of <span class="math inline">\(p\)</span>. Denote by <span class="math inline">\(\beta(x^\prime) = \mathbb{E}_{x\sim p}[\mathcal{A}_q k_{x^\prime}(x)]\)</span>, then</p>
 <p><span class="math display">\[
 \begin{equation}
 \mathbb{S}(p, q) = ||\beta||_{\mathcal{H}^d}^2
@@ -400,16 +400,16 @@ u_q(x, x^\prime) = \sum_j \lambda_j [\mathcal{A}_q e_j(x)]^\top [\mathcal{A}_q e
 \sqrt{S(p, q)}=\max _{f \in \mathcal{H}^{d}}\left\{\mathbb{E}_{x}\left[\operatorname{trace}\left(\mathcal{A}_{q} f\right)\right] \text { s.t. }\|f\|_{\mathcal{H}^{d}} \leq 1\right\}
 \end{equation}
 \]</span></p>
-<p>where the maximum is achieved when <span class="math display">\[f = \beta / \left\|\beta\right\|_{\mathcal{H}^d}\]</span>.</p>
+<p>where the maximum is achieved when <span class="math inline">\(f = \beta / \left\|\beta\right\|_{\mathcal{H}^d}\)</span>.</p>
 <h2 id="how-to-use-ksd-goodness-of-fit-testing-based-on-ksd">How to Use KSD? (Goodness-of-fit Testing Based on KSD)</h2>
-<p>The form in - allows efficient estimation of <span class="math inline">\(\mathbb{S}(p, q)\)</span> in practice. Given i.i.d sample <span class="math display">\[\left\{ x_i \sim p \right\}\]</span> (<span class="math inline">\(p\)</span> is unknown) and the score function <span class="math inline">\(s_q(x)\)</span>, we can estimate <span class="math inline">\(\mathbb{S}(p, q)\)</span> by</p>
+<p>The form in - allows efficient estimation of <span class="math inline">\(\mathbb{S}(p, q)\)</span> in practice. Given i.i.d sample <span class="math inline">\(\left\{ x_i \sim p \right\}\)</span> (<span class="math inline">\(p\)</span> is unknown) and the score function <span class="math inline">\(s_q(x)\)</span>, we can estimate <span class="math inline">\(\mathbb{S}(p, q)\)</span> by</p>
 <p><span class="math display">\[
 \begin{equation}
 \hat{\mathbb{S}}_u(p, q) = \frac{1}{n(n-1)}\sum_{1\leq i \neq j \leq n}u_q(x_i, x_j)
 \end{equation}
 \]</span></p>
-<p>where <span class="math display">\[\hat{\mathbb{S}}_u(p, q)\]</span> is a form of U-statistics. <span class="math display">\[\mathbb{S}(p, q)\]</span> can also be estimated using a V-statistics of form <span class="math display">\[\frac{1}{n^2}\sum_{i,j=1}^n u_q(x_i, x_j)\]</span>, which provides a biased estimator.</p>
-<h3 id="references">References</h3>
+<p>where <span class="math inline">\(\hat{\mathbb{S}}_u(p, q)\)</span> is a form of U-statistics. <span class="math inline">\(\mathbb{S}(p, q)\)</span> can also be estimated using a V-statistics of form <span class="math inline">\(\frac{1}{n^2}\sum_{i,j=1}^n u_q(x_i, x_j)\)</span>, which provides a biased estimator.</p>
+<h1 id="references">References</h1>
 <p><a id="1">[1]</a> Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
 <p><a id="2">[2]</a> Schulman, J., Abbeel, P., and Chen, X. Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
 <p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
@@ -500,7 +500,7 @@ u_q(x, x^\prime) = \sum_j \lambda_j [\mathcal{A}_q e_j(x)]^\top [\mathcal{A}_q e
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#steins-method"><span class="nav-number">1.</span> <span class="nav-text">Stein’s Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-method-1"><span class="nav-number">1.1.</span> <span class="nav-text">Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foundation-of-steins-method"><span class="nav-number">1.2.</span> <span class="nav-text">Foundation of Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#one-example"><span class="nav-number">1.3.</span> <span class="nav-text">One example:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-lemma-identity-and-operator"><span class="nav-number">1.4.</span> <span class="nav-text">Stein’s Lemma, Identity and Operator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stein-discrepancy-measure-and-kernelized-stein-discrepancy-ksd"><span class="nav-number">1.5.</span> <span class="nav-text">Stein Discrepancy Measure and Kernelized Stein Discrepancy (KSD)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-use-ksd-goodness-of-fit-testing-based-on-ksd"><span class="nav-number">1.6.</span> <span class="nav-text">How to Use KSD? (Goodness-of-fit Testing Based on KSD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.6.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#steins-method"><span class="nav-number">1.</span> <span class="nav-text">Stein’s Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-method-1"><span class="nav-number">1.1.</span> <span class="nav-text">Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foundation-of-steins-method"><span class="nav-number">1.2.</span> <span class="nav-text">Foundation of Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#one-example"><span class="nav-number">1.3.</span> <span class="nav-text">One example:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steins-lemma-identity-and-operator"><span class="nav-number">1.4.</span> <span class="nav-text">Stein’s Lemma, Identity and Operator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stein-discrepancy-measure-and-kernelized-stein-discrepancy-ksd"><span class="nav-number">1.5.</span> <span class="nav-text">Stein Discrepancy Measure and Kernelized Stein Discrepancy (KSD)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-use-ksd-goodness-of-fit-testing-based-on-ksd"><span class="nav-number">1.6.</span> <span class="nav-text">How to Use KSD? (Goodness-of-fit Testing Based on KSD)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -514,12 +514,12 @@ u_q(x, x^\prime) = \sum_j \lambda_j [\mathcal{A}_q e_j(x)]^\top [\mathcal{A}_q e
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">80</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
