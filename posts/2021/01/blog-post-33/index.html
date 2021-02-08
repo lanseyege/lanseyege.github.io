@@ -28,7 +28,7 @@
 <meta property="og:description" content="Gradient Descent">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-23T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-04T03:10:55.669Z">
+<meta property="article:modified_time" content="2021-02-08T12:19:07.106Z">
 <meta property="article:author" content="Ye Yuan">
 <meta property="article:tag" content="Convergence">
 <meta property="article:tag" content="Gradient">
@@ -204,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 04:10:55" itemprop="dateModified" datetime="2021-02-04T04:10:55+01:00">2021-02-04</time>
+                <time title="Modified: 2021-02-08 13:19:07" itemprop="dateModified" datetime="2021-02-08T13:19:07+01:00">2021-02-08</time>
               </span>
 
           
@@ -234,7 +234,7 @@ w_{t+1} = w_t - \eta \nabla f_w
 f(x^{(k)}) - f(x^\star) \leq \frac{\| x^{(0)} - x^\star \|_2 ^2}{2tk} ,
 \]</span></p>
 <p>where <span class="math inline">\(f(x^\star)\)</span> is the optimal value. Intuitively, this means that gradient descent is guaranteed to converge and that it converges with rate <span class="math inline">\(O(1/k)\)</span>.</p>
-<p><strong><em>Proof:</em></strong> Our assumption that <span class="math inline">\(\nabla f\)</span> is Lipschitz continuous with constant <span class="math inline">\(L\)</span> implies <span class="math inline">\(\nabla^2 f(x) \preceq L I\)</span>, or equivalently that $ ^2 f(x) - LI $ is a negative semidefinite matrix. Using this fact, we can perform a quadratic expansion of <span class="math inline">\(f\)</span> around <span class="math inline">\(f(x)\)</span> and obtain the following inequality:</p>
+<p><strong><em>Proof:</em></strong> Our assumption that <span class="math inline">\(\nabla f\)</span> is Lipschitz continuous with constant <span class="math inline">\(L\)</span> implies <span class="math inline">\(\nabla^2 f(x) \preceq L I\)</span>, or equivalently that <span class="math inline">\(\nabla^2 f(x) - LI\)</span> is a negative semidefinite matrix. Using this fact, we can perform a quadratic expansion of <span class="math inline">\(f\)</span> around <span class="math inline">\(f(x)\)</span> and obtain the following inequality:</p>
 <p><span class="math display">\[
 \begin{array}{ll}
 f(y) &amp;\leq f(x) + \nabla f(x)^\top (y-x) +\frac{1}{2} \nabla^2 f(x) \| y - x \| _2^2 \\
@@ -292,7 +292,7 @@ f(x^{(k)}) - f(x^\star) &amp;\leq \frac{1}{k} \sum_{i=1}^k f(x^{(i)}) - f(x^\sta
 \end{array}
 \]</span></p>
 <p>where in the final step, we plug in it to get the inequality from - that we were trying to prove.</p>
-<p><strong>Theorem</strong> Convergence of SGD for strongly convex problem; fixed stepsizes. Under the assumption of <span class="math inline">\(\mu\)</span>-strongly convex, <span class="math inline">\(L\)</span>-smooth, if $_t =  $, then SGD achieves</p>
+<p><strong>Theorem</strong> Convergence of SGD for strongly convex problem; fixed stepsizes. Under the assumption of <span class="math inline">\(\mu\)</span>-strongly convex, <span class="math inline">\(L\)</span>-smooth, if <span class="math inline">\(\eta_t = \eta \leq \frac{1}{L c_g}\)</span>, then SGD achieves</p>
 <p><span class="math display">\[
 \mathbb{E} [F(x^t) - F(x^\star)] \leq \frac{\eta L \sigma_g^2}{2\mu} + (1 - \eta \mu)^t (F(x^0) - F(x^\star))  
 \]</span></p>
@@ -335,12 +335,12 @@ w_{t+1} &amp;= w_t - u_t \\
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/2021/01/blog-post-32/" rel="prev" title="Optimization on Manifold ">
-      <i class="fa fa-chevron-left"></i> Optimization on Manifold 
+    <a href="/posts/2021/01/blog-post-31/" rel="prev" title=" Manifold Leaning ">
+      <i class="fa fa-chevron-left"></i>  Manifold Leaning 
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/2021/02/blog-post-34/" rel="next" title="Note on "Introduction to Stochastic Programming"">
-      Note on "Introduction to Stochastic Programming" <i class="fa fa-chevron-right"></i>
+    <a href="/posts/2021/01/blog-post-32/" rel="next" title="Optimization on Manifold ">
+      Optimization on Manifold  <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
