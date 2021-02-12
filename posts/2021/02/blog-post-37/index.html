@@ -20,22 +20,23 @@
     var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Stein Variational Gradient Descent: RHKS">
+  <meta name="description" content="Bayesian Inference">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Stein Variational Gradient Decsent: RHKS">
-<meta property="og:url" content="http://lanseyege.github.io/posts/2020/08/blog-post-5/index.html">
+<meta property="og:title" content="Bayesian Inference">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/02/blog-post-37/index.html">
 <meta property="og:site_name" content="Ye Yuan">
-<meta property="og:description" content="Stein Variational Gradient Descent: RHKS">
+<meta property="og:description" content="Bayesian Inference">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-09T22:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-04T10:19:41.381Z">
+<meta property="og:image" content="http://lanseyege.github.io/posts/2021/02/blog-post-37/pic/bi.png">
+<meta property="article:published_time" content="2021-02-07T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-12T17:29:27.564Z">
 <meta property="article:author" content="Ye Yuan">
-<meta property="article:tag" content="Stein">
-<meta property="article:tag" content="SVGD">
-<meta property="article:tag" content="RHKS">
+<meta property="article:tag" content="Bayesian">
+<meta property="article:tag" content="Inference">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://lanseyege.github.io/posts/2021/02/blog-post-37/pic/bi.png">
 
-<link rel="canonical" href="http://lanseyege.github.io/posts/2020/08/blog-post-5/">
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/02/blog-post-37/">
 
 
 <script id="page-configurations">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>Stein Variational Gradient Decsent: RHKS | Ye Yuan</title>
+  <title>Bayesian Inference | Ye Yuan</title>
   
 
 
@@ -163,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2020/08/blog-post-5/">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/02/blog-post-37/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -176,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Stein Variational Gradient Decsent: RHKS
+          Bayesian Inference
         </h1>
 
         <div class="post-meta">
@@ -186,14 +187,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-08-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-10T00:00:00+02:00">2020-08-10</time>
+              <time title="Created: 2021-02-08 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-08T00:00:00+01:00">2021-02-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 11:19:41" itemprop="dateModified" datetime="2021-02-04T11:19:41+01:00">2021-02-04</time>
+                <time title="Modified: 2021-02-12 18:29:27" itemprop="dateModified" datetime="2021-02-12T18:29:27+01:00">2021-02-12</time>
               </span>
 
           
@@ -207,54 +208,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="stein-variational-gradient-descent-rhks">Stein Variational Gradient Descent: RHKS</h1>
+        <h1 id="bayesian-inference">Bayesian Inference</h1>
 <a id="more"></a>
-<h2 id="reproducing-hilbert-kernel-space-rhks">Reproducing Hilbert Kernel Space (RHKS)</h2>
-<p>Before we start SVGD, we should overview some basic concepts in mathamatics. The RHKS will be the first to be introduced here.</p>
-<h3 id="hilbert-space">Hilbert Space</h3>
-<p><strong><em>Definition (Inner Product)</em></strong> Let <span class="math inline">\(\mathcal{H}\)</span> be a vector space over <span class="math inline">\(\mathcal{R}\)</span>. A function <span class="math inline">\(\langle\cdot, \cdot\rangle_{\mathcal{H}}: \mathcal{H} \times \mathcal{H} \rightarrow \mathbb{R}\)</span> is said to be an inner product on <span class="math inline">\(\mathcal{H}\)</span> if</p>
+<h2 id="what-is-bayesian-inference">What is Bayesian Inference?</h2>
+<p><strong><em>Statistical inference</em></strong> is the process of deducing properties about a population or probability distribution from data. <strong><em>Bayesian inference</em></strong> is therefore just the process of deducing properties about a population or probability distribution from data using Bayes' therem. <a href="#1">[1]</a></p>
+<p>Bayesian inference is a method of statistical inference in which Bayes’ theorem is used to update the probability for a hypothesis as more evidence or information becomes available. <a href="#2">[2]</a></p>
+<p><strong><em>Statistical inference</em></strong> consists in learning about what we do not observe based on what we observe. <strong><em>Bayesian inference</em></strong> is the process of producing statistical inference taking a Bayesian point of view. <a href="#3">[3]</a></p>
+<figure>
+<img src="./pic/bi.png" alt="Bayesian" /><figcaption aria-hidden="true">Bayesian</figcaption>
+</figure>
+<h2 id="formal-description-of-bayesian-inference-2">Formal Description of Bayesian Inference <a href="#2">[2]</a></h2>
+<p><strong><em>Definitions</em></strong></p>
 <ul>
-<li><span class="math inline">\(\langle \alpha_1 f_1 + \alpha_2 f_2, g \rangle_\mathcal{H} = \alpha_1 \langle f_1, g \rangle_\mathcal{H} + \alpha_2 \langle f_2, g \rangle_\mathcal{H}\)</span></li>
-<li><span class="math inline">\(\langle f, g \rangle_\mathcal{H} = \langle g, f \rangle_\mathcal{H}\)</span></li>
-<li><span class="math inline">\(\langle f, f \rangle_\mathcal{H} \geq 0\)</span> and <span class="math inline">\(\langle f, f \rangle_\mathcal{H} = 0\)</span> if and only if <span class="math inline">\(f = 0\)</span></li>
+<li><span class="math inline">\(x\)</span>, a data point in general. This may in fact be a vector of values.</li>
+<li><span class="math inline">\(\theta\)</span>, the parameter of the data point’s distribution, i.e., <span class="math inline">\(x \sim p(x | \theta)\)</span>. This may in fact be a vector of parameters.</li>
+<li><span class="math inline">\(\alpha\)</span>, the hyperparameter of the parameter distribution, i.e., <span class="math inline">\(\theta \sim p(\theta | \alpha)\)</span>. This may in fact be a vector of hyperparameters.</li>
+<li><span class="math inline">\(\mathbf{X}\)</span> is the sample, a set of <span class="math inline">\(n\)</span> observed data points, i.e., <span class="math inline">\(x_1, \ldots, x_n\)</span>.</li>
+<li><span class="math inline">\(\tilde{x}\)</span>, a new data point whose distribution is to be predicted.</li>
 </ul>
-<p><strong><em>Definition (Hilbert Space)</em></strong> A Hilbert Space is an inner product space that is complete and separable with respect to the norm defined by the inner product.</p>
-<p><strong><em>Definition (Reproducing Kernel)</em></strong> Let <span class="math inline">\(\mathcal{F}\)</span> be a Hilbert function space over <span class="math inline">\(\mathcal{X}\)</span>. A reproducing kernel of <span class="math inline">\(\mathcal{F}\)</span> is a function <span class="math inline">\(k : \mathcal{X} \times \mathcal{X} \rightarrow \mathcal{R}\)</span> which satisfies the following two properties:</p>
+<p><strong><em>Bayesian Inference</em></strong></p>
 <ul>
-<li><span class="math inline">\(k(\cdot, x) \in \mathcal{F}\)</span> for any <span class="math inline">\(x \in \mathcal{X}\)</span>.</li>
-<li>(Reproducing property) For any <span class="math inline">\(f \in \mathcal{F}\)</span> and any <span class="math inline">\(x \in \mathcal{X}, f(x) = \langle f, k(\cdot, x)\rangle_\mathcal{F}\)</span>.</li>
+<li>The <strong>prior distribution</strong> is the distribution of the parameters before any data is observed, i.e. <span class="math inline">\(p(\theta | \alpha)\)</span>. The prior distribution might not be easily determined; in such a case, one possibility may be to use the <strong>Jeffreys prior</strong> to obtain a prior distribution before updating it with newer observations.</li>
+<li>The <strong>sampling distribution</strong> is the distribution of the observed data conditional on its parameters, i.e. <span class="math inline">\(p(\mathbf{X} | \theta)\)</span>. This is also termed the <strong>likelihood</strong>, especially when viewed as a function of the parameters, sometimes written <span class="math inline">\(L(\theta | \mathbf{X}) = p(\mathbf{X} | \theta)\)</span>.</li>
+<li>The <strong>marginal likelihood</strong> (sometimes also termed the <strong>evidence</strong>) is the distribution of the observed data marginalized over the parameters, i.e. <span class="math inline">\(p(\mathbf{X} | \alpha) = \int p(\mathbf{X}|\theta) p(\theta | \alpha) d\theta\)</span>.</li>
+<li>The <strong>posterior distribution</strong> is the distribution of the parameters after taking into account the observed data. This is determined by Bayes' rule, which forms the heart of Bayesian inference:</li>
 </ul>
-<p><strong><em>Theorem</em></strong> Let <span class="math inline">\(\mathcal{F}\)</span> be a Hilbert function space over <span class="math inline">\(\mathcal{X}\)</span>. The following are equivalent:</p>
-<ul>
-<li><span class="math inline">\(\mathcal{F}\)</span> has a reproducing kernel.</li>
-<li>For any <span class="math inline">\(x \in \mathcal{X}\)</span>, the function <span class="math inline">\(\delta_x : \mathcal{F} \rightarrow \mathcal{R}\)</span> defined by <span class="math inline">\(\delta_x(f) = f(x)\)</span> is continuous.</li>
-</ul>
-<p><strong><em>Remark</em></strong> The space of function <span class="math inline">\(\delta_x\)</span> forms the dual space <span class="math inline">\(\mathcal{F}^\star\)</span> of <span class="math inline">\(\mathcal{F}\)</span>.</p>
-<p><strong><em>Definition</em></strong> Let <span class="math inline">\(\mathcal{F}\)</span> be a Hilbert function space over <span class="math inline">\(\mathcal{X}\)</span>, we say <span class="math inline">\(\mathcal{F}\)</span> is a reproducing kernel Hilbert space over <span class="math inline">\(\mathcal{X}\)</span> if it satisfies the conditions of the previous theorem.</p>
-<p><strong><em>Theorem (Riesz Representation Theorem)</em></strong> Let <span class="math inline">\(\mathcal{F}\)</span> be a Hilbert space and <span class="math inline">\(L : \mathcal{F} \rightarrow \mathcal{R}\)</span> be a linear functional on <span class="math inline">\(\mathcal{F}\)</span> (The space of <span class="math inline">\(L\)</span> is dual space <span class="math inline">\(\mathcal{F}^\star\)</span> of <span class="math inline">\(\mathcal{F}\)</span>). Then <span class="math inline">\(L\)</span> is continuous if and only if there exists <span class="math inline">\(\Phi \in \mathcal{F}\)</span> such that <span class="math inline">\(L(f) = \langle f, \Phi \rangle_\mathcal{F}\)</span> for any <span class="math inline">\(f \in \mathcal{F}\)</span>.</p>
-<p><strong><em>Theorem</em></strong> Let <span class="math inline">\(k : \mathcal{X} \times \mathcal{X} \rightarrow \mathcal{R}\)</span>. Then <span class="math inline">\(k\)</span> is a kernel if and only if <span class="math inline">\(k\)</span> is a reproducing kernel of some RKHS <span class="math inline">\(\mathcal{F}\)</span> over <span class="math inline">\(\mathcal{X}\)</span>.</p>
-<p><strong><em>Lemma</em></strong> If <span class="math inline">\(k\)</span> is a kernel, then it has a feature space <span class="math inline">\(\tilde{\mathcal{F}}\)</span> and a feature map <span class="math inline">\(\tilde{\Phi}: \mathcal{X} \rightarrow \tilde{\mathcal{F}}\)</span> such that the map <span class="math inline">\(\mathcal{V}: \tilde{\mathcal{F}} \mapsto(\mathcal{X} \mapsto \mathbb{R})\)</span> (the range of <span class="math inline">\(\mathcal{V}\)</span> is the set of functions from <span class="math inline">\(\mathcal{X}\)</span> to <span class="math inline">\(\mathcal{R}\)</span>) given by</p>
-<p><span class="math display">\[\begin{equation}
- \mathcal{V}(\omega) = \langle \omega, \tilde{\Phi}(\cdot) \rangle_\tilde{\mathcal{F}}
- \end{equation}\]</span></p>
-<p>is injective.</p>
-<p><strong><em>Theorem</em></strong> If <span class="math inline">\(\mathcal{F}\)</span> is a RKHS, then it has a unique reproducing kernel.</p>
-<p><strong><em>Theorem</em></strong> Let <span class="math inline">\(k\)</span> be a kernel on <span class="math inline">\(\mathcal{X}\)</span>, and let <span class="math inline">\(\mathcal{F}_0\)</span> and <span class="math inline">\(\Phi_0: \mathcal{X} \rightarrow \mathcal{F}_0\)</span> be an associated feature space and feature map, respectively, such that the mapping <span class="math display">\[\mathcal{V}: \mathcal{F}_0 \rightarrow \mathcal{F} = \left\{f = \langle \omega, \Phi_0(\cdot) \rangle_{\mathcal{F}_0} \vert \omega \in \mathcal{F}_0\right\}\]</span> is injective, whose existence is guarenteed by Lemma. Then,</p>
-<ul>
-<li><span class="math inline">\(\mathcal{F}\)</span> is the unique RKHS with <span class="math inline">\(k\)</span> as its reproducing kernel.</li>
-<li>The set <span class="math inline">\(\mathcal{F}_\text{pre} = \left\{\sum_{i=1}^n \alpha_i k(\cdot, x_i)\vert n \in \mathcal{N}, \alpha_i \in \mathcal{R}, x_i \in \mathcal{X}\right\}\)</span> is dense in <span class="math inline">\(\mathcal{F}\)</span>.</li>
-<li>For <span class="math inline">\(f, f^\prime \in \mathcal{F}_\text{pre}\)</span> with <span class="math inline">\(f = \sum_{i=1}^n \alpha_i k(\cdot, x_i)\)</span> and <span class="math inline">\(f^\prime = \sum_{i=1}^{n^\prime}\alpha_{i}^{\prime}k(\cdot, x_{i}^{\prime})\)</span>, <span class="math inline">\(\langle f, f^\prime \rangle_\mathcal{F} = \sum_{i=1}^{n} \sum_{j=1}^{n^\prime} k(x_i, x_{j}^{\prime})\)</span></li>
-</ul>
-<p><strong><em>Definition</em></strong> A kernel <span class="math inline">\(k(x, x^\prime)\)</span> is said to be integrally strictly positive definition, if for any function <span class="math inline">\(g\)</span> that satisfies <span class="math display">\[0 &lt; \left\|g \right\|_2^2 &lt; \infty\]</span>,</p>
 <p><span class="math display">\[
- \begin{equation}
- \int_{\mathcal{X}} g(x)k(x, x^\prime)g(x^\prime)dxdx^\prime &gt; 0
- \end{equation}
- \]</span></p>
+  \begin{array}{ll}
+  p(\theta|\mathbf{X}, \alpha)&amp;=\frac{p(\theta, \mathbf{X}, \alpha)}{p(\mathbf{X}, \alpha)} = \frac{p(\mathbf{X}|\theta, \alpha)p(\theta,\alpha)}{p(\mathbf{X}|\alpha)p(\alpha)} \\
+  &amp;=\frac{p(\mathbf{X}|\theta, \alpha)p(\theta|\alpha)}{p(\mathbf{X}|\alpha)} \propto p(\mathbf{X}|\theta, \alpha)p(\theta | \alpha)
+  \end{array}
+  \]</span></p>
+<p><strong><em>Bayesian prediction</em></strong></p>
+<ul>
+<li>The <strong><em>posterior predictive distribution</em></strong> is the distribution of a new data point, marginalized over the posterior:</li>
+</ul>
+<p><span class="math display">\[
+  p(\tilde{x} | \mathbf{X}, \alpha) = \int p(\tilde{x}|\theta) p(\theta | \mathbf{X}, \alpha) d\theta
+  \]</span></p>
+<ul>
+<li>The <strong>proir predictive distribution</strong> is the distribution of a new data point, marginalized over the prior:</li>
+</ul>
+<p><span class="math display">\[
+  p(\tilde{x}|\alpha) = \int p(\tilde{x}|\theta)p(\theta|\alpha)d\theta
+  \]</span></p>
+<h3 id="computational-difficulties">Computational difficulties</h3>
+<p>The Bayes theorem tells us that the computation of the posterior requires three terms: a prior, a likelihood and evidence. The first two can be expressed easily as they are part of the assumed model. However, the third term, that is normalisation factor, requires to be computed <span class="math inline">\(p(x)=\int_\theta p(x|\theta)p(\theta)d\theta\)</span> (<span class="math inline">\(\alpha\)</span> not shown here).</p>
+<h2 id="methods">Methods</h2>
+<p>The integral can become <strong>intractable in higher dimensions</strong>. Two most used approached are <strong>Markov Chain Monte Carlo</strong> and <strong>Variational Inference</strong> methods.</p>
+<h3 id="mcmc">MCMC</h3>
+<p>Monte carlo sampling methods are able to draw independent samples from distribution. While, they are not effective and may be intractable for high-dimensinal probabilistic models. Markov Chain Monte Carlo provides an alternate approach to random sampling a high-dimensional probability distribution where the next sample is dependent upon the current sample.</p>
+<p>Markov chain is a systematic method for generating a sequence of random variables where the current value is probabilistically dependent on the value of the prior variable.</p>
+<p>A Markov chain is a special type of stochastic process, which deals with characterization of sequences of random variables. Special interest is paid to the dynamic and the limiting behaviors of the sequence <a href="#">[]</a>.</p>
+<p>MCMC algorithms are sensitive to their starting point, and often require a warm-up phase or burn-in phase to move in towards a fruitful part of the search space, after which prior samples can be discarded and useful samples can be collected.</p>
+<h4 id="gibbs-sampling">Gibbs Sampling</h4>
+<p>Gibbs Sampling is appropriate for those probabilistic models where this conditional probability can be calculated.</p>
+<h4 id="metropolis-hastings-algorithm">Metropolis-Hastings Algorithm</h4>
+<p>The Metropolis-Hastings Algorithm is appropriate for those probabilistic models where we cannot directly sample the so-called next state probability distribution, . Unlike the Gibbs chain, the algorithm doesnot assume that we can generate next state samples from a particular target distribution. Instead, the Metropolis-Hastings algorithm involves using a surrogate or proposal probability distribution that is sampled (sometimes called the kernel), then an acceptance criterion that decides whether the new sample is accepted into the chain or discarded.</p>
 <h1 id="references">References</h1>
-<p><a id="1">[1]</a> Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
-<p><a id="2">[2]</a> Schulman, J., Abbeel, P., and Chen, X. Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
-<p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
+<p><a id="1">[1]</a> https://towardsdatascience.com/probability-concepts-explained-bayesian-inference-for-parameter-estimation-90e8930e5348</p>
+<p><a id="2">[2]</a> https://en.wikipedia.org/wiki/Bayesian_inference</p>
+<p><a id="3">[3]</a> https://towardsdatascience.com/bayesian-inference-problem-mcmc-and-variational-inference-25a8aa9bce29</p>
 
     </div>
 
@@ -264,9 +278,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Stein/" rel="tag"># Stein</a>
-              <a href="/tags/SVGD/" rel="tag"># SVGD</a>
-              <a href="/tags/RHKS/" rel="tag"># RHKS</a>
+              <a href="/tags/Bayesian/" rel="tag"># Bayesian</a>
+              <a href="/tags/Inference/" rel="tag"># Inference</a>
           </div>
 
         
@@ -275,13 +288,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/2020/08/blog-post-3/" rel="prev" title="程序员数学防忽悠备忘录">
-      <i class="fa fa-chevron-left"></i> 程序员数学防忽悠备忘录
+    <a href="/posts/2021/02/blog-post-35/" rel="prev" title=" Note on "Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting"">
+      <i class="fa fa-chevron-left"></i>  Note on "Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting"
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/2020/08/blog-post-6/" rel="next" title="Stein Variational Gradient Decsent: Stein Method">
-      Stein Variational Gradient Decsent: Stein Method <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -340,7 +350,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#stein-variational-gradient-descent-rhks"><span class="nav-number">1.</span> <span class="nav-text">Stein Variational Gradient Descent: RHKS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reproducing-hilbert-kernel-space-rhks"><span class="nav-number">1.1.</span> <span class="nav-text">Reproducing Hilbert Kernel Space (RHKS)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hilbert-space"><span class="nav-number">1.1.1.</span> <span class="nav-text">Hilbert Space</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bayesian-inference"><span class="nav-number">1.</span> <span class="nav-text">Bayesian Inference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-bayesian-inference"><span class="nav-number">1.1.</span> <span class="nav-text">What is Bayesian Inference?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#formal-description-of-bayesian-inference-2"><span class="nav-number">1.2.</span> <span class="nav-text">Formal Description of Bayesian Inference [2]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#computational-difficulties"><span class="nav-number">1.2.1.</span> <span class="nav-text">Computational difficulties</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#methods"><span class="nav-number">1.3.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mcmc"><span class="nav-number">1.3.1.</span> <span class="nav-text">MCMC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gibbs-sampling"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Gibbs Sampling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#metropolis-hastings-algorithm"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">Metropolis-Hastings Algorithm</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
