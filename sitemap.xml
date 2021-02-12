@@ -319,6 +319,20 @@
   </url>
   
   <url>
+    <loc>http://lanseyege.github.io/tags/soft/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://lanseyege.github.io/tags/entropy-regularized/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://lanseyege.github.io/tags/Stein/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
@@ -334,20 +348,6 @@
   
   <url>
     <loc>http://lanseyege.github.io/tags/RHKS/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/soft/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/entropy-regularized/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -383,13 +383,6 @@
   
   <url>
     <loc>http://lanseyege.github.io/tags/Generalized/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/Offline/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -438,14 +431,28 @@
   </url>
   
   <url>
-    <loc>http://lanseyege.github.io/tags/Online/</loc>
+    <loc>http://lanseyege.github.io/tags/Offline/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://lanseyege.github.io/tags/Game-Theory/</loc>
+    <loc>http://lanseyege.github.io/tags/Graph/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://lanseyege.github.io/tags/Convolution/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://lanseyege.github.io/tags/Laplacian/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -473,21 +480,14 @@
   </url>
   
   <url>
-    <loc>http://lanseyege.github.io/tags/Graph/</loc>
+    <loc>http://lanseyege.github.io/tags/Online/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://lanseyege.github.io/tags/Convolution/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/Laplacian/</loc>
+    <loc>http://lanseyege.github.io/tags/Game-Theory/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -550,6 +550,27 @@
   </url>
   
   <url>
+    <loc>http://lanseyege.github.io/tags/Eigenvector/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://lanseyege.github.io/tags/Eigenvalue/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://lanseyege.github.io/tags/Space/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://lanseyege.github.io/tags/VRP/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
@@ -572,27 +593,6 @@
   
   <url>
     <loc>http://lanseyege.github.io/tags/Optimization/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/Eigenvector/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/Eigenvalue/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/Space/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -746,7 +746,7 @@
   </url>
   
   <url>
-    <loc>http://lanseyege.github.io/tags/Manifold/</loc>
+    <loc>http://lanseyege.github.io/tags/Probability/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -760,28 +760,7 @@
   </url>
   
   <url>
-    <loc>http://lanseyege.github.io/tags/Probability/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/Gradient/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/Momentum/</loc>
-    <lastmod>2021-02-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://lanseyege.github.io/tags/Nesterov/</loc>
+    <loc>http://lanseyege.github.io/tags/Manifold/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -824,6 +803,27 @@
   
   <url>
     <loc>http://lanseyege.github.io/tags/Forecasting/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://lanseyege.github.io/tags/Gradient/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://lanseyege.github.io/tags/Momentum/</loc>
+    <lastmod>2021-02-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://lanseyege.github.io/tags/Nesterov/</loc>
     <lastmod>2021-02-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
