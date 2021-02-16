@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Measure Thoery: Chp 5. Product Measures">
+  <meta name="description" content="Simulation - Chp 12 : Markov Chain Monte Carlo Methods">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Notes on book &quot;Measure Theory (2nd ed.) - Cohn Donald L.&quot; ">
-<meta property="og:url" content="http://lanseyege.github.io/posts/2021/01/blog-post-25/index.html">
+<meta property="og:title" content=" Notes on book &quot;Simulation (Fifth Edition)&quot; ">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/02/blog-post-38/index.html">
 <meta property="og:site_name" content="Ye Yuan">
-<meta property="og:description" content="Measure Thoery: Chp 5. Product Measures">
+<meta property="og:description" content="Simulation - Chp 12 : Markov Chain Monte Carlo Methods">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-15T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-04T03:18:04.788Z">
+<meta property="article:published_time" content="2021-02-12T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-16T18:06:23.381Z">
 <meta property="article:author" content="Ye Yuan">
-<meta property="article:tag" content="Product Measure">
-<meta property="article:tag" content="Fubini">
+<meta property="article:tag" content="Simulation">
+<meta property="article:tag" content="Statistic">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://lanseyege.github.io/posts/2021/01/blog-post-25/">
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/02/blog-post-38/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan</title>
+  <title> Notes on book "Simulation (Fifth Edition)"  | Ye Yuan</title>
   
 
 
@@ -167,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/01/blog-post-25/">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/02/blog-post-38/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+           Notes on book "Simulation (Fifth Edition)" 
         </h1>
 
         <div class="post-meta">
@@ -190,14 +190,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-01-16 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-16T00:00:00+01:00">2021-01-16</time>
+              <time title="Created: 2021-02-13 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-13T00:00:00+01:00">2021-02-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 04:18:04" itemprop="dateModified" datetime="2021-02-04T04:18:04+01:00">2021-02-04</time>
+                <time title="Modified: 2021-02-16 19:06:23" itemprop="dateModified" datetime="2021-02-16T19:06:23+01:00">2021-02-16</time>
               </span>
 
           
@@ -211,46 +211,66 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="measure-thoery-chp-5.-product-measures">Measure Thoery: Chp 5. Product Measures</h1>
+        <h1 id="simulation---chp-12-markov-chain-monte-carlo-methods">Simulation - Chp 12 : Markov Chain Monte Carlo Methods</h1>
 <a id="more"></a>
-<h2 id="constructions">Constructions</h2>
-<p><strong><em>Theorem 5.1.4.</em></strong> Let <span class="math inline">\((X, \mathscr{A} ,\mu )\)</span> and <span class="math inline">\((Y, \mathscr{B}, ν)\)</span> be <span class="math inline">\(\sigma\)</span>-finite measure spaces. Then there is a unique measure <span class="math inline">\(\mu \times ν\)</span> on the <span class="math inline">\(\sigma\)</span>-algebra <span class="math inline">\(\mathscr{A} \times \mathscr{B}\)</span> such that</p>
+<h2 id="markov-chains">12.1 Markov Chains</h2>
+<p>Consider a collection of random variables <span class="math inline">\(X_0, X_1, \ldots\)</span>. If there exists a set of numbers <span class="math inline">\(P_{ij}, i,j = 1, \ldots, N\)</span>, such that whenever the process is in state <span class="math inline">\(i\)</span> then, independent of the past states, the probability that the next state is <span class="math inline">\(j\)</span> is <span class="math inline">\(P_{ij}\)</span>, then we say that the collection <span class="math inline">\(\{X_n, n \geq 0\}\)</span> constitutes a <strong>Markov chain</strong> having transition probabilities <span class="math inline">\(P_{ij}, i,j = 1, \ldots, N\)</span>.</p>
+<p>A Markov chain is said to be irreducible if for each pair of states <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> there is a positive probability, starting in state <span class="math inline">\(i\)</span>, that the process will ever enter state <span class="math inline">\(j\)</span>. For an irreducible Markov chain, let <span class="math inline">\(\pi_{j}\)</span> denote the long-run proportion of time that the process is in state <span class="math inline">\(j\)</span>.</p>
 <p><span class="math display">\[
-(\mu \times v) (A \times B) = \mu(A) \times v(B)
+\begin{array}{ll}
+\pi_j &amp;= \sum_{i=1}^N \pi_i P_{ij}, \quad j = 1, \ldots, N \\
+\sum_{j=1}^N \pi_j &amp;= 1 \\
+\end{array}
 \]</span></p>
-<p>holds for each <span class="math inline">\(A\)</span> in <span class="math inline">\(\mathscr{A}\)</span> and <span class="math inline">\(B\)</span> in <span class="math inline">\(\mathscr{B}\)</span>. Furthermore, the measure under <span class="math inline">\(\mu \times v\)</span> of an arbitrary set <span class="math inline">\(E\)</span> in <span class="math inline">\(\mathscr{A} \times \mathscr{B}\)</span> is given by</p>
+<p>The <span class="math inline">\(\{\pi_j\}\)</span> are often called the <strong>stationary probabilities</strong> of the Markov chain.</p>
+<p>An irreducible Markov chain is said to be aperiodic if for some <span class="math inline">\(n \geq 0\)</span> and some state <span class="math inline">\(j\)</span>,</p>
 <p><span class="math display">\[
-(\mu \times v) (E) = \int_X v(E_x) \mu(dx) = \int_Y \mu(E^y) v(dy)
+P\{X_n = j | X_0 = j\} &gt; 0 \text{ and } P\{X_{n+1} = j | X_0 = j \} &gt; 0 
 \]</span></p>
-<p>The measure <span class="math inline">\(\mu \times v\)</span> is called the product of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(v\)</span>.</p>
-<h2 id="fubinis-theorem">Fubini’s Theorem</h2>
-<p><strong><em>Proposition 5.2.1 (Tonelli’s Theorem).</em></strong> Let <span class="math inline">\((X, \mathscr{A} ,\mu)\)</span> and <span class="math inline">\((Y, \mathscr{B}, ν)\)</span> be <span class="math inline">\(\sigma\)</span>-finite measure spaces, and let <span class="math inline">\(f : X \times Y \rightarrow [0, +\infty]\)</span> be <span class="math inline">\(\mathscr{A} \times \mathscr{B}\)</span>-measurable. Then - the function <span class="math inline">\(x \rightarrow \int_Y f_x dv\)</span> is <span class="math inline">\(\mathscr{A}\)</span>-measurable and the function <span class="math inline">\(y \rightarrow \int_X f^y d\mu\)</span> is <span class="math inline">\(\mathscr{B}\)</span>-measurable, and - <span class="math inline">\(f\)</span> satisfies</p>
+<p>When <span class="math inline">\(\pi_i P_{ij} = \pi_j P_{ji}, \forall i \neq j\)</span>, the Markov chain is said to be <strong>time reversible</strong>.</p>
+<h2 id="the-hastings-metropolis-algorithm">12.2 The Hastings-Metropolis Algorithm</h2>
+<p>Let <span class="math inline">\(b(j), j = 1, \ldots, m\)</span> be positive numbers, and <span class="math inline">\(B = \sum_{j=1}^m b(j)\)</span>. Suppose that <span class="math inline">\(m\)</span> is large and <span class="math inline">\(B\)</span> is difficult to calculate, and that we want to simulate a random variable (or a sequence of random variables) with probability mass function</p>
 <p><span class="math display">\[
-\int_{X \times Y} f d(\mu \times v)=\int_{X}\left(\int_{Y} f_{x} d v\right) \mu(d x)=\int_{Y}\left(\int_{X} f^{y} d \mu\right) v(d y)
+\pi(j) = b(j) / B, j = 1, \ldots, m
 \]</span></p>
-<p><strong><em>Theorem 5.2.2 (Fubini’s Theorem).</em></strong> Let <span class="math inline">\((X, \mathscr{A} , \mu)\)</span> and <span class="math inline">\((Y, \mathscr{B}, ν)\)</span> be <span class="math inline">\(\sigma\)</span>-finite measure spaces, and let <span class="math inline">\(f : X \times Y \rightarrow [−\infty, +\infty]\)</span> be <span class="math inline">\(\mathscr{A} \times \mathscr{B}\)</span>-measurable and <span class="math inline">\(\mu \times ν\)</span>- integrable. Then - for <span class="math inline">\(\mu\)</span>-almost every <span class="math inline">\(x\)</span> in <span class="math inline">\(X\)</span> the section <span class="math inline">\(f_x\)</span> is <span class="math inline">\(v\)</span>-integrable and for <span class="math inline">\(v\)</span>-almost every <span class="math inline">\(y\)</span> in <span class="math inline">\(Y\)</span> the section <span class="math inline">\(f^y\)</span> is <span class="math inline">\(\mu\)</span>-integrable, - the functions <span class="math inline">\(I_f\)</span> and <span class="math inline">\(J_f\)</span> defined by</p>
+<p>One way of simulating a sequence of random variables whose distributions converge <span class="math inline">\(\pi(j), j =1, \ldots, m\)</span>, is to find a Markov chain that is easy to simulate and whose limiting probabilities are the <span class="math inline">\(\pi(j)\)</span>. The <strong>Hastings-Metropolis algorithm</strong> provides an approach for accomplishing this task.</p>
+<p>Let <span class="math inline">\(Q\)</span> be an irreducible Markov transition probability matrix on the integers <span class="math inline">\(1, \ldots, m\)</span>, with <span class="math inline">\(q(i,j)\)</span>, representing the row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> element of <span class="math inline">\(Q\)</span>. Now define a Markov chain <span class="math inline">\(\{X_n , n \geq 0\}\)</span> as follows. When <span class="math inline">\(X_n = i\)</span>, a random variable <span class="math inline">\(X\)</span> such that <span class="math inline">\(P\{X=j\} = q(i, j), j = 1, \ldots, m\)</span>, is generated. If <span class="math inline">\(X = j\)</span>, then <span class="math inline">\(X_{n+1}\)</span> is set equal to <span class="math inline">\(j\)</span> with probability <span class="math inline">\(\alpha (i, j)\)</span> and is set equal to <span class="math inline">\(i\)</span> with probability <span class="math inline">\(1 - \alpha (i, j)\)</span>. Under these conditions, it is easy to see that the sequence of states will constitute a Markov chain with transition probabilities <span class="math inline">\(P_{ij}\)</span> given by</p>
 <p><span class="math display">\[
-I_{f}(x)=\left\{\begin{array}{ll}
-\int_{Y} f_{x} d v &amp; \text { if } f_{x} \text { is } v \text { -integrable } \\
-0 &amp; \text { otherwise }
-\end{array}\right.
+\begin{array}{ll}
+P_{i,j} = q(i,j) \alpha (i, j), \quad \text{if } j \neq i \\ 
+P_{i,i} = q(i, i) + \sum_{k \neq i} q(i, k) (1 - \alpha (i, k)) \\
+\end{array}
 \]</span></p>
-<p>and</p>
+<p>Now this Markov chain will be time reversible and have stationary probabilities <span class="math inline">\(\pi(j)\)</span> if</p>
 <p><span class="math display">\[
-J_{f}(y)=\left\{\begin{array}{ll}
-\int_{X} f^{y} d \mu &amp; \text { if } f^{y} \text { is } \mu \text { -integrable } \\
-0 &amp; \text { otherwise }
-\end{array}\right.
+\pi(i) P_{i,j} = \pi(j) P_{j,i} \quad \forall j \neq i
 \]</span></p>
-<p>belong to <span class="math inline">\(\mathscr{L}^1 (X, \mathscr{A}, \mu, \mathbb{R})\)</span> and <span class="math inline">\(\mathscr{L}^1(Y, \mathscr{B}, v, \mathbb{R})\)</span>, and</p>
-<ul>
-<li>the relation</li>
-</ul>
+<p>which is equivalent to</p>
 <p><span class="math display">\[
-\int_{X \times Y} f d (\mu \times v) = \int_X I_f d\mu = \int_Y J_f dv
-\]</span> holds.</p>
-<h3 id="references">References</h3>
-<p><a id="1">[1]</a> <span class="citation" data-cites="book">@book</span>{cohn2013measure, title={Measure theory}, author={Cohn, Donald L}, year={2013}, publisher={Springer} }</p>
+\pi(i) q(i,j) \alpha(i,j) = \pi(j) q(j, i) \alpha (j, i)
+\]</span></p>
+<p>It is now easy to check that this will be satisfied if we take</p>
+<p><span class="math display">\[
+\alpha(i,j) = \min \left(\frac{\pi(j)q(j,i)}{\pi(i)q(i,j)} , 1\right) = \min \left(\frac{b(j)q(j,i)}{b(i)q(i,j)} , 1\right)
+\]</span></p>
+<p>Note that if <span class="math inline">\(\alpha (i,j) = \pi(j) q(j,i) / \pi(i)q(i,j)\)</span> then <span class="math inline">\(\alpha(j,i) = 1\)</span>, and vice versa. We should note that the value of <span class="math inline">\(B\)</span> is not needed to define the Markov chain, as the values <span class="math inline">\(b(j)\)</span> suffice.</p>
+<p>The following sums up the Hastings-Metropolis algorithm for generating a time-reversible Markov chain whose limiting probabilities are <span class="math inline">\(\pi(j) = b(j) / B, j = 1, \ldots, m\)</span>.</p>
+<ol type="1">
+<li>Choose an irreducible Markov transition probability matrix <span class="math inline">\(Q\)</span> with transition probabilities <span class="math inline">\(q(i, j), i,j = 1, \ldots, m\)</span>. Also, choose some integer value <span class="math inline">\(k\)</span> between <span class="math inline">\(1\)</span> and <span class="math inline">\(m\)</span>.</li>
+<li>Let <span class="math inline">\(n = 0\)</span> and <span class="math inline">\(X_0 = k\)</span>.</li>
+<li>Generate a random variable <span class="math inline">\(X\)</span> such that <span class="math inline">\(P\{X = j\} = q(X_n, j)\)</span> and generate a random number <span class="math inline">\(U\)</span>.</li>
+<li>If <span class="math inline">\(U &lt; [b(X)q(X, X_n)] / [b(X_n)q(X_n, X)],\)</span> then <span class="math inline">\(NS = X\)</span>; else <span class="math inline">\(NS = X_n\)</span>.</li>
+<li><span class="math inline">\(n = n + 1, X_n = NS\)</span>.</li>
+<li>Go to <span class="math inline">\(3\)</span>.</li>
+</ol>
+<h2 id="the-gibbs-sampler">12.3 The Gibbs Sampler</h2>
+<p>The most widely used version of the Hastings-Metropolis algorithm is the <strong>Gibbs sampler</strong>.</p>
+<h2 id="continuous-time-markov-chains-and-a-queueing-loss-model">12.4 Continuous time Markov Chains and a Queueing Loss Model</h2>
+<h2 id="simulated-annealing">12.5 Simulated Annealing</h2>
+<h2 id="the-sampling-importance-resampling-algorithm">12.6 The Sampling Importance Resampling Algorithm</h2>
+<h2 id="coupling-from-the-past">12.7 Coupling from the Past</h2>
+<h1 id="references">References</h1>
+<p><a id="1">[1]</a> SIMULATION 5TH EDITION SHELDON ROSS</p>
 
     </div>
 
@@ -260,8 +280,8 @@ J_{f}(y)=\left\{\begin{array}{ll}
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Product-Measure/" rel="tag"># Product Measure</a>
-              <a href="/tags/Fubini/" rel="tag"># Fubini</a>
+              <a href="/tags/Simulation/" rel="tag"># Simulation</a>
+              <a href="/tags/Statistic/" rel="tag"># Statistic</a>
           </div>
 
         
@@ -270,13 +290,10 @@ J_{f}(y)=\left\{\begin{array}{ll}
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/2021/01/blog-post-26/" rel="prev" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
-      <i class="fa fa-chevron-left"></i> Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+    <a href="/posts/2021/02/blog-post-37/" rel="prev" title="Bayesian Inference">
+      <i class="fa fa-chevron-left"></i> Bayesian Inference
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/2021/01/blog-post-30/" rel="next" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
-      Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -335,7 +352,7 @@ J_{f}(y)=\left\{\begin{array}{ll}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#measure-thoery-chp-5.-product-measures"><span class="nav-number">1.</span> <span class="nav-text">Measure Thoery: Chp 5. Product Measures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#constructions"><span class="nav-number">1.1.</span> <span class="nav-text">Constructions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fubinis-theorem"><span class="nav-number">1.2.</span> <span class="nav-text">Fubini’s Theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.2.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#simulation---chp-12-markov-chain-monte-carlo-methods"><span class="nav-number">1.</span> <span class="nav-text">Simulation - Chp 12 : Markov Chain Monte Carlo Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#markov-chains"><span class="nav-number">1.1.</span> <span class="nav-text">12.1 Markov Chains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-hastings-metropolis-algorithm"><span class="nav-number">1.2.</span> <span class="nav-text">12.2 The Hastings-Metropolis Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-gibbs-sampler"><span class="nav-number">1.3.</span> <span class="nav-text">12.3 The Gibbs Sampler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#continuous-time-markov-chains-and-a-queueing-loss-model"><span class="nav-number">1.4.</span> <span class="nav-text">12.4 Continuous time Markov Chains and a Queueing Loss Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#simulated-annealing"><span class="nav-number">1.5.</span> <span class="nav-text">12.5 Simulated Annealing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-sampling-importance-resampling-algorithm"><span class="nav-number">1.6.</span> <span class="nav-text">12.6 The Sampling Importance Resampling Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coupling-from-the-past"><span class="nav-number">1.7.</span> <span class="nav-text">12.7 Coupling from the Past</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
