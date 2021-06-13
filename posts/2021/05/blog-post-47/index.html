@@ -28,7 +28,7 @@
 <meta property="og:description" content="ReduNet [1]">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-27T07:30:58.371Z">
-<meta property="article:modified_time" content="2021-05-29T06:20:40.660Z">
+<meta property="article:modified_time" content="2021-05-31T11:44:37.093Z">
 <meta property="article:author" content="Ye Yuan">
 <meta property="article:tag" content="rate reduction">
 <meta property="article:tag" content="deep learning">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-29 14:20:40" itemprop="dateModified" datetime="2021-05-29T14:20:40+08:00">2021-05-29</time>
+                <time title="Modified: 2021-05-31 19:44:37" itemprop="dateModified" datetime="2021-05-31T19:44:37+08:00">2021-05-31</time>
               </span>
 
           
@@ -238,14 +238,51 @@
 <p>In this work, to learn a discriminative linear representation for intrinsic low-dimensional structures from high-dimensional data, they propose an information-theoretic measure that maximizes the coding rate difference between the whole dataset and the sum of each individual class, known as <strong><em>rate reduction</em></strong>.</p>
 <h3 id="measure-of-compactness-for-linear-representation">Measure of Compactness for Linear Representation</h3>
 <p><strong><em>Rate distortion</em></strong> measures the “compactness” of a random distribution: Given a random variable <span class="math inline">\(z\)</span> and a prescribed precision <span class="math inline">\(\epsilon &gt; 0\)</span>, the rate distortion <span class="math inline">\(R(z, \epsilon)\)</span> is the minimal number of binary bits needed to encode <span class="math inline">\(z\)</span> such that the expected decoding error is less than <span class="math inline">\(\epsilon\)</span>, i.e., the decoded <span class="math inline">\(\hat{z}\)</span> satisfied <span class="math inline">\(\mathbb{E}[\| z - \hat{z} \| _2] \leq \epsilon\)</span>.</p>
-<p>The compactness of learned features as a whole can be measured in terms of the average coding length per sample (as the sample size m is large), a.k.a. the coding rate subject to the distortion <span class="math inline">\(\epsilon\)</span>:</p>
+<p><strong><em>Rate distortion for finite samples on a subspace.</em></strong> The compactness of learned features as a whole can be measured in terms of the average coding length per sample (as the sample size m is large), a.k.a. the coding rate subject to the distortion <span class="math inline">\(\epsilon\)</span>:</p>
 <p><span class="math display">\[
 \begin{equation}
 R(\mathbf{Z}, \epsilon) = \frac{1}{2} \log \det (\mathbf{I} + \frac{n}{m \epsilon^2} \mathbf{Z}\mathbf{Z}^\star)
 \end{equation}
 \]</span></p>
+<p><strong><em>Rate distortion of samples on a mixture of subspaces.</em></strong> We may partition the data (representation) <span class="math inline">\(\mathbf{Z}\)</span> into multiple subsets: <span class="math inline">\(\mathbf{Z} = \mathbf{Z}^1 \cup \mathbf{Z}^2 \ldots \mathbf{Z}^k\)</span> with each <span class="math inline">\(\mathbf{Z}^j\)</span> containing samples in one low-dimensional subspace. Let <span class="math inline">\(\Pi = \{ \Pi ^ j \in \mathbb{R}^{m \times m} \}_{j=1}^k\)</span> be a set of diagonal matrices whose diagonal entries encode the membership of the <span class="math inline">\(m\)</span> samples in the <span class="math inline">\(k\)</span> classes. The average number of bits per sample (the coding rate) is</p>
+<p><span class="math display">\[
+\begin{equation}
+R_c (\mathbf{Z}, \epsilon | \mathbf{\Pi}) = \sum_{j = 1} ^k \frac{tr(\mathbf{\Pi})}{2m} \log \det \left( \mathbf{I} + \frac{d}{tr(\mathbf{\Pi}^j)\epsilon ^2} \mathbf{Z}\mathbf{\Pi}^j \mathbf{Z}^\star  \right)
+\end{equation}
+\]</span></p>
+<p>When <span class="math inline">\(\mathbf{Z}\)</span> is given, <span class="math inline">\(R_c (\mathbf{Z}, \epsilon | \mathbf{\Pi})\)</span> is a concave function of <span class="math inline">\(\mathbf{\Pi}\)</span>.</p>
 <h3 id="principle-of-maximal-coding-rate-reduction">Principle of Maximal Coding Rate Reduction</h3>
+<p>The learned features should follow the basic rule that <strong><em>similarity contracts and dissimilarity contrasts</em></strong>. To be more precise, a good (linear) discriminative representation <span class="math inline">\(\mathbf{Z}\)</span> of <span class="math inline">\(\mathbf{X}\)</span> is one such that, given a partition <span class="math inline">\(\mathbf{\Pi}\)</span> of <span class="math inline">\(\mathbf{Z}\)</span>, achieves a large difference between the coding rate for the whole and that for all the subsets:</p>
+<p><span class="math display">\[
+\begin{equation}
+\Delta R(\mathbf{Z}, \mathbf{\Pi}, \epsilon) = R(\mathbf{Z}, \epsilon) - R_c(\mathbf{Z}, \epsilon | \mathbf{\Pi})
+\end{equation}
+\]</span></p>
+<p>If we choose our feature mapping to be <span class="math inline">\(z = f(x, \theta)\)</span> (a dnn), the overall process of the feature representation and the resulting rate reduction w.r.t. certain partition <span class="math inline">\(\mathbf{\Pi}\)</span> can be illustrated by the following diagram:</p>
+<p><span class="math display">\[
+\begin{equation}
+\boldsymbol{X} \stackrel{f(\boldsymbol{x}, \boldsymbol{\theta})}{\longrightarrow} \boldsymbol{Z}(\boldsymbol{\theta}) \stackrel{\Pi, \epsilon}{\longrightarrow} \Delta R(\boldsymbol{Z}(\boldsymbol{\theta}), \boldsymbol{\Pi}, \epsilon)
+\end{equation}
+\]</span></p>
+<p><strong>Normalization</strong>. To make the amount of reduction comparable between different representations, we need to normalize the scale of the learned features, either by imposing the Frobenius norm of each class <span class="math inline">\(\mathbf{Z}^j\)</span> to scale with the number of features in <span class="math inline">\(\mathbf{Z}^j \in \mathbb{R}^{n \times m_j} : \| \mathbf{Z}^j \| _F^2 = m_j\)</span> or by normalizing each feature to be on the unit sphere: <span class="math inline">\(z ^i \in \mathcal{S}^{n-1}\)</span>.</p>
+<p>Once the representations can be compared fairly, our goal becomes to learn a set of features <span class="math inline">\(\mathbf{Z}(\theta) = f(\mathbf{X}, \theta)\)</span> and their partition <span class="math inline">\(\mathbf{\Pi}\)</span> such that they maximize the reduction between the coding rate of all features and that of the sum of features w.r.t. their classes:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{split}
+\max_{\theta, \Pi} \Delta R(\mathbf{Z}(\mathbf{\theta}), \mathbf{\Pi}, \epsilon) &amp;= R(\mathbf{Z}(\mathbf{\theta}), \epsilon) - R_c (\mathbf{Z}(\theta), \epsilon | \mathbf{\Pi}),  \\
+ \text{ s.t. } &amp; \| \mathbf{Z}^j (\mathbf{\theta}) \|_F ^2 = m_j , \mathbf{\Pi} \in \Omega
+\end{split}
+\end{equation}
+\]</span></p>
+<p>This is refered to as the principle of maximal coding rate reduction (MC<span class="math inline">\(R^2\)</span>).</p>
 <h3 id="properties-of-the-rate-reduction-function">Properties of the Rate Reduction Function</h3>
+<p>The MC<span class="math inline">\(R^2\)</span> principle is very general and can be applied to representations <span class="math inline">\(\mathbf{Z}\)</span> of any distributions with any attributes <span class="math inline">\(\mathbf{\Pi}\)</span> as long as the rates <span class="math inline">\(R\)</span> and <span class="math inline">\(R_c\)</span> for the distributions can be accurately and efficiently evaluated.</p>
+<p>The optimal representation <span class="math inline">\(\mathbf{Z_\star}\)</span> has the following desired properties:</p>
+<p><strong>Theorem 1</strong> (Informal Statement) Suppose <span class="math inline">\(\mathbf{Z_\star} = \mathbf{Z_\star^1} \cup \cdots \cup \mathbf{Z_\star^k}\)</span> is the optimal solution that maximizes the rate reduction with the rates <span class="math inline">\(R\)</span> and <span class="math inline">\(R_c\)</span>. Assume that the optimal solution satisfies <span class="math inline">\(rank(\mathbf{Z_\star^j}) \leq d_j\)</span>. We have:</p>
+<ul>
+<li>Between-class Discriminative: As long as the ambient space is adequately large <span class="math inline">\((n \geq \sum_{j=1}^k d_j)\)</span>, the subspaces are all orthogonal to each other, i.e. <span class="math inline">\((\mathbf{Z_\star^i}) * \mathbf{Z_\star^j} = 0\)</span> for <span class="math inline">\(i \neq j.\)</span></li>
+<li>Maximally Diverse Representation: As long as the coding precision is adequately high, i.e., <span class="math inline">\(\epsilon^4 &lt; \min_j \{\frac{m_j}{m} \frac{n^2}{d_j^2} \}\)</span>, each subspace achieves its maximal dimension, i.e. <span class="math inline">\(rank(\mathbf{Z_\star^j}) = d_j\)</span>. In addition, the largest <span class="math inline">\(d_j - 1\)</span> singular values of <span class="math inline">\(\mathbf{Z_\star}^j\)</span> are equal.</li>
+</ul>
 <h1 id="references">References</h1>
 <p><a id="1">[1]</a> <span class="citation" data-cites="article">@article</span>{chan2020redunet, title={ReduNet: A White-box Deep Network from the Principle of Maximizing Rate Reduction}, author={Chan, Kwan Ho Ryan and Yu, Yaodong and You, Chong and Qi, Haozhi and Wright, John and Ma, Yi}, journal={arXiv preprint arXiv:2105.10446}, year={2021} }</p>
 <p><a id="2">[2]</a></p>
@@ -271,7 +308,10 @@ R(\mathbf{Z}, \epsilon) = \frac{1}{2} \log \det (\mathbf{I} + \frac{n}{m \epsilo
     <a href="/posts/2021/05/blog-post-46/" rel="prev" title="Determinantal Point Processes">
       <i class="fa fa-chevron-left"></i> Determinantal Point Processes
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/posts/2021/06/blog-post-49/" rel="next" title="Notes on "Greedy Function Approximation: a Gradient Boosting Machine" ">
+      Notes on "Greedy Function Approximation: a Gradient Boosting Machine"  <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -344,14 +384,14 @@ R(\mathbf{Z}, \epsilon) = \frac{1}{2} \log \det (\mathbf{I} + \frac{n}{m \epsilo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-count">108</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
