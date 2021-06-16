@@ -28,7 +28,7 @@
 <meta property="og:description" content="Maximum Margin Methods">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-04T03:14:58.319Z">
+<meta property="article:modified_time" content="2021-06-16T09:57:32.277Z">
 <meta property="article:author" content="Ye Yuan">
 <meta property="article:tag" content="Maximum Margin">
 <meta property="article:tag" content="SVM">
@@ -198,7 +198,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 11:14:58" itemprop="dateModified" datetime="2021-02-04T11:14:58+08:00">2021-02-04</time>
+                <time title="Modified: 2021-06-16 17:57:32" itemprop="dateModified" datetime="2021-06-16T17:57:32+08:00">2021-06-16</time>
               </span>
 
           
@@ -238,23 +238,55 @@ L(x, \lambda, \mu) = f(x) + \sum_{i=1}^m \mu_i(0-g_i(x)) + \sum_{j=1}^k \lambda_
 <h2 id="support-vector-machine-svm">Support Vector Machine (SVM)</h2>
 <h3 id="separable-case">Separable case</h3>
 <p>Consider an input space <span class="math inline">\(\mathcal{X} \in \mathbb{R}^N\)</span> with <span class="math inline">\(N \geq 1\)</span>, the target space <span class="math display">\[\mathcal{Y} = \left\{-1, +1\right\}\]</span>, and let <span class="math inline">\(f : \mathcal{X} \rightarrow \mathcal{Y}\)</span> be the target function.</p>
-<p><strong><em>Geometric Margin</em></strong> The geometric margin <span class="math inline">\(\rho_h(x)\)</span> of a linear classifier <span class="math inline">\(h: x \rightarrow w\cdot x + b\)</span> at a point <span class="math inline">\(X\)</span> is its Euclidean distance to the hyperplane <span class="math inline">\(w\cdot x + b = 0\)</span>:</p>
+<p><strong><em>Geometric Margin</em></strong> The geometric margin <span class="math inline">\(\rho_h(\mathbf{x})\)</span> of a linear classifier <span class="math inline">\(h: \mathbf{x} \rightarrow \mathbf{w}\cdot \mathbf{x} + b\)</span> at a point <span class="math inline">\(\mathbf{x}\)</span> is its Euclidean distance to the hyperplane <span class="math inline">\(\mathbf{w}\cdot \mathbf{x} + b = 0\)</span>:</p>
 <p><span class="math display">\[
-\rho_h(x) = \frac{\lvert w\cdot x + b \rvert}{\left\| w \right\|_2}
+\rho_h(x) = \frac{\lvert \mathbf{w}\cdot \mathbf{x} + b \rvert}{\left\| \mathbf{w} \right\|_2}
 \]</span></p>
-<p>The geometric margin <span class="math inline">\(\rho_h\)</span> of a linear classifier <span class="math inline">\(h\)</span> for a sample <span class="math inline">\(S = (x_1, \cdots, x_m)\)</span> is the minimum geometric margin over the points in the sample, <span class="math inline">\(\rho_h = \min_{i \in [m]}\rho_h(x_i)\)</span>, that is the distance of the hyperplane defining <span class="math inline">\(h\)</span> to the closest sample points.</p>
-<p><strong><em>Primal optimization problem</em></strong> The maximum margin <span class="math inline">\(\rho\)</span> of a separating hyperplane is given by</p>
+<p>The <strong>geometric margin</strong> <span class="math inline">\(\rho_h\)</span> of a linear classifier <span class="math inline">\(h\)</span> for a sample <span class="math inline">\(S = (\mathbf{x}_1, \cdots, \mathbf{x}_m)\)</span> is the minimum geometric margin over the points in the sample, <span class="math inline">\(\rho_h = \min_{i \in [m]}\rho_h(x_i)\)</span>, that is the distance of the hyperplane defining <span class="math inline">\(h\)</span> to the closest sample points.</p>
+<p><strong><em>Primal optimization problem</em></strong> By definition of the geometric margin, the maximum margin <span class="math inline">\(\rho\)</span> of a separating hyperplane is given by</p>
 <p><span class="math display">\[
+\begin{equation}
 \begin{split}
-\rho &amp;= \max_{w,b: y_i (w\cdot x_i + b) \geq 0} \min_{i\in [m]} \frac{\lvert w\cdot x_i + b \rvert}{\left\| w \right\|} \\ 
-&amp;= \max_{w,b: \min_{i\in[m]} y_i(w\cdot x_i + b)=1}\frac{1}{\left\| w\right\|} = \max_{w,b: \forall i\in[m], y_i(w\cdot x_i + b)=1}\frac{1}{\left\| w\right\|} \\
+\rho &amp;= \max_{\mathbf{w},b: y_i (\mathbf{w}\cdot \mathbf{x}_i + b) \geq 0} \min_{i\in [m]} \frac{\lvert \mathbf{w}\cdot \mathbf{x}_i + b \rvert}{\left\| \mathbf{w} \right\|} \\ 
+&amp;= \max _{\mathbf{w},b} \min_{i \in [m]} \frac{y_i (\mathbf{w} \cdot \mathbf{x}_i + b)}{\left\| \mathbf{w} \right\|}
 \end{split}
+\end{equation}
+\]</span></p>
+<p>The second equality follows from the fact that, since the sample is linearly separable, for the maximizing pair <span class="math inline">\((\mathbf{w}, b), y_i(\mathbf{w} \cdot \mathbf{x}_i + b)\)</span> must be non-negative for all $ i $. Now, observe that the last expression is invariant to multiplication of <span class="math inline">\((\mathbf{w}, b)\)</span> by a positive scalar. Thus, we can restrict ourselves to pairs <span class="math inline">\((\mathbf{w}, b)\)</span> scaled such that <span class="math inline">\(\min_{i \in [m]} y_i (\mathbf{w}\cdot \mathbf{x}_i + b) = 1\)</span>:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{split}
+\rho &amp;= \max_{\mathbf{w},b:  \min_{i\in[m]} y_i(\mathbf{w}\cdot \mathbf{x}_i + b)=1}\frac{1}{\left\| \mathbf{w} \right\|} = \max_{\mathbf{w},b: \forall i\in[m], y_i(\mathbf{w}\cdot \mathbf{x}_i + b)=1}\frac{1}{\left\| \mathbf{w} \right\|} \\
+\end{split}
+\end{equation}
+\]</span></p>
+<p>The second equality results from the fact that for the maximizing pair <span class="math inline">\((\mathbf{w}, b)\)</span>, the minimum of $y_i ( _i + b) $ is 1.</p>
+<p>Since maximizing <span class="math inline">\(1 / \left\| \mathbf{w} \right\|\)</span> is equivalent to minimzing <span class="math inline">\(\frac{1}{2}\left\| \mathbf{w} \right\| ^2\)</span>, the pair <span class="math inline">\((\mathbf{w}, b)\)</span> returned by SVM in the separable case is the solution of the following convex optimization problem:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{split}
+\min_{\mathbf{w},b} &amp; \frac{1}{2} \left\| \mathbf{w} \right\| ^2 \\
+s.t.: \quad &amp; y_i (\mathbf{w} \cdot \mathbf{x}_i + b) \geq 1, \forall i \in [m] 
+\end{split}
+\end{equation}
 \]</span></p>
 <p><strong><em>The Lagrangian</em></strong></p>
 <p><span class="math display">\[
-\mathcal{L}(w, b, \alpha) = \frac{1}{2}\left\|w\right\|^2 - \sum_{i=1}^m \alpha_i [y_i(w\cdot x_i + b) - 1]
+\begin{equation}
+\mathcal{L}(\mathbf{w}, b, \mathbf{\alpha}) = \frac{1}{2}\left\| \mathbf{w} \right\|^2 - \sum_{i=1}^m \alpha_i [y_i(\mathbf{w}\cdot \mathbf{x}_i + b) - 1]
+\end{equation}
 \]</span></p>
-<p>and its dual optimization problem is:</p>
+<p>The KKT conditions are obtained by setting the gradient of the Lagrangian with respect to the primal variables <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(b\)</span> to zero and by writing the complementarity conditions:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{array}{lll}
+\nabla_{\mathbf{w}} \mathcal{L}=\mathbf{w}-\sum_{i=1}^{m} \alpha_{i} y_{i} \mathbf{x}_{i}=0 &amp; \Longrightarrow &amp; \mathbf{w}=\sum_{i=1}^{m} \alpha_{i} y_{i} \mathbf{x}_{i} \\
+\nabla_{b} \mathcal{L}=-\sum_{i=1}^{m} \alpha_{i} y_{i}=0 &amp; \Longrightarrow &amp; \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+\forall i, \alpha_{i}\left[y_{i}\left(\mathbf{w} \cdot \mathbf{x}_{i}+b\right)-1\right]=0 &amp; \Longrightarrow &amp; \alpha_{i}=0 \vee y_{i}\left(\mathbf{w} \cdot \mathbf{x}_{i}+b\right)=1
+\end{array}
+\end{equation}
+\]</span></p>
+<p>and its <strong>dual optimization problem</strong> is:</p>
 <p><span class="math display">\[
 \begin{split}
 &amp; \max_{\alpha} \sum_{i=1}^m \alpha_i - \frac{1}{2} \sum_{i,j=1}^m \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) \\
@@ -264,18 +296,22 @@ L(x, \lambda, \mu) = f(x) + \sum_{i=1}^m \mu_i(0-g_i(x)) + \sum_{j=1}^k \lambda_
 <h3 id="non-separable-case">Non-separable Case</h3>
 <p>For any hyperplane <span class="math inline">\(w \cdot x + b = 0\)</span>, there exists <span class="math inline">\(x_i \in S\)</span> such that</p>
 <p><span class="math display">\[
-y_i [w\cdot x_i + b] \ngeq 1 
+\begin{equation}
+y_i [\mathbf{w}\cdot \mathbf{x}_i + b] \ngeq 1 
+\end{equation}
 \]</span></p>
-<p>While, a relaxed version of these constraints can indeed hold, that is, for each <span class="math inline">\(i \in [m]\)</span>, there exist <span class="math inline">\(\xi_i \geq 0\)</span> such that <span class="math inline">\(y_i [w\cdot x_i + b] \ngeq 1 - \xi_i\)</span>. So the primal optimization problem becomes:</p>
+<p>While, a relaxed version of these constraints can indeed hold, that is, for each <span class="math inline">\(i \in [m]\)</span>, there exist <span class="math inline">\(\xi_i \geq 0\)</span> such that <span class="math inline">\(y_i [\mathbf{w}\cdot \mathbf{x}_i + b] \ngeq 1 - \xi_i\)</span>. So the primal optimization problem becomes:</p>
 <p><span class="math display">\[
 \begin{split}
-\min_{w, b, \xi} \frac{1}{2}\left\|w\right\|^2 + C \sum_{i=1}^m \xi_i^p \\
-\textbf{s.t.}\quad y_i(w\cdot \xi_i + b) \geq 1-\xi_i \wedge \xi_i \geq 0, i \in [m] \\
+\min_{w, b, \xi} &amp; \frac{1}{2}\left\|\mathbf{w}\right\|^2 + C \sum_{i=1}^m \xi_i^p \\
+\textbf{s.t.}\quad &amp; y_i(\mathbf{w}\cdot \xi_i + b) \geq 1-\xi_i \wedge \xi_i \geq 0, i \in [m] \\
 \end{split}
 \]</span></p>
 <p>Then the Lagrangian is defined as:</p>
 <p><span class="math display">\[
-\mathcal{L}(w, b, \xi, \alpha, \beta) = \frac{1}{2}\left\| w\right\|^2 + C\sum_{i=1}^m \xi_i - \sum_{i=1}^m \alpha_i [y_i(w\cdot x_i + b) - 1 + \xi_i] - \sum_{i=1}^m \beta_i \xi_i 
+\begin{equation*}
+\mathcal{L}(\mathbf{w}, b, \mathbf{\xi}, \mathbf{\alpha}, \mathbf{\beta}) = \frac{1}{2}\left\| \mathbf{w} \right\|^2 + C\sum_{i=1}^m \xi_i - \sum_{i=1}^m \alpha_i [y_i(\mathbf{w}\cdot \mathbf{x}_i + b) - 1 + \xi_i] - \sum_{i=1}^m \beta_i \xi_i 
+\end{equation*}
 \]</span></p>
 <h3 id="references">References</h3>
 <p><a id="1">[1]</a> <span class="citation" data-cites="misc">@misc</span>{ wiki:xxx, author = “{Wikipedia contributors}”, title = “Karush–Kuhn–Tucker conditions — {Wikipedia}{,} The Free Encyclopedia”, year = “2020”, url = “https://en.wikipedia.org/w/index.php?title=Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions&amp;oldid=983546575”, note = “[Online; accessed 31-October-2020]” }</p>
