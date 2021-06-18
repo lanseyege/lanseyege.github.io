@@ -28,7 +28,7 @@
 <meta property="og:description" content="Spectral Graph Theory">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-02-04T03:15:37.912Z">
+<meta property="article:modified_time" content="2021-06-18T07:09:39.801Z">
 <meta property="article:author" content="Ye Yuan">
 <meta property="article:tag" content="Graph">
 <meta property="article:tag" content="Laplacian">
@@ -199,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 11:15:37" itemprop="dateModified" datetime="2021-02-04T11:15:37+08:00">2021-02-04</time>
+                <time title="Modified: 2021-06-18 15:09:39" itemprop="dateModified" datetime="2021-06-18T15:09:39+08:00">2021-06-18</time>
               </span>
 
           
@@ -230,10 +230,13 @@ F(\lambda) = \int_{-\infty}^{\infty} f(t) e^{-i\lambda t} dt
 f(x) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} F(\lambda) e^{i\lambda x} d\lambda 
 \]</span></p>
 <p>We will adopt <span class="math inline">\(\mathcal{F}[f] = F\)</span>, and <span class="math inline">\(\mathcal{F}^{-1}[F] = f\)</span>. We know that: <span class="math inline">\(\mathcal{F} : L^2 \rightarrow L^2\)</span>.</p>
-<p>The properties of Fourier transform: - <span class="math inline">\(\mathcal{F}\)</span> and its inverse are linear operators</p>
-<pre><code>$$
-\mathcal&#123;F&#125;\left[bf + cg\right] = b \mathcal&#123;F&#125;\left[f\right] + c \mathcal&#123;F&#125;\left[g\right]
-$$</code></pre>
+<p>The properties of Fourier transform:</p>
+<ul>
+<li><span class="math inline">\(\mathcal{F}\)</span> and its inverse are linear operators</li>
+</ul>
+<p><span class="math display">\[
+  \mathcal{F}\left[bf + cg\right] = b \mathcal{F}\left[f\right] + c \mathcal{F}\left[g\right]
+  \]</span></p>
 <ul>
 <li><p>Fourier transform of a translation</p>
 <p><span class="math display">\[
@@ -283,7 +286,12 @@ $$</code></pre>
 \int_{-\infty}^{\infty} \lvert F(y) \rvert ^2 dy &lt; \infty
 \]</span></p>
 <p>and is the restriction to the real line of a certain entire analytic function <span class="math inline">\(F(z)\)</span> of a complex variable <span class="math inline">\(z\)</span> satisfying <span class="math inline">\(\lvert F(z) \rvert \leq e^{A\lvert z \rvert}\)</span> for all <span class="math inline">\(z \in \mathbb{C}\)</span>.</p>
-<p><strong><em>Linear Filters</em></strong> - A filter <span class="math inline">\(\mathcal{L}\)</span> maps a signal <span class="math inline">\(f\)</span> into another signal <span class="math inline">\(\mathcal{L}\left[f\right]\)</span>. - A filter is called linear if <span class="math inline">\(\mathcal{L}\left[bf + cg \right] = b\mathcal{L}\left[f\right] + c \mathcal{L} \left[ g \right]\)</span> - A filter is time invariant if <span class="math inline">\(\mathcal{L} \left[f(x-c)\right] (t) = \mathcal{L} \left[f(x)\right] (t-c)\)</span></p>
+<p><strong><em>Linear Filters</em></strong></p>
+<ul>
+<li>A filter <span class="math inline">\(\mathcal{L}\)</span> maps a signal <span class="math inline">\(f\)</span> into another signal <span class="math inline">\(\mathcal{L}\left[f\right]\)</span>.</li>
+<li>A filter is called linear if <span class="math inline">\(\mathcal{L}\left[bf + cg \right] = b\mathcal{L}\left[f\right] + c \mathcal{L} \left[ g \right]\)</span></li>
+<li>A filter is time invariant if <span class="math inline">\(\mathcal{L} \left[f(x-c)\right] (t) = \mathcal{L} \left[f(x)\right] (t-c)\)</span></li>
+</ul>
 <p><strong><em>Theorem</em></strong> Let <span class="math inline">\(\mathcal{L}\)</span> be a linear and time invariant filter. There exists a function <span class="math inline">\(h\)</span> such that</p>
 <p><span class="math display">\[
 \mathcal{L}\left[ f\right] = f* h
@@ -293,7 +301,12 @@ $$</code></pre>
 \mathcal{F}\left[\mathcal{L}\left[f\right]\right] = \mathcal{F}\left[f\right]  \cdot \mathcal{F}\left[h \right]
 \]</span></p>
 <h2 id="graph-laplacian">Graph Laplacian</h2>
-<p>Why is so interesting about the Graph Laplacian (GL)? - The GL is a symmetric matrix (real eigenvalues and eigenvectors, the latter forming an orthogonal basis) - The GL is positive semidefinite (assuming non-negative edge weights) - The eigenvectors are “nice” functions defined on the graph.</p>
+<p>Why is so interesting about the Graph Laplacian (GL)?</p>
+<ul>
+<li>The GL is a symmetric matrix (real eigenvalues and eigenvectors, the latter forming an orthogonal basis)</li>
+<li>The GL is positive semidefinite (assuming non-negative edge weights)</li>
+<li>The eigenvectors are “nice” functions defined on the graph.</li>
+</ul>
 <p><strong><em>Property 3</em></strong> Supposing <span class="math inline">\(G\)</span> is connected, the eigenvector associated to the smallest non-zero eigenvalue (Fiedler Vector) provides the best one-dimensional <strong>embedding</strong> of <span class="math inline">\(G\)</span>.</p>
 <p>In mathematical terms, we want to find <span class="math inline">\(f : V \rightarrow \mathbb{R}, f_i = f(v_i)\)</span> for each node <span class="math inline">\(v_i\)</span> in <span class="math inline">\(G\)</span>, so as to minimize</p>
 <p><span class="math display">\[
@@ -357,7 +370,7 @@ f^\top L f = \frac{1}{2} \sum_{e_{ij}} W_{ij}(f_i - f_j)^2
 \]</span></p>
 <p>Therefore, when the filter is a polynomial in the spectral domain, the filtered signal in each node i is a linear combination of the original signal in the neighborhood of i.</p>
 <p><strong><em>Theorem</em></strong> It can be shown that <span class="math inline">\((\mathbf{L}^k)_{ij} = 0\)</span> when the shortest distance between nodes i and j is greater than k.</p>
-<p><strong><em>Lemma 5.4, the localization result for integer powers of the Laplacian <a href="#2">[2]</a></em></strong> Let <span class="math inline">\(G\)</span> be a weighted graph, <span class="math inline">\(\mathcal{L}\)</span> the graph Laplacian and <span class="math inline">\(s &gt; 0\)</span> an integer. For any two vertices <span class="math display">\[m\]</span> and <span class="math display">\[n\]</span>, if <span class="math display">\[ d_G (m,n) &gt; s\]</span> then <span class="math inline">\((\mathcal{L}^s)_{m,n} = 0\)</span>.</p>
+<p><strong><em>Lemma 5.4, the localization result for integer powers of the Laplacian <a href="#2">[2]</a></em></strong> Let <span class="math inline">\(G\)</span> be a weighted graph, <span class="math inline">\(\mathcal{L}\)</span> the graph Laplacian and <span class="math inline">\(s &gt; 0\)</span> an integer. For any two vertices <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span>, if $ d_G (m,n) &gt; s$ then <span class="math inline">\((\mathcal{L}^s)_{m,n} = 0\)</span>.</p>
 <h3 id="graph-fourier-transform-convolution">Graph Fourier Transform: Convolution</h3>
 <p>The definition of convolution between two functions <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> is</p>
 <p><span class="math display">\[
@@ -373,7 +386,13 @@ f^\top L f = \frac{1}{2} \sum_{e_{ij}} W_{ij}(f_i - f_j)^2
 (f * g)(i) &amp;= \sum_{l = 1}^n \hat{f}(\lambda_l) \hat{g}(\lambda_l) u_l(i) \\
 \end{split}
 \]</span></p>
-<p>Some properties of the convolution: - <span class="math inline">\(\widehat{f * g}=\hat{f} \hat{g}\)</span> - <span class="math inline">\(f * g = g * f\)</span> - <span class="math inline">\(f * (g + h) = f * g + f * h\)</span> - <span class="math inline">\(\sum_{i=1}^n (f * g)(i) = \sqrt{n} \hat{f}(0) \hat{g}(0)\)</span></p>
+<p>Some properties of the convolution:</p>
+<ul>
+<li><span class="math inline">\(\widehat{f * g}=\hat{f} \hat{g}\)</span></li>
+<li><span class="math inline">\(f * g = g * f\)</span></li>
+<li><span class="math inline">\(f * (g + h) = f * g + f * h\)</span></li>
+<li><span class="math inline">\(\sum_{i=1}^n (f * g)(i) = \sqrt{n} \hat{f}(0) \hat{g}(0)\)</span></li>
+</ul>
 <h3 id="graph-fourier-transform-translation">Graph Fourier Transform: Translation</h3>
 <p>The classical translation</p>
 <p><span class="math display">\[
@@ -383,7 +402,7 @@ f^\top L f = \frac{1}{2} \sum_{e_{ij}} W_{ij}(f_i - f_j)^2
 <p><span class="math display">\[
 (T_t f)(x) = (f * \delta_t) (x)
 \]</span></p>
-<p>Recalling that <span class="math inline">\(\mathcal{F}\left\[\delta(t-a)\right\](\lambda) = e^{-i2\pi \lambda a}\)</span>, we define translation to a vertex j as:</p>
+<p>Recalling that <span class="math inline">\(\mathcal{F}\left[\delta(t-a)\right](\lambda) = e^{-i2\pi \lambda a}\)</span>, we define translation to a vertex j as:</p>
 <p><span class="math display">\[
 (T_j f)(i) = \sqrt{n} (f * \delta_j)(i) = \sqrt{n} \sum_{l=0}^{n-1} \hat{f}(\lambda_l) u_l(j) u_l(i)
 \]</span></p>
