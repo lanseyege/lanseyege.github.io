@@ -28,7 +28,7 @@
 <meta property="og:description" content="Neural Tangent Kernel [1] proposes a new explanation for neural network. During training, the network function follows a descent along the kernel gradient w.r.t. the Neural Tangent Kernel (NTK).">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-30T03:04:53.724Z">
+<meta property="article:modified_time" content="2021-07-24T06:38:27.932Z">
 <meta property="article:author" content="Ye Yuan">
 <meta property="article:tag" content="Tangent">
 <meta property="article:tag" content="Kernel">
@@ -198,7 +198,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-30 11:04:53" itemprop="dateModified" datetime="2021-06-30T11:04:53+08:00">2021-06-30</time>
+                <time title="Modified: 2021-07-24 14:38:27" itemprop="dateModified" datetime="2021-07-24T14:38:27+08:00">2021-07-24</time>
               </span>
 
           
@@ -215,7 +215,7 @@
         <h1 id="neural-tangent-kernel">Neural Tangent Kernel</h1>
 <p><a href="#1">[1]</a> proposes a new explanation for neural network. During training, the network function follows a descent along the kernel gradient w.r.t. the Neural Tangent Kernel (NTK).</p>
 <a id="more"></a>
-<p>The paper sutdy the network function <span class="math inline">\(f_\theta\)</span> of an ANN. In the limit as the widths of the hidden layers tend to infinity, the network function at initialization, <span class="math inline">\(f_\theta\)</span> converges to a Gaussian distribution. The behavior of ANNs during training is described by a related kernel, which we call the <strong>neural tangent network (NTK)</strong>.</p>
+<p>The paper sutdy the network function <span class="math inline">\(f_\theta\)</span> of an ANN. In the limit as the widths of the hidden layers tend to infinity, the network function at initialization, <span class="math inline">\(f_\theta\)</span> converges to a Gaussian distribution. The behavior of ANNs during training is described by a related kernel, which we call the <strong>neural tangent kernel (NTK)</strong>.</p>
 <h2 id="neural-networks">Neural networks</h2>
 <p><strong>Setting:</strong> ANN</p>
 <ul>
@@ -261,6 +261,51 @@
 <p><span class="math display">\[
 \mathbb{E}[f_k^{(p)}(x) f_{k^\prime}^{(p)}(x^\prime)] = K_{kk^\prime}(x, x^\prime)
 \]</span></p>
+<p>These functions define a random linear parametrization <span class="math inline">\(F^{lin} : \mathbb{R}^P \rightarrow \mathcal{F}\)</span></p>
+<p><span class="math display">\[
+\theta \rightarrow f^{lin}_\theta = \frac{1}{\sqrt{P}}\sum_{p=1}^P \theta_p f^{(p)}
+\]</span></p>
+<p>The partial derivatives of the parametrization are given by</p>
+<p><span class="math display">\[
+\partial_{\theta_p} F^{lin} (\theta) = \frac{1}{\sqrt{P}} f^{(p)}
+\]</span></p>
+<p>Optimizing the cost <span class="math inline">\(C \circ F^{lin}\)</span> lin through gradient descent, the parameters follow the ODE:</p>
+<p><span class="math display">\[
+\partial_{t} \theta_{p}(t)=-\partial_{\theta_{p}}\left(C \circ F^{l i n}\right)(\theta(t))=-\left.\frac{1}{\sqrt{P}} \partial_{f}^{i n} C\right|_{f_{\theta(t)}^{l i n}} f^{(p)}=-\frac{1}{\sqrt{P}}\left\langle\left. d\right|_{f_{\theta(t)}^{l i n}}, f^{(p)}\right\rangle_{p^{i n}}
+\]</span></p>
+<h2 id="neural-tangent-kernel-1">Neural tangent kernel</h2>
+<p>During training, the network function <span class="math inline">\(f_\theta\)</span> evolves along the negative kernel gradient</p>
+<p><span class="math display">\[
+\partial_t f_{\theta(t)} = - \nabla_{\Theta^{(L)}}C |_{f_{\theta(t)}}
+\]</span></p>
+<p>with respect to the <strong>neural tangent kernel (NTK)</strong></p>
+<p><span class="math display">\[
+\Theta^{(L)}(\theta) = \sum_{p=1}^P \partial_{\theta_p} F^{(L)} (\theta) \otimes \partial_{\theta_p} F^{(L)}(\theta)
+\]</span></p>
+<p>Next will show that in the infinite-width limit, the NTK becomes deterministic at initialization and stays constant during training.</p>
+<h3 id="initialization">Initialization</h3>
+<p><strong>Proposition 1.</strong> For a network of depth <span class="math inline">\(L\)</span> at initialization, with a Lipschitz nonlinearity <span class="math inline">\(\sigma\)</span>, and in the limit as <span class="math inline">\(n_1, \ldots, n_{L-1} \rightarrow \infty\)</span>, the <strong><em>output functions</em></strong> <span class="math inline">\(f_{\theta, k}\)</span>, for <span class="math inline">\(k = 1, \ldots, n_L\)</span>, tend (in law) to iid centered <strong><em>Gaussian processes</em></strong> of covariance <span class="math inline">\(\Sigma^{(L)}\)</span>.</p>
+<p><strong>The firstly key result</strong>: in the same limit, the Neural Tangent Kernel (NTK) converges in probability to an explicit deterministic limit.</p>
+<p><strong>Theorem 1.</strong> For a network of depth <span class="math inline">\(L\)</span> at initialization, with a Lipschitz nonlinearity <span class="math inline">\(\sigma\)</span>, an in the limit as the layers width <span class="math inline">\(n_1, \ldots, n_{L-1} \rightarrow \infty\)</span>, the NTK <span class="math inline">\(\Sigma^{(L)}\)</span> converges in probability to a deterministic limiting kernel:</p>
+<p><span class="math display">\[
+\Sigma^{(L)} \rightarrow \Sigma^{(L)}_{\infty} \otimes I d_{n_L}
+\]</span></p>
+<p>The scalar kernel <span class="math inline">\(\Sigma^{(L)}_\infty : \mathbb{R}^{n_0} \times \mathbb{R}^{n_0} \rightarrow \mathbb{R}\)</span> is defined recursively.</p>
+<h3 id="training">Training</h3>
+<p><strong>Second key result</strong> is that the NTK stays asymptotically constant during training.</p>
+<p><strong>Theorem 2.</strong> Assume that <span class="math inline">\(\sigma\)</span> is a Lipschitz, twice differentiable nonlinearity function, with bounded second derivative. For any <span class="math inline">\(T\)</span> such that the integral <span class="math inline">\(\int_0 ^T \| d_t \| _{p^{in}} dt\)</span> stays stochastically bounded, as <span class="math inline">\(n_1, \ldots, n_{L-1} \rightarrow \infty\)</span>, we have, uniformly for <span class="math inline">\(t \in [0, T]\)</span>,</p>
+<p><span class="math display">\[
+\Sigma^{(L)}(t) \rightarrow \Sigma^{(L)}_\infty \otimes I d_{n_L}
+\]</span></p>
+<p>As a consequence, in this limit, the dynamics of <span class="math inline">\(f_\theta\)</span> is described by the differential equation</p>
+<p><span class="math display">\[
+\partial_t f_{\theta(t)} = \Phi_{\Sigma^{(L)}_\infty \otimes I d_{n_L}}\left(\langle d_t, \cdot \rangle_{p^{in}}\right)
+\]</span></p>
+<h2 id="least-squares-regression">Least-squares regression</h2>
+<p>Given a goal function <span class="math inline">\(f^*\)</span> and input distribution <span class="math inline">\(p^{in}\)</span>, the least-squares regression cost is</p>
+<p><span class="math display">\[
+C(f) = \frac{1}{2} \| f - f^*\| ^2 _{p^{in}} = \frac{1}{2}\mathbb{E}_{x \sim p^{in}} [\| f(x) - f^*(x) \|^2 ]
+\]</span></p>
 <h1 id="references">References</h1>
 <p><a id="1">[1]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{jacot2018neural, title=“Neural Tangent Kernel: Convergence and Generalization in Neural Networks”, author=“Arthur {Jacot} and Franck {Gabriel} and Clément {Hongler}”, booktitle=“Advances in Neural Information Processing Systems”, volume=“31”, pages=“8571–8580”, notes=“Sourced from Microsoft Academic - https://academic.microsoft.com/paper/2809090039”, year=“2018” }</p>
 <p><a id="2">[2]</a></p>
@@ -284,8 +329,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/2021/06/blog-post-49/" rel="prev" title="Notes on "Greedy Function Approximation: a Gradient Boosting Machine" ">
-      <i class="fa fa-chevron-left"></i> Notes on "Greedy Function Approximation: a Gradient Boosting Machine" 
+    <a href="/posts/2021/06/blog-post-48/" rel="prev" title="Some Picks on "Boosting Methods" Blogs""">
+      <i class="fa fa-chevron-left"></i> Some Picks on "Boosting Methods" Blogs""
     </a></div>
       <div class="post-nav-item">
     <a href="/posts/2021/07/blog-post-51/" rel="next" title="Generative Adversarial Nets">
@@ -349,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#neural-tangent-kernel"><span class="nav-number">1.</span> <span class="nav-text">Neural Tangent Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#neural-networks"><span class="nav-number">1.1.</span> <span class="nav-text">Neural networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kernel-gradient"><span class="nav-number">1.2.</span> <span class="nav-text">Kernel gradient</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setting"><span class="nav-number">1.2.1.</span> <span class="nav-text">setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#random-functions-approximation"><span class="nav-number">1.2.2.</span> <span class="nav-text">Random functions approximation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#neural-tangent-kernel"><span class="nav-number">1.</span> <span class="nav-text">Neural Tangent Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#neural-networks"><span class="nav-number">1.1.</span> <span class="nav-text">Neural networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kernel-gradient"><span class="nav-number">1.2.</span> <span class="nav-text">Kernel gradient</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setting"><span class="nav-number">1.2.1.</span> <span class="nav-text">setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#random-functions-approximation"><span class="nav-number">1.2.2.</span> <span class="nav-text">Random functions approximation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#neural-tangent-kernel-1"><span class="nav-number">1.3.</span> <span class="nav-text">Neural tangent kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#initialization"><span class="nav-number">1.3.1.</span> <span class="nav-text">Initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#training"><span class="nav-number">1.3.2.</span> <span class="nav-text">Training</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#least-squares-regression"><span class="nav-number">1.4.</span> <span class="nav-text">Least-squares regression</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -363,14 +408,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">114</span>
+        <span class="site-state-item-count">116</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
