@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Measure Thoery: Chp 1. Measures">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on book &quot;Measure Theory (2nd ed.) - Cohn Donald L.&quot; ">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/01/blog-post-21/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Measure Thoery: Chp 1. Measures">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T03:17:07.780Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Measure">
+<meta property="article:tag" content="Outer Measure">
+<meta property="article:tag" content="Algebras">
+<meta property="article:tag" content="Sigma-Algebras">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/01/blog-post-21/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2021/01/blog-post-21/","path":"/posts/2021/01/blog-post-21/","title":"Notes on book \"Measure Theory (2nd ed.) - Cohn Donald L.\" "}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Measure-Thoery-Chp-1-Measures"><span class="nav-number">1.</span> <span class="nav-text">Measure Thoery: Chp 1. Measures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Algebras-and-Sigma-Algebras"><span class="nav-number">1.1.</span> <span class="nav-text">Algebras and Sigma-Algebras</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Measures"><span class="nav-number">1.2.</span> <span class="nav-text">Measures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Outer-Measures"><span class="nav-number">1.3.</span> <span class="nav-text">Outer Measures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lebesgue-Measure"><span class="nav-number">1.4.</span> <span class="nav-text">Lebesgue Measure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Completeness-and-Regularity"><span class="nav-number">1.5.</span> <span class="nav-text">Completeness and Regularity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynkin-Classes"><span class="nav-number">1.6.</span> <span class="nav-text">Dynkin Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.6.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/01/blog-post-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-13T00:00:00+08:00">2021-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-04 11:17:07" itemprop="dateModified" datetime="2021-02-04T11:17:07+08:00">2021-02-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Measure-Thoery-Chp-1-Measures"><a href="#Measure-Thoery-Chp-1-Measures" class="headerlink" title="Measure Thoery: Chp 1. Measures"></a>Measure Thoery: Chp 1. Measures</h1><span id="more"></span>
+
+<h2 id="Algebras-and-Sigma-Algebras"><a href="#Algebras-and-Sigma-Algebras" class="headerlink" title="Algebras and Sigma-Algebras"></a>Algebras and Sigma-Algebras</h2><p><em><strong>Algebras</strong></em> Let $X$ be an arbitrary set. A collection $\mathscr{A}$ of subsets of $X$ is an <em><strong>algebra</strong></em> on $X$ if </p>
+<ul>
+<li>$X \in \mathscr{A}$, </li>
+<li>for each set $A$ that belongs to $\mathscr{A}$, the set $A^c$ belongs to $\mathscr{A}$,</li>
+<li>for each finite sequence $A_1, \ldots, A_n$ of sets that belong to $\mathscr{A}$, the set $\cup_{i&#x3D;1}^{n} A_{i}$ belongs to $\mathscr{A}$, and </li>
+<li>for each finite sequence $A_1, \ldots, A_n$ of sets that belongs to $\mathscr{A}$, the set $\cap_{i&#x3D;1}^{n} A_{i}$ belongs to $\mathcal{A}$.</li>
+</ul>
+<p><em><strong>Sigma-Algebras</strong></em> Let $X$ be an arbitrary set. A collection $\mathscr{A}$ of subsets of $X$ is a $\sigma$-algebra on $X$ if </p>
+<ul>
+<li>$X \in \mathscr{A}$, </li>
+<li>for each set $A$ that belongs to $\mathscr{A}$, the set $A^c$ belongs to $\mathscr{A}$,</li>
+<li>for each finite sequence $A_1, \ldots, A_n$ of sets that belong to $\mathscr{A}$, the set $\cup_{i&#x3D;1}^{\infty} A_{i}$ belongs to $\mathscr{A}$, and </li>
+<li>for each finite sequence $A_1, \ldots, A_n$ of sets that belongs to $\mathscr{A}$, the set $\cap_{i&#x3D;1}^{\infty} A_{i}$ belongs to $\mathcal{A}$.</li>
+</ul>
+<h2 id="Measures"><a href="#Measures" class="headerlink" title="Measures"></a>Measures</h2><p>Let $X$ be a set, and let $\mathscr{A}$ be a $\sigma$-algebra on $X$. A function $\mu$ whose domain is the $\sigma$-algebra $\mathscr{A}$ and whose values belong to the extended half-line $[0, +\infty]$ is said to be countably additive if it satisfies</p>
+<p>$$<br>\mu (\cup_{i&#x3D;1}^\infty A_i) &#x3D; \sum_{i&#x3D;1}^\infty \mu(A_i)<br>$$</p>
+<p>for each infinite sequence $\left{ A_i \right}$ of disjoint sets that belong to $\mathscr{A}$. A <strong>measure</strong> (or a countably additive measure) on $\mathscr{A}$ is a function $\mu : \mathscr{A} \rightarrow [0, +\infty]$ that satisfies $\mu(\varnothing) &#x3D; 0$ and is countably additive. A triplet $(X, \mathscr{A}, \mu)$ is often called a <strong>measure space</strong>. </p>
+<h2 id="Outer-Measures"><a href="#Outer-Measures" class="headerlink" title="Outer Measures"></a>Outer Measures</h2><p>Let $X$ be a set, and let $\mathscr{P}(X)$ be the collection of all subsets of $X$. An <strong>outer measure</strong> on $X$ is a function $\mu^\star : \mathscr{P}(X) \rightarrow [0, +\infty] $ such that </p>
+<ul>
+<li>$\mu^\star(\varnothing) &#x3D; 0$, </li>
+<li>if $A \subseteq B \subseteq X$, then $\mu^\star (A) \leq \mu^\star(B)$, and </li>
+<li>if $\left{A_n \right}$ is an infinite sequence of subsets of $X$, then $\mu^\star(\cup_n A_n) \leq \sum_n \mu^\star (A_n)$.</li>
+</ul>
+<p>Thus an outer measure on $X$ is a monotone and countably subadditive function from $\mathscr{P}(X)$ to $[0, + \infty]$ whose value at $\varnothing$ is $0$. </p>
+<p><strong>$\mu^\star$-measurable (or measurable with respect to $\mu^\star$)</strong> Let $X$ be a set, and let $\mu^\star$ be an outer measure on $X$. A subset $B$ of $X$ is $\mu^\star$-measurable if </p>
+<p>$$<br>\mu^\star (A) &#x3D; \mu^\star (A \cap B) + \mu^\star (A \cap B^c)<br>$$</p>
+<p>holds for every subset $A$ of $X$. </p>
+<p><em><strong>Theorem 1.3.6</strong></em> Let $X$ be a set, let $\mu^\star$ be an outer measure on $X$, and let $\mathscr{M}_{\mu^\star}$ be the collection of all $\mu^\star$-measurable subsets of $X$. Then</p>
+<ul>
+<li>$\mathscr{M}_{\mu^{*}}$ is a $\sigma$-algebra, and </li>
+<li>the restriction of $\mu^\star$ to $\mathscr{M}<em>{\mu^{*}}$ is a measure on $\mathscr{M}</em>{\mu^{*}}$.</li>
+</ul>
+<h2 id="Lebesgue-Measure"><a href="#Lebesgue-Measure" class="headerlink" title="Lebesgue Measure"></a>Lebesgue Measure</h2><p>The <strong>Borel $\sigma$-algebra</strong> on $\mathbb{R}^d$ is the $\sigma$-algebra on $\mathbb{R}^d$ generated by the collection of open subsets of $\mathbb{R}^d$; it is denoted by $\mathscr{B}\left(\mathbb{R}^{d}\right)$. The Borel subsets of $\mathbb{R}^d$ are those that belong to $\mathscr{B}\left(\mathbb{R}^{d}\right)$. </p>
+<h2 id="Completeness-and-Regularity"><a href="#Completeness-and-Regularity" class="headerlink" title="Completeness and Regularity"></a>Completeness and Regularity</h2><p>Let $(X, \mathscr{A}, \mu)$ be a measure space. The measure $\mu$ is <strong>complete</strong> if the relations $A \in \mathscr{A}, \mu(A) &#x3D; 0$, and $B \subseteq A$ together imply that $B \in \mathscr{A}$. It’s sometimes convenient to call a subset $B$ of $X$ $\mu$-negligible (or $\mu$-null) if there is a subset $A$ of $X$ such that $A \in \mathscr{A}, B \subseteq A$, and $\mu(A) &#x3D; 0$. Thus the measure $\mu$ is complete if and only if every $\mu$-negligible subset of $X$ belongs to $\mathscr{A}$.</p>
+<p>If $\mu^\star$ is an outer measure on the set $X$ and if $\mathscr{M}<em>{\mu^\star}$ is the $\sigma$-algebra of all $\mu^\star$-measurable subsets of $X$, then the restriction of $\mu^\star$ to $\mathscr{M}</em>{\mu^\star}$ is <strong>complete</strong>. </p>
+<p>Let $\mathscr{A}$ be a $\sigma$-algebra on $\mathbb{R}^d$ that includes the $\sigma$-algebra $\mathscr{B}(\mathbb{R}^d)$ of Borel sets. A measure $\mu$ on $(\mathbb{R}^d, \mathscr{A})$ is <strong>regular</strong> if </p>
+<ul>
+<li><p>each compact subset $K$ of $\mathbb{R}^d$ satisfies $\mu(K) &lt; +\infty$</p>
+</li>
+<li><p>each set $A$ in $\mathscr{A}$ satisfies<br>$$<br>\mu(A) &#x3D; \inf \left{ \mu(U) : U \text{ is open and } A \subseteq U\right}, \text{ and}<br>$$</p>
+</li>
+<li><p>each open subset $U$ of $\mathbb{R}^d$ satisfies</p>
+</li>
+</ul>
+<p>$$<br>\mu(U) &#x3D; \sup \left{ \mu(K) : K \text{ is compact and } K \subseteq U \right},<br>$$</p>
+<h2 id="Dynkin-Classes"><a href="#Dynkin-Classes" class="headerlink" title="Dynkin Classes"></a>Dynkin Classes</h2><p>Let $X$ be a set. A collection $\mathscr{D}$ of subsets of $X$ is a <strong>d-system</strong> (or a Dynkin class) on $X$ if</p>
+<ul>
+<li>$X \in \mathscr{D}$,</li>
+<li>$A - B \in \mathscr{D}$ whenever $A , B \in \mathscr{D}$ and $A \supseteq B$, and</li>
+<li>$\cup_n A_n \in \mathscr{D}$ whenever $\left{ A_n \right}$ is an increasing sequence of sets in $\mathscr{D}$.</li>
+</ul>
+<p>A collection of subsets of $X$ is a <strong>$\pi$-system</strong> on $X$ if it is closed under the formation of finite intersections. </p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>@book{cohn2013measure,<br>  title&#x3D;{Measure theory},<br>  author&#x3D;{Cohn, Donald L},<br>  year&#x3D;{2013},<br>  publisher&#x3D;{Springer}<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Measure/" rel="tag"># Measure</a>
+              <a href="/tags/Outer-Measure/" rel="tag"># Outer Measure</a>
+              <a href="/tags/Algebras/" rel="tag"># Algebras</a>
+              <a href="/tags/Sigma-Algebras/" rel="tag"># Sigma-Algebras</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-22/" rel="prev" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
+                  <i class="fa fa-chevron-left"></i> Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-20/" rel="next" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
+                  Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

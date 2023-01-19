@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="AlphaGo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on &quot;AlphaGo&quot;">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/02/blog-post-40/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="AlphaGo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://lanseyege.github.io/images/alphago.png">
+<meta property="og:image" content="http://lanseyege.github.io/images/mcts.png">
+<meta property="article:published_time" content="2021-02-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-25T10:00:55.601Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="RL">
+<meta property="article:tag" content="AlphaGo">
+<meta property="article:tag" content="MCTS">
+<meta property="article:tag" content="policy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://lanseyege.github.io/images/alphago.png">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/02/blog-post-40/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2021/02/blog-post-40/","path":"/posts/2021/02/blog-post-40/","title":"Notes on \"AlphaGo\""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Notes on "AlphaGo" | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AlphaGo"><span class="nav-number">1.</span> <span class="nav-text">AlphaGo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Difficulties-and-Current-Methods"><span class="nav-number">1.1.</span> <span class="nav-text">Difficulties and Current Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AlphaGo-1"><span class="nav-number">1.2.</span> <span class="nav-text">AlphaGo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Supervised-learning-of-policy-networks"><span class="nav-number">1.2.1.</span> <span class="nav-text">Supervised learning of policy networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reinforcement-Learning-of-Policy-Networks"><span class="nav-number">1.2.2.</span> <span class="nav-text">Reinforcement Learning of Policy Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reinforcement-learning-of-value-networks"><span class="nav-number">1.2.3.</span> <span class="nav-text">Reinforcement learning of value networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Searching-with-policy-and-value-networks"><span class="nav-number">1.2.4.</span> <span class="nav-text">Searching with policy and value networks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/02/blog-post-40/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Notes on "AlphaGo" | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes on "AlphaGo"
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-24 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-24T00:00:00+08:00">2021-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-25 18:00:55" itemprop="dateModified" datetime="2021-02-25T18:00:55+08:00">2021-02-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="AlphaGo"><a href="#AlphaGo" class="headerlink" title="AlphaGo"></a>AlphaGo</h1><span id="more"></span>
+
+<p>AlphaGo is a successful application of (deep) reinforcement learning in board games. </p>
+<h2 id="Difficulties-and-Current-Methods"><a href="#Difficulties-and-Current-Methods" class="headerlink" title="Difficulties and Current Methods"></a>Difficulties and Current Methods</h2><p>The search space of game Go is extremely huge, it’s about $b^d (b \approx 250, d \approx 150)$ possible sequences of moves, where $b$ is the game’s breadth (number of legal moves per position) and $d$ is its depth (game length). Exhastive search is infeasible but the effective search space can be reduced by two general principles. </p>
+<ul>
+<li>The depth of the search may be reduced by position evaluation </li>
+<li>The breadth of the search may be reduced by sampling actions from a policy $p(a | s)$ that is a probability distribution over possible moves $a$ in position $s$.</li>
+</ul>
+<p>Monte Carlo tree search (MCTS) uses Monto Carlo rollouts to estimate the value of each state in a search tree. As more simulations are executed, the search tree grows larger and the relevant values become more accurate. The strongest current (now old) Go progams are based on MCTS. </p>
+<h2 id="AlphaGo-1"><a href="#AlphaGo-1" class="headerlink" title="AlphaGo"></a>AlphaGo</h2><p><img src="/images/alphago.png" alt="AlphaGo training pipeline and Architecture"></p>
+<p>AlphaGo use neural networks to reduce the effective depth and breadth of the search tree: evaluating positions using a value network, and sampling actions using a policy network. </p>
+<ul>
+<li>AlphaGo begin by training a supervised learning (SL) policy network $p_\sigma$ directly from expert human moves;</li>
+<li>It also train a fast policy $p_\pi$ that can rapidly sample actions during rollouts;</li>
+<li>Next, we train a reinforcement learning (RL) policy network $p_\rho$ that improves the SL policy network by optimizing the final outcome of games of self-play;</li>
+<li>It train a value network $v_\theta$ that predicts the winner of games played by the RL policy network against itself.</li>
+</ul>
+<p><img src="/images/mcts.png" alt="Monte Carlo Tree Search in AlphaGo"></p>
+<h3 id="Supervised-learning-of-policy-networks"><a href="#Supervised-learning-of-policy-networks" class="headerlink" title="Supervised learning of policy networks"></a>Supervised learning of policy networks</h3><p>The SL policy network $p_\sigma (a | s)$ alternates between convolutional layers with weights $\sigma$, and rectifier nonlinearities. A final softmax layer outs a probability distribution over all legal moves $a$. The policy network is trained on randomly sampled state-action pairs $(s, a)$, using stocahstic gradient ascent to maximize the likelihood of the human move $a$ selected in state $s$ </p>
+<p>$$<br>\nabla \sigma \propto \frac{\partial \log p_{\sigma}(a \mid s)}{\partial \sigma}<br>$$</p>
+<p>AlphaGo also trained a faster but less accurate rollout policy $p_\pi (a|s)$, using a linear softmax of small pattern features (see Extended Data Table 4) with weights $\pi$</p>
+<h3 id="Reinforcement-Learning-of-Policy-Networks"><a href="#Reinforcement-Learning-of-Policy-Networks" class="headerlink" title="Reinforcement Learning of Policy Networks"></a>Reinforcement Learning of Policy Networks</h3><p>This stage aims at improving the policy network by policy gradient reinforcement learning. The RL policy network $p_\rho$ is identical in structure to the SL policy network, and its weights $\rho$ are initialized to the same values, $\rho &#x3D; \sigma$. AlphaGo play games between the current policy network $p_\rho$ and a randomly selected previous iteration of the policy network. A reward $r(s)$ is used here. It’s $0$ for all non-terminal time steps $t &lt; T$. The outcome $z_t &#x3D; \pm r(S_T)$ is the terminal reward at the game: $+1$ for winning and $-1$ for losing. </p>
+<p>$$<br>\nabla \rho \propto \frac{\partial \log p_\rho (a_t | s_t)}{\partial \rho} z_t<br>$$</p>
+<h3 id="Reinforcement-learning-of-value-networks"><a href="#Reinforcement-learning-of-value-networks" class="headerlink" title="Reinforcement learning of value networks"></a>Reinforcement learning of value networks</h3><p>The final stage of the training pipeline focuses on position evaluation, estimating a value function $v^p (s)$ that predicts the outcome from position $s$ of games played by using policy $p$ for both players </p>
+<p>$$<br>v^p (s) &#x3D; \mathbb{E} [z_t | s_t &#x3D; s, a_{t \ldots T} \sim p]<br>$$</p>
+<p>We train the weights of the value network by regression on state-outcome pairs $(s, z)$, using stochastic gradient descent to minimize the mean squared error (MSE) between the predicted value $v_\theta (s)$, and the corresponding outcome $z$ </p>
+<p>$$<br>\nabla \theta \propto \frac{\partial v_\theta (s)}{\partial \theta} (z - v_\theta (s))<br>$$</p>
+<p>The naive approach of predicting game outcomes from data consisting of complete games leads to overfitting, for the reason that successive positions are strongly correlated. To mitigate this problem, we generated a new self-play data set. </p>
+<h3 id="Searching-with-policy-and-value-networks"><a href="#Searching-with-policy-and-value-networks" class="headerlink" title="Searching with policy and value networks"></a>Searching with policy and value networks</h3><p>AlphaGo combines the policy and value networks in an MCTS algorithm that selects actions by lookahead search. At each time step $t$ of each simulation, an action $a_t$ is selected from state $s_t$</p>
+<p>$$<br>a_t &#x3D; \arg \max_a (Q(s_t, a) + u (s_t, a))<br>$$</p>
+<p>so as to maximize action value plus a bonus </p>
+<p>$$<br>u(s, a) \propto \frac{P(s, a)}{ 1 + N(s, a )}<br>$$</p>
+<p>$P(s, a ) &#x3D; p_\sigma (a | s)$. A leaf evaluation $V(s_L)$ is </p>
+<p>$$<br>V(s_L) &#x3D; (1 - \lambda ) v_\theta (s_L) + \lambda z_L<br>$$</p>
+<p>where the outcome $z_L$ of a random rollout played until terminal step $T$ using the fast rollout policy $p_\pi$. </p>
+<p>At the end of simulation, the action values and visit counts of all traversed edges are updated. Each edge accumulates the visit count and mean evaluation of all simulations passing through that edge</p>
+<p>$$<br>\begin{array}{ll}<br>N(s , a) &#x3D; \sum_{i &#x3D; 1}^n 1(s, a , i) \<br>Q(s, a) &#x3D; \frac{1}{N(s, a)} \sum_{i&#x3D;1}^n 1(s, a, i) V(s_L^i) \<br>\end{array}<br>$$</p>
+<p>where $s_L^i$ is the leaf node from the $i$th simulation, and $1(s, a, i)$ indicates whether an edge $(s, a)$ was traversed during the $i$th simulation.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br>@article{silver2016mastering,<br>  title&#x3D;{Mastering the game of Go with deep neural networks and tree search},<br>  author&#x3D;{Silver, David and Huang, Aja and Maddison, Chris J and Guez, Arthur and Sifre, Laurent and Van Den Driessche, George and Schrittwieser, Julian and Antonoglou, Ioannis and Panneershelvam, Veda and Lanctot, Marc and others},<br>  journal&#x3D;{nature},<br>  volume&#x3D;{529},<br>  number&#x3D;{7587},<br>  pages&#x3D;{484–489},<br>  year&#x3D;{2016},<br>  publisher&#x3D;{Nature Publishing Group}<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/RL/" rel="tag"># RL</a>
+              <a href="/tags/AlphaGo/" rel="tag"># AlphaGo</a>
+              <a href="/tags/MCTS/" rel="tag"># MCTS</a>
+              <a href="/tags/policy/" rel="tag"># policy</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2021/02/blog-post-41/" rel="prev" title="Notes on "AlphaGo Zero"">
+                  <i class="fa fa-chevron-left"></i> Notes on "AlphaGo Zero"
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2021/02/blog-post-43/" rel="next" title="Legendre-Fenchel transforms and application in RL">
+                  Legendre-Fenchel transforms and application in RL <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

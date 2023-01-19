@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Measure Thoery: Chp 3. ConvergenceIn this chapter we look in some detail at the convergence of sequences of functions.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on book &quot;Measure Theory (2nd ed.) - Cohn Donald L.&quot; ">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/01/blog-post-23/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Measure Thoery: Chp 3. ConvergenceIn this chapter we look in some detail at the convergence of sequences of functions.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T03:17:39.167Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Measure">
+<meta property="article:tag" content="Convergence">
+<meta property="article:tag" content="a.e.">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/01/blog-post-23/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2021/01/blog-post-23/","path":"/posts/2021/01/blog-post-23/","title":"Notes on book \"Measure Theory (2nd ed.) - Cohn Donald L.\" "}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Measure-Thoery-Chp-3-Convergence"><span class="nav-number">1.</span> <span class="nav-text">Measure Thoery: Chp 3. Convergence</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Modes-of-Convergence"><span class="nav-number">1.1.</span> <span class="nav-text">Modes of Convergence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normed-Spaces"><span class="nav-number">1.2.</span> <span class="nav-text">Normed Spaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-of-mathscr-L-p-and-L-p"><span class="nav-number">1.3.</span> <span class="nav-text">Definition of $\mathscr{L}^p$ and $L^p$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties-of-mathscr-L-p-and-L-p"><span class="nav-number">1.4.</span> <span class="nav-text">Properties of $\mathscr{L}^p$ and $L^p$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dual-Spaces"><span class="nav-number">1.5.</span> <span class="nav-text">Dual Spaces</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.5.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/01/blog-post-23/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-13T00:00:00+08:00">2021-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-04 11:17:39" itemprop="dateModified" datetime="2021-02-04T11:17:39+08:00">2021-02-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Measure-Thoery-Chp-3-Convergence"><a href="#Measure-Thoery-Chp-3-Convergence" class="headerlink" title="Measure Thoery: Chp 3. Convergence"></a>Measure Thoery: Chp 3. Convergence</h1><p>In this chapter we look in some detail at the convergence of sequences of functions.</p>
+<span id="more"></span>
+
+<h2 id="Modes-of-Convergence"><a href="#Modes-of-Convergence" class="headerlink" title="Modes of Convergence"></a>Modes of Convergence</h2><p><em><strong>Converge in measure</strong></em> Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $f$ and $f_1, f_2, \ldots$ be real-valued $\mathscr{A}$-measurable functions on $X$. The sequence $\left{ f_n \right}$ converges to $f$ <strong>in measure</strong> if</p>
+<p>$$<br>\lim_n \mu(\left{ x \in X : \lvert f_n(x) - f(x) \rvert &gt; \epsilon \right}) &#x3D; 0<br>$$</p>
+<p>holds for each positive $\epsilon$. </p>
+<p><em><strong>Converge almost everywhere</strong></em> The sequence $\left{ f_n \right}$ converges to $f$ almost everywhere if $f(x) &#x3D; \lim_n f_n(x)$ holds at $\mu$-almost every point $x$ in $X$. </p>
+<p><em><strong>Proposition 3.1.2</strong></em> Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $f$ and $f_1, f_2, \ldots$ be real-valued $\mathscr{A}$-measurable functions on $X$. If $\mu$ is finite and if $\left{ f_n \right}$ converges to $f$ almost everywhere, then $\left{ f_n \right}$ converges to $f$ in measure. </p>
+<p><em><strong>Proposition 3.1.3</strong></em> Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $f$ and $f_1, f_2, \ldots$ be real-valued $\mathscr{A}$-measurable functions on $X$. If $\left{f_n\right}$ converges to $f$ in measure, then there is a subsequence of $\left{ f_n \right}$ that converges to $f$ almost everywhere. </p>
+<p><em><strong>Proposition 3.1.4 (Egoroff’s Theorem)</strong></em> Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $f$ and $f_1, f_2, \ldots$ be real-valued $\mathscr{A}$-measurable functions on $X$. If $\mu$ is finite and if $\left{ f_n \right}$ converges to $f$ almost everywhere, then for each positive number $\epsilon$ there is a subset $B$ of $X$ that belongs to $\mathscr{A}$, satisfies $\mu(B^c) &lt; \epsilon$, and is such that $\left{f_n\right}$ converges to $f$ <strong>uniformly</strong> on $B$. </p>
+<p>It follows from this remark and Egoroff’s theorem that on a finite measure space almost everywhere convergence is equivalent to almost uniform convergence. </p>
+<p><em><strong>Converge in Mean</strong></em> Suppose that $(X, \mathscr{A}, \mu)$ is a measure space and that $f$ and $f_1, f_2, \ldots$ belong to $\mathscr{L}^1 (X, \mathscr{A}, \mu, \mathbb{R})$. Then $\left{f_n\right}$ converges to $f$ <strong>in mean</strong> if </p>
+<p>$$<br>\lim_n \int \lvert f_n - f \rvert d \mu &#x3D; 0<br>$$</p>
+<p><em><strong>Proposition 3.1.5</strong></em> Let $(X, \mathscr{A}, \mu)$ is a measure space and that $f$ and $f_1, f_2, \ldots$ belong to $\mathscr{L}^1 (X, \mathscr{A}, \mu, \mathbb{R})$. If $\left{ f_n \right}$ converges to $f$ in mean, then $\left{ f_n \right}$ converges to f in measure. </p>
+<p><em><strong>Proposition 3.1.6</strong></em> Let $(X, \mathscr{A}, \mu)$ is a measure space and that $f$ and $f_1, f_2, \ldots$ belong to $\mathscr{L}^1 (X, \mathscr{A}, \mu, \mathbb{R})$. If $\left{ f_n \right}$ converges to $f$ almost everywhere or in measure, and if there is a nonnegative extended real-valued integrable function $g$ such that</p>
+<p>$$<br>\lvert f_n \rvert \leq g, (\forall n \in N), \text{ and } \lvert f \rvert \leq g<br>$$</p>
+<p>hold almost everywhere, then $\left{f_n \right}$ converges to $f$ in mean. </p>
+<h2 id="Normed-Spaces"><a href="#Normed-Spaces" class="headerlink" title="Normed Spaces"></a>Normed Spaces</h2><p>Let $V$ be a vector space over $\mathbb{R}$ (or over $\mathbb{C}$). A <strong>norm</strong> on $V$ is a function $| \cdot | : V \rightarrow \mathbb{R}$ that satisfies </p>
+<ul>
+<li>$|v| \geq 0$</li>
+<li>$|v| &#x3D; 0$ if and only if $v &#x3D; 0$</li>
+<li>$|\alpha v| &#x3D; \lvert \alpha \rvert |v|$, and</li>
+<li>$|u+v| \leq |u| + |v|$</li>
+</ul>
+<p>for each $u$ and $v$ in $V$ and each $\alpha$ in $\mathbb{R}$ (or in $\mathbb{C}$). A <strong>normed vector space</strong> is a vector space together with a norm.</p>
+<p>A <strong>metric</strong> on a set $S$ is a function $d : S \times S \rightarrow \mathbb{R}$ that satisfies</p>
+<ul>
+<li>$d(s,t) \geq 0$,</li>
+<li>$d(s,t) &#x3D; 0$ if and only if $s&#x3D;t$,</li>
+<li>$d(s,t) &#x3D; d(t,s)$, and</li>
+<li>$d(r,t) \leq d(r,s) + d(s,t)$</li>
+</ul>
+<p>for all $r, s$ and $t$ in $S$. </p>
+<p>Let $d$ be a metric on a set $S$. Then a subset $A $ of $S$ is <strong>dense</strong> in $S$ if for each $s \in S$ and each positive $\epsilon$ there is an element $a$ of $A$ that satisfies $d(s,a)&lt;\epsilon$. </p>
+<p>A sequence $\left{s_n\right}$ of elements of $S$ is a <strong>Cauchy sequence</strong> if for each positive number $\epsilon$ there is a positive integer $N$ such that $d(s_m, s_n) &lt; \epsilon$ holds whenever $m \geq N$ and $n\geq N$. If every Cauchy sequence in $S$ converges to a point in $S$, then $S$ is called <strong>complete</strong>. A normed linear space that is complete (with respect to the metric induced by its norm) is called a <strong>Banach space</strong>.</p>
+<h2 id="Definition-of-mathscr-L-p-and-L-p"><a href="#Definition-of-mathscr-L-p-and-L-p" class="headerlink" title="Definition of $\mathscr{L}^p$ and $L^p$"></a>Definition of $\mathscr{L}^p$ and $L^p$</h2><p>***$\mathscr{L}^p$ *** Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $p$ satisfy $1 \leq p &lt; +\infty$ ($p$ need not be an integer). Then $\mathscr{L}^p(X, \mathscr{A}, \mu, \mathbb{R})$ is the set of all $\mathscr{A}$-measurable functions $f : X \rightarrow \mathbb{R}$ such that $\lvert f \rvert ^p$ is integrable. We define $| \cdot | _p$ by</p>
+<p>$$<br>| f | _p &#x3D; (\int \lvert f \rvert ^p d \mu)^{\frac{1}{p}}<br>$$</p>
+<p>A subset $N$ of $X$ is <strong>locally $\mu$-null</strong> (or simply locally null) if for each set $A$ that belongs to $\mathscr{A}$ and satisfies $\mu(A) &lt; +\infty$ the set $A \cap N$ is $\mu$-null.</p>
+<p><em><strong>Lemma 3.3.1</strong></em> Let $p$ satisfy $1 &lt; p &lt; +\infty$, let $q$ be defined by $\frac{1}{p} + \frac{1}{q} &#x3D; 1$, and let $x$ and $y$ be nonnegative real numbers. Then</p>
+<p>$$<br>xy \leq \frac{x^p}{p} + \frac{y^q}{q}<br>$$</p>
+<p><em><strong>Proposition 3.3.2 (Holder’s Inequality)</strong></em> Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $p$ and $q$ satisfy $1 \leq p \leq +\infty, 1 \leq q \leq +\infty$, and $\frac{1}{p} + \frac{1}{q} &#x3D; 1$. If $f \in \mathscr{L}^p (X, \mathscr{A}, \mu)$ and $g \in \mathscr{L}^q(X, \mathscr{A}, \mu)$, then $fg$ belongs to $\mathscr{L}^1(X, \mathscr{A}, \mu)$ and satisfies $\int \lvert fg \rvert d \mu \leq |f|_p |g|_q$. </p>
+<p><em><strong>Proposition 3.3.3 (Minkownski’s Inequality)</strong></em> Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $p$ satisfy $1 \leq p \leq +\infty$. If $f$ and $g$ belongs to $\mathscr{L}^p(X, \mathscr{A}, \mu)$, then $f + g$ belongs to $\mathscr{L}^p(X, \mathscr{A}, \mu)$ and $|f + g |_p \leq |f|_p + |g|_p$. </p>
+<h2 id="Properties-of-mathscr-L-p-and-L-p"><a href="#Properties-of-mathscr-L-p-and-L-p" class="headerlink" title="Properties of $\mathscr{L}^p$ and $L^p$"></a>Properties of $\mathscr{L}^p$ and $L^p$</h2><p><em><strong>Theorem 3.4.1</strong></em> Let $(X, \mathscr{A}, \mu)$ be a measure space, and let $p$ satisfy $1 \leq p \leq +\infty$. Then $L^p(X, \mathscr{A}, \mu)$ is complete under the norm $| \cdot |_p$. </p>
+<h2 id="Dual-Spaces"><a href="#Dual-Spaces" class="headerlink" title="Dual Spaces"></a>Dual Spaces</h2><p><em><strong>Proposition 3.5.1</strong></em> Let $V_1$ and $V_2$ be normed linear spaces, and let $T : V_1 \rightarrow V_2$ be a linear operator. Then $T$ is continuous if and only if there is a nonnegative number $M$ such that</p>
+<p>$$<br>| T(V) | \leq M | v |<br>$$</p>
+<p>holds for each $v$ in $V_1$. (Operator $T$ is called bounded.)</p>
+<p><em><strong>Dual Space</strong></em> Let $V$ be a normed linear space. A linear functional on $V$ is a linear operator on $V$ whose values lie in $\mathbb{R}$. We will be particularly concerned with the bounded, that is, continuous, linear functionals on $V$. It is easy to check that the set of all continuous linear functionals on $V$ is a subspace of the vector space of all linear functionals on $V$; this subspace is called the <strong>dual space (or conjugate space)</strong> of $V$ and is denoted by $V^\star$. The space $V^\star$ is sometimes called the <strong>topological dual space</strong> of V in order to distinguish it from the space of all linear functionals on V (which is then called the <em>algebraic dual space</em> of V).</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>@book{cohn2013measure,<br>  title&#x3D;{Measure theory},<br>  author&#x3D;{Cohn, Donald L},<br>  year&#x3D;{2013},<br>  publisher&#x3D;{Springer}<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Measure/" rel="tag"># Measure</a>
+              <a href="/tags/Convergence/" rel="tag"># Convergence</a>
+              <a href="/tags/a-e/" rel="tag"># a.e.</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2020/12/blog-post-19/" rel="prev" title="Some key Papers on Graph Spectral Theory and Graph Convolutional Networks">
+                  <i class="fa fa-chevron-left"></i> Some key Papers on Graph Spectral Theory and Graph Convolutional Networks
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-22/" rel="next" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
+                  Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

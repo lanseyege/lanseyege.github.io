@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Stein’s Method">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stein Variational Gradient Decsent: Stein Method">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2020/08/blog-post-6/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Stein’s Method">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T12:34:45.116Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Stein">
+<meta property="article:tag" content="SVGD">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2020/08/blog-post-6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2020/08/blog-post-6/","path":"/posts/2020/08/blog-post-6/","title":"Stein Variational Gradient Decsent: Stein Method"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Stein Variational Gradient Decsent: Stein Method | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Stein%E2%80%99s-Method"><span class="nav-number">1.</span> <span class="nav-text">Stein’s Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stein%E2%80%99s-Method-1"><span class="nav-number">1.1.</span> <span class="nav-text">Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Foundation-of-Stein%E2%80%99s-Method"><span class="nav-number">1.2.</span> <span class="nav-text">Foundation of Stein’s Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#One-example"><span class="nav-number">1.3.</span> <span class="nav-text">One example:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stein%E2%80%99s-Lemma-Identity-and-Operator"><span class="nav-number">1.4.</span> <span class="nav-text">Stein’s Lemma, Identity and Operator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stein-Discrepancy-Measure-and-Kernelized-Stein-Discrepancy-KSD"><span class="nav-number">1.5.</span> <span class="nav-text">Stein Discrepancy Measure and Kernelized Stein Discrepancy (KSD)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Use-KSD-Goodness-of-fit-Testing-Based-on-KSD"><span class="nav-number">1.6.</span> <span class="nav-text">How to Use KSD? (Goodness-of-fit Testing Based on KSD)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2020/08/blog-post-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Stein Variational Gradient Decsent: Stein Method | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Stein Variational Gradient Decsent: Stein Method
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-26 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-26T00:00:00+08:00">2020-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-04 20:34:45" itemprop="dateModified" datetime="2021-02-04T20:34:45+08:00">2021-02-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Stein’s-Method"><a href="#Stein’s-Method" class="headerlink" title="Stein’s Method"></a>Stein’s Method</h1><span id="more"></span>
+
+<h2 id="Stein’s-Method-1"><a href="#Stein’s-Method-1" class="headerlink" title="Stein’s Method"></a>Stein’s Method</h2><p>Stein’s method is a technique that can quantify the error in the approximation of one distribution by another in a variety of metrics. Stein’s method is a general theoretical tool for obtaining bounds on distances between distributions. </p>
+<h2 id="Foundation-of-Stein’s-Method"><a href="#Foundation-of-Stein’s-Method" class="headerlink" title="Foundation of Stein’s Method"></a>Foundation of Stein’s Method</h2><p>(The following content is almost directly copied form <a href="#4">[4]</a>)</p>
+<p>Let $Z$ be a random variable on $\mathbb{R}$ with differentiable probability density $p$. Our main emphasis here is for $p$ the standard normal density, but this argument works more generally. Now let $\mathcal{F}$ be the set of differentiable real functions $f$ such that $f(x)p(x) \rightarrow 0$ as $\lvert x \rvert \rightarrow \infty$. Then clearly</p>
+<p>$$<br>\begin{split}<br>0 &amp;&#x3D; \int_{-\infty}^\infty \frac{d}{dx}\left{ f(x)p(x)\right} dx  \<br> &amp;&#x3D; \int_{-\infty}^{\infty} \left{ f^\prime(x) + \phi(x)f(x) \right}p(x) dx \<br>\end{split}<br>$$</p>
+<p>with $\phi(x) :&#x3D; p^\prime(x) &#x2F; p(x)$: for $p$ the standard normal density, $\phi(x) &#x3D; -x$. Hence any function $h$ of the form $f^\prime + \phi f$ with $f \in \mathcal{F}$ automatically has $\mathbb{E} h(Z) &#x3D; 0$. Conversely, given any continuous $h$ with $\mathbb{E}\lvert h(Z) \rvert &lt; \infty$, the function $h - \mathbb{E}h(Z)$ can be written in the form $f^\prime + \phi f$ with $f\in \mathcal{F}$. (Remark: is this Stein’s Lemma??)</p>
+<h2 id="One-example"><a href="#One-example" class="headerlink" title="One example:"></a>One example:</h2><p><strong>example: begin</strong> If $g &#x3D; f^\prime + \phi f$, then </p>
+<p>$$<br>\begin{equation}<br>\int_{-\infty}^{X} g(x) p(x) dx &#x3D; \int_{-\infty}^{X} \frac{d}{dx} \left{ f(x)p(x)\right}dx &#x3D; f(X)p(X)<br>\end{equation}<br>$$</p>
+<p>and that this argument can be reversed: $f$ so defined, for an arbitrary $g$ for which $\mathbb{E}\lvert g(Z) \rvert &lt; \infty$, is such that $g &#x3D; f^\prime + \phi f$. Hence we can take $f &#x3D; f_h$ to be defined by</p>
+<p>$$<br>\begin{split}<br>f_h(X)p(X) &amp;&#x3D; \int_{-\infty}^X \left{ h(x) - \mathbb{E}h(Z) \right}p(x) dx<br>&amp;&#x3D; - \int_X^\infty \left{ h(x) - \mathbb{E}h(Z) \right} p(x) dx<br>\end{split}<br>$$</p>
+<p>noting that it’s then directly checked that $f_h \in \mathcal{F}$. This allows us to write </p>
+<p>$$<br>\begin{equation}<br>\mathbb{E} h(W) - \mathbb{E}h(Z) &#x3D; \mathbb{E}\left{ f_h^\prime(W) + \phi(W)f_h(W) \right}<br>\end{equation}<br>$$</p>
+<p>How to get the last equation? By derivating $w$ at both side, </p>
+<p>$$<br>[f_h(x)p(x)]^\prime \vert_{x &#x3D; W} &#x3D; \left{h(W)-\mathbb{E}h(Z)\right}<em>{\vert</em>{x&#x3D;W}}p(W)<br>$$</p>
+<p>the left:</p>
+<p>$$<br>\begin{equation}<br>\begin{split}<br>\text{left} &amp;:&#x3D; \int_{-\infty}^W [f_h(x)p(x)]^\prime dx  \<br>&amp;&#x3D; \int f_h^\prime p + \int f_n p^\prime  \<br>&amp;&#x3D; \mathbb{E}f_h^\prime + \int f_h \frac{p^\prime}{p} p dx \<br>&amp;&#x3D; \mathbb{E}f_h^\prime + \mathbb{E}\phi f_h \<br>\end{split}<br>\end{equation}<br>$$</p>
+<p>the right:</p>
+<p>$$<br>\begin{equation}<br>\begin{split}<br>\text{right} &amp;:&#x3D; \int_{-\infty}^W \left{ h(x) - \mathbb{E}h(Z) \right} p(x) dx \<br>&amp;&#x3D; \mathbb{E}h(W) - \mathbb{E}h(Z) \<br>\end{split}<br>\end{equation}<br>$$</p>
+<p>for any random variable $W$ for which the expectations exist; in particular, for standard normal approximation,</p>
+<p>$$<br>\begin{equation}<br>\mathbb{E}h(W) - \mathbb{E}h(Z) &#x3D; \mathbb{E}\left{ f_h^\prime (W) - Wf_h(W) \right}<br>\end{equation}<br>$$</p>
+<p><strong>example: end</strong> </p>
+<p><em><strong>Important Conclusion!!</strong></em> Taking the supremum of the left hand side over test funcitons $h \in \mathcal{H}$ gives a measure of the distance between the distributions of $W$ and $Z$. The distance can in turn be computed by taking the supremum of the right side over $h \in \mathcal{H}$. …, in many many circumstances, <em><strong>expressing the difference $\mathbb{E}h(W) - \mathbb{E}h(Z)$ in the entirely equivalent form $$\mathbb{E}\left{ f_h^\prime (W) + \phi(W)f_h(W) \right}$$ makes it easier to bound.</strong></em></p>
+<p><em><strong>Error Bounded</strong></em> <a href="#5">[5]</a> Let $\mathcal{D}$ be the set of all $f : \mathbb{R}\rightarrow \mathbb{R}$ that are twice continuously differentiable, and $\lvert f(x) \rvert \leq 1, \lvert f^\prime(x) \rvert \leq 1$ and $\lvert f^{\prime\prime}(x) \rvert \leq 1$ for all $x \in \mathbb{R}$. Let $Z$ be a standard normal random variable and $W$ be any random variable. Then</p>
+<p>$$<br>\begin{equation}<br>\sup_{t\in \mathbb{R}} \lvert \mathbb{P}(W \leq t) - \mathbb{P}(Z \leq t) \rvert \leq 2 (\sup_{f\in \mathcal{D}} \lvert \mathbb{E}(f^\prime(W)) - Wf(W)) \rvert )^{1&#x2F;2}<br>\end{equation}<br>$$</p>
+<h2 id="Stein’s-Lemma-Identity-and-Operator"><a href="#Stein’s-Lemma-Identity-and-Operator" class="headerlink" title="Stein’s Lemma, Identity and Operator"></a>Stein’s Lemma, Identity and Operator</h2><p><em><strong>Stein’s Lemma</strong></em> Define the functional operator $\mathcal{A}$ by</p>
+<p>$$<br>\begin{equation}<br>\mathcal{A}f(x) &#x3D; f^\prime(x) - xf(x)<br>\end{equation}<br>$$</p>
+<ul>
+<li>If $Z$ has the standard normal distribution, then $\mathbb{E}\mathcal{A}f(Z) &#x3D; 0$ for all absolutely continuous $f$ with $\mathbb{E} \lvert f^\prime(Z)\rvert &lt; \infty$.</li>
+<li>If for some random variable $W$, $\mathbb{E}\mathcal{A}f(W) &#x3D; 0$ for all absolutely continuous functions $f$ with $|| f^\prime || &lt; \infty$, then $W$ has the standard normal distribution.</li>
+</ul>
+<p>The operator $\mathcal{A}$ is referred to as a characterizing operator of the standard normal distribution. </p>
+<p><em><strong>(Stein) score function</strong></em> Assume that $\mathcal{X}$ is a subset of $\mathbb{R}^d$ and $p(x)$ a continuous differentiable (also called smooth) density whose support is $\mathcal{X}$. The (Stein) score function of $p$ is defined as</p>
+<p>$$<br>\begin{equation}<br>s_p &#x3D; \nabla_x \log p(x) &#x3D; \frac{\nabla_x p(x)}{p(x)}<br>\end{equation}<br>$$</p>
+<p>We say that a function $f : \mathcal{X} \rightarrow \mathbb{R}$ is in the <em><strong>Stein class</strong></em> of $p$ if $f$ is smooth and satisfies</p>
+<p>$$<br>\begin{equation}<br>\int_{x\in \mathcal{X}} \nabla_x(f(x)p(x))dx &#x3D; 0<br>\end{equation}<br>$$</p>
+<p>It holds with a condition when $\mathcal{X} &#x3D; \mathbb{R}^d$, if </p>
+<p>$$<br>\begin{equation}<br>\lim_{||x|| \rightarrow \infty} f(x)p(x) &#x3D; 0<br>\end{equation}<br>$$</p>
+<p><em><strong>Stein’s Operator</strong></em> The Stein’s operator of $p$ is a linear operator acting on the Stein class of $p$, defined as</p>
+<p>$$<br>\begin{equation}<br>\mathcal{A}_p f(x) &#x3D; s_p(x)f(x) + \nabla_xf(x)<br>\end{equation}<br>$$</p>
+<p><em><strong>Stein’s Identity</strong></em> Assume $p(x)$ is a smooth density supported on $\mathcal{X}$, then </p>
+<p>$$<br>\begin{equation}<br>\mathbb{E}_p[\mathcal{A}_p f(x)] &#x3D; \mathbb{E}_p[s_p(x) f(x)^\top + \nabla f(x)] &#x3D; 0<br>\end{equation}<br>$$</p>
+<p>for any $f$ that is in the Stein class of $p$. </p>
+<p><em><strong>Lemma <a href="#6">[6]</a></strong></em> Assume $p(x)$ and $q(x)$ are smooth densities supported on $\mathcal{X}$ and $f(x)$ is in the Stein class of $p$, we have </p>
+<p>$$<br>\begin{equation}<br>\mathbb{E}_p[\mathcal{A}_q f(x)] &#x3D; \mathbb{E}_p[(s_q(x) - s_p(x))f(x)^\top]<br>\end{equation}<br>$$</p>
+<p><em><strong>Lemma Stein’s identity (again..)</strong></em><br>Roughly speaking, it relies on the basic fact that two smooth densities $p(x)$ and $q(x)$ supported on $\mathcal{R}$ are <strong>identical</strong> if and only if </p>
+<p>\begin{equation}<br>\mathbb{E}_p [s_q(x)f(x) + \nabla_x f(x)] &#x3D; 0<br>\end{equation}</p>
+<p>for smooth functions $f(x)$ with proper zero-boudary conditions, where $s_q(x) &#x3D; \nabla_x \log q(x) &#x3D; \nabla_x q(x) &#x2F; q(x)$ is called the (Stein) score function of $q(x)$. The equation is known as <strong>Stein’s identity</strong>. </p>
+<h2 id="Stein-Discrepancy-Measure-and-Kernelized-Stein-Discrepancy-KSD"><a href="#Stein-Discrepancy-Measure-and-Kernelized-Stein-Discrepancy-KSD" class="headerlink" title="Stein Discrepancy Measure and Kernelized Stein Discrepancy (KSD)"></a>Stein Discrepancy Measure and Kernelized Stein Discrepancy (KSD)</h2><p><em><strong>Stein discrepancy measure</strong></em> between $p$ and $q$ is </p>
+<p>$$<br>\begin{equation}<br>\mathbb{S}(p, q) &#x3D; \max_{f \in \mathcal{F}} (\mathbb{E}_p[s_q(x)f(x) + \nabla_xf(x)])^2<br>\end{equation}<br>$$</p>
+<p>where $\mathcal{F}$ is a set of smooth functions that satisfies $$\mathbb{E}_p[s_q(x)f(x) + \nabla_xf(x)]&#x3D;0$$ and is also rich enough to ensure $\mathbb{S}(p,q)&gt;0$ whenever $p \neq q$. </p>
+<p><em><strong>Kernelized Stein Discrepancy (KSD)</strong></em> $\mathbb{S}(p, q)$ between distribution $p$ and $q$ is defined as </p>
+<p>$$<br>\begin{equation}<br>\mathbb{S}(p, q) &#x3D; \mathbb{E}<em>{x, x^\prime \sim p}[\delta</em>{q,p}(x)^\top k(x, x^\prime)\delta_{q,p}(x^\prime)]<br>\end{equation}<br>$$</p>
+<p>where $\delta_{q,p}(x) &#x3D; s_q(x) - s_p(x)$ is the score difference between $p$ and $q$, and $x, x^\prime$ are i.i.d draws from $p(x)$. </p>
+<p><em><strong>Proposition</strong></em> Define $g_{p,q}(x)&#x3D;p(x)(s_q(x)-s_p(x))$. Assume $k(x,x^\prime)$ is integrally strictly positive definite, and $p, q$ are continuous densities with $\left|\boldsymbol{g}<em>{p, q}\right|</em>{2}^{2}&lt;\infty$, we have $\mathbb{S}(p,q) \geq 0$ and $\mathbb{S}(p, q) &#x3D; 0$ if and only if $$p&#x3D;q$$. (This establishes $\mathbb{S}(p,q)$ as a valid discrepancy measure.)</p>
+<p><em><strong>Definition</strong></em> A kernel $k(x,x^\prime)$ is said to be in the Stein class of $p$ if $k(x, x^\prime)$ has a continuous second order partial derivatives, and both $k(x, \cdot)$ and $k(\cdot, x)$ are in the Stein class of $p$ for any fixed $x$. </p>
+<p><em><strong>Theorem</strong></em> Assume $p$ and $q$ are smooth densities and $k(x, x^\prime)$ is in the Stein class of $p$. Define</p>
+<p>$$<br>\begin{equation}<br>\begin{split}<br>u_q(x,x^\prime) &amp;&#x3D; s_q(x)^\top k(x,x^\prime)s_q(x^\prime) + s_q(x)^\top \nabla_{x^\prime}k(x,x^\prime) \<br>&amp; \quad \quad + \nabla_x k(x,x^\prime)^\top s_q(x^\prime) + \text{trace}(\nabla_{x,x^\prime}k(x,x^\prime)) \<br>\end{split}<br>\end{equation}<br>$$</p>
+<p>then, $$\mathbb{S}(p,q) &#x3D; \mathbb{E}_{x,x^\prime \sim p}[u_q(x, x^\prime)]$$</p>
+<p><em><strong>Theorem</strong></em> Assume $k(x, x^\prime)$ is a positive definite kernel in the Stein class of $p$, with positive eigenvalues $\left{\lambda_j\right}$ and eigenfunctions $\left{e_j(x)\right}$, then $u_q(x, x^\prime)$ is also a positive definite kernel, and can be rewritten into </p>
+<p>$$<br>\begin{equation}<br>u_q(x, x^\prime) &#x3D; \sum_j \lambda_j [\mathcal{A}_q e_j(x)]^\top [\mathcal{A}_q e_j(x^\prime)]<br>\end{equation}<br>$$</p>
+<p>where $\mathcal{A}_qe_j(x) &#x3D; s_q(x)e_j(x) + \nabla_xe_j(x)$ is the Stein’s operator acted on $e_j$. In addition,</p>
+<p>$$<br>\begin{equation}<br>\mathbb{S}(p, q) &#x3D; \sum_j \lambda_j || \mathbb{E}_{x\sim p}[\mathcal{A}_qe_j(x)] ||_2^2<br>\end{equation}<br>$$</p>
+<p>Note that although $\left{e_j\right}$ are orthonormal, the $\left{\mathcal{A}_qe_j(x)\right}$ are no longer othonormal in general. </p>
+<p><em><strong>Theorem</strong></em> Let $\mathcal{H}$ be the RKHS related to a positive definite kernel $k(x, x^\prime)$ in the Stein class of $p$. Denote by $\beta(x^\prime) &#x3D; \mathbb{E}_{x\sim p}[\mathcal{A}<em>q k</em>{x^\prime}(x)]$, then </p>
+<p>$$<br>\begin{equation}<br>\mathbb{S}(p, q) &#x3D; ||\beta||_{\mathcal{H}^d}^2<br>\end{equation}<br>$$</p>
+<p>Further, we have $\langle f, \beta \rangle_{\mathcal{H}^d} &#x3D; \mathbb{E}_x[\text{trace}(\mathcal{A}_qf)]$ for $f \in \mathcal{H}^d$, and hence</p>
+<p>$$<br>\begin{equation}<br>\sqrt{S(p, q)}&#x3D;\max <em>{f \in \mathcal{H}^{d}}\left{\mathbb{E}</em>{x}\left[\operatorname{trace}\left(\mathcal{A}<em>{q} f\right)\right] \text { s.t. }|f|</em>{\mathcal{H}^{d}} \leq 1\right}<br>\end{equation}<br>$$</p>
+<p>where the maximum is achieved when $f &#x3D; \beta &#x2F; \left|\beta\right|_{\mathcal{H}^d}$.</p>
+<h2 id="How-to-Use-KSD-Goodness-of-fit-Testing-Based-on-KSD"><a href="#How-to-Use-KSD-Goodness-of-fit-Testing-Based-on-KSD" class="headerlink" title="How to Use KSD? (Goodness-of-fit Testing Based on KSD)"></a>How to Use KSD? (Goodness-of-fit Testing Based on KSD)</h2><p>The form in - allows efficient estimation of $\mathbb{S}(p, q)$ in practice. Given i.i.d sample $\left{ x_i \sim p \right}$ ($p$ is unknown) and the score function $s_q(x)$, we can estimate $\mathbb{S}(p, q)$ by</p>
+<p>$$<br>\begin{equation}<br>\hat{\mathbb{S}}<em>u(p, q) &#x3D; \frac{1}{n(n-1)}\sum</em>{1\leq i \neq j \leq n}u_q(x_i, x_j)<br>\end{equation}<br>$$</p>
+<p>where $\hat{\mathbb{S}}<em>u(p, q)$ is a form of U-statistics. $\mathbb{S}(p, q)$ can also be estimated using a V-statistics of form $\frac{1}{n^2}\sum</em>{i,j&#x3D;1}^n u_q(x_i, x_j)$, which provides a biased estimator. </p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br>Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
+<p><a id="2">[2]</a><br>Schulman, J., Abbeel, P., and Chen, X.  Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
+<p><a id="3">[3]</a><br>Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
+<p><a id="4">[4]</a><br>Barbour, Andrew D., and Louis HY Chen. “Steins (magic) method.” arXiv preprint arXiv:1411.1179 (2014).</p>
+<p><a id="5">[5]</a><br>Reinert, Gesine. “A short introduction to Stein’s method.” Lecture Notes (2011).</p>
+<p><a id="6">[6]</a><br>Ley, Christophe, and Yvik Swan. “Stein’s density approach and information inequalities.” Electronic Communications in Probability 18 (2013).</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Stein/" rel="tag"># Stein</a>
+              <a href="/tags/SVGD/" rel="tag"># SVGD</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2020/08/blog-post-5/" rel="prev" title="Stein Variational Gradient Decsent: RHKS">
+                  <i class="fa fa-chevron-left"></i> Stein Variational Gradient Decsent: RHKS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2020/08/blog-post-7/" rel="next" title="Offline Reinforcement Learning">
+                  Offline Reinforcement Learning <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Spectral Graph Theory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spectral Graph Theory">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2020/11/blog-post-14/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Spectral Graph Theory">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-18T07:09:39.801Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Graph">
+<meta property="article:tag" content="Laplacian">
+<meta property="article:tag" content="Spectral">
+<meta property="article:tag" content="Eigenvalues">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2020/11/blog-post-14/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2020/11/blog-post-14/","path":"/posts/2020/11/blog-post-14/","title":"Spectral Graph Theory"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spectral Graph Theory | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spectral-Graph-Theory"><span class="nav-number">1.</span> <span class="nav-text">Spectral Graph Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fourier-Transform-1"><span class="nav-number">1.1.</span> <span class="nav-text">Fourier Transform [1]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-Laplacian"><span class="nav-number">1.2.</span> <span class="nav-text">Graph Laplacian</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-Fourier-Transform"><span class="nav-number">1.3.</span> <span class="nav-text">Graph Fourier Transform</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Fourier-Transform-Filtering"><span class="nav-number">1.3.1.</span> <span class="nav-text">Graph Fourier Transform: Filtering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Fourier-Transform-Convolution"><span class="nav-number">1.3.2.</span> <span class="nav-text">Graph Fourier Transform: Convolution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Fourier-Transform-Translation"><span class="nav-number">1.3.3.</span> <span class="nav-text">Graph Fourier Transform: Translation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Fourier-Transform-Dilation"><span class="nav-number">1.3.4.</span> <span class="nav-text">Graph Fourier Transform: Dilation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Fourier-Transform-Modulation"><span class="nav-number">1.3.5.</span> <span class="nav-text">Graph Fourier Transform: Modulation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wavelets-and-Graph-Wavelets"><span class="nav-number">1.4.</span> <span class="nav-text">Wavelets and Graph Wavelets</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wavelet-Transform-Continuous-Wavelet-Transform-CWT-and-Discrete-Wavelet-Transform-DWT"><span class="nav-number">1.4.1.</span> <span class="nav-text">Wavelet Transform: Continuous Wavelet Transform (CWT) and Discrete Wavelet Transform (DWT)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spectral-Graph-Wavelet-Transform-Hammond%E2%80%99s-Formualtion"><span class="nav-number">1.4.2.</span> <span class="nav-text">Spectral Graph Wavelet Transform: Hammond’s Formualtion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SGWT-Reconstruction"><span class="nav-number">1.4.3.</span> <span class="nav-text">SGWT Reconstruction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Laplacian-and-eigenvalues"><span class="nav-number">1.5.</span> <span class="nav-text">The Laplacian and eigenvalues</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.5.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2020/11/blog-post-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spectral Graph Theory | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spectral Graph Theory
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-11-07 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-07T00:00:00+08:00">2020-11-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-06-18 15:09:39" itemprop="dateModified" datetime="2021-06-18T15:09:39+08:00">2021-06-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Spectral-Graph-Theory"><a href="#Spectral-Graph-Theory" class="headerlink" title="Spectral Graph Theory"></a>Spectral Graph Theory</h1><span id="more"></span>
+
+<h2 id="Fourier-Transform-1"><a href="#Fourier-Transform-1" class="headerlink" title="Fourier Transform [1]"></a>Fourier Transform <a href="#1">[1]</a></h2><p><em><strong>Taylor expansion</strong></em> </p>
+<p>$$<br>e^x &#x3D; 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots<br>$$</p>
+<p>making $x &#x3D; it$, we get $e^{it} &#x3D; \operatorname{cos}(t) + i\operatorname{sin}(t)$. The <em><strong>one-parameter family of Fourier basis</strong></em>: $e^{-i\lambda x}$. </p>
+<p><em><strong>Fourier Transform</strong></em> </p>
+<p>$$<br>F(\lambda) &#x3D; \int_{-\infty}^{\infty} f(t) e^{-i\lambda t} dt<br>$$</p>
+<p><em><strong>Inverse Fourier Transform</strong></em></p>
+<p>$$<br>f(x) &#x3D; \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} F(\lambda) e^{i\lambda x} d\lambda<br>$$</p>
+<p>We will adopt $\mathcal{F}[f] &#x3D; F$, and $\mathcal{F}^{-1}[F] &#x3D; f$. We know that: $\mathcal{F} : L^2 \rightarrow L^2$.</p>
+<p>The properties of Fourier transform:</p>
+<ul>
+<li>$\mathcal{F}$ and its inverse are linear operators</li>
+</ul>
+<p>  $$<br>  \mathcal{F}\left[bf + cg\right] &#x3D; b \mathcal{F}\left[f\right] + c \mathcal{F}\left[g\right]<br>  $$</p>
+<ul>
+<li><p>Fourier transform of a translation</p>
+<p>$$<br>\mathcal{F}\left[f(x-c)\right] (\lambda) &#x3D; e^{-i\lambda c} \mathcal{F}\left[f\right] (\lambda)<br>$$</p>
+</li>
+<li><p>Fourier transform of a rescaling</p>
+<p>$$<br>\mathcal{F}\left[f(cx)\right] (\lambda) &#x3D; \frac{1}{c}e^{-i\lambda c}\mathcal{F}\left[f\right] (\frac{\lambda}{c})<br>$$</p>
+</li>
+</ul>
+<p>The <em><strong>convolution</strong></em> of two functions $f$ and $g$ is defined as:</p>
+<p>$$<br>(f * g) (x) &#x3D; \int_{-\infty}^{\infty} f(x - t) g(t) dt<br>$$</p>
+<ul>
+<li>Fourier transform of a convolution</li>
+</ul>
+<p>  $$<br>  \mathcal{F}\left[f * g\right] &#x3D; \sqrt{2 \pi} \mathcal{F}\left[f\right] \mathcal{F}\left[g\right]<br>  $$</p>
+<ul>
+<li>Fourier transform of a product</li>
+</ul>
+<p>  $$<br>  \mathcal{F}\left[f \cdot g\right] &#x3D; \sqrt{2\pi} \mathcal{F}\left[f\right] *  \mathcal{F}\left[g\right]<br>  $$</p>
+<ul>
+<li>Perseval’s equation</li>
+</ul>
+<p>  $$<br>  \left| \mathcal{F} \left[f\right] \right\rvert &#x3D; \left| f \right|<br>  $$</p>
+<p><em><strong>Cross-correlation</strong></em> The cross-correlation is similar in nature to the convolution of two functions. </p>
+<p>$$<br>(f \star g)(\tau) &#x3D; \int_{-\infty}^{\infty} \overline{f(t)} g(t + \tau) dt<br>$$</p>
+<p>which is equivalent to </p>
+<p>$$<br>(f \star g) (\tau) &#x3D; \int_{-\infty}^{\infty} \overline{f(t - \tau)} g(t) dt<br>$$</p>
+<p>The cross-correlation of functions $f(t)$ and $g(t)$ is equivalent to the convolution (denoted by $*$) of $\overline{f(-t)}$ and $g(t)$. That is:</p>
+<p>$$<br>\left[f(t) \star g(t)\right] (t) &#x3D; \left[\overline{f(-t)} * g(t)\right] (t)<br>$$</p>
+<p><em><strong>Paley-Wiener theorem</strong></em> A function $f \in L^2 (-\infty, \infty)$ vanishes almost everywhere outside and interval $\left[-A, A\right]$ if and only if its Fourier transform satisfies</p>
+<p>$$<br>\int_{-\infty}^{\infty} \lvert F(y) \rvert ^2 dy &lt; \infty<br>$$</p>
+<p>and is the restriction to the real line of a certain entire analytic function $F(z)$ of a complex variable $z$ satisfying $\lvert F(z) \rvert \leq e^{A\lvert z \rvert}$ for all $z \in \mathbb{C}$. </p>
+<p><em><strong>Linear Filters</strong></em> </p>
+<ul>
+<li>A filter $\mathcal{L}$ maps a signal $f$ into another signal $\mathcal{L}\left[f\right]$. </li>
+<li>A filter is called linear if $\mathcal{L}\left[bf + cg \right] &#x3D; b\mathcal{L}\left[f\right] + c \mathcal{L} \left[ g \right]$ </li>
+<li>A filter is time invariant if $\mathcal{L} \left[f(x-c)\right] (t) &#x3D; \mathcal{L} \left[f(x)\right] (t-c)$</li>
+</ul>
+<p><em><strong>Theorem</strong></em> Let $\mathcal{L}$ be a linear and time invariant filter. There exists a function $h$ such that </p>
+<p>$$<br>\mathcal{L}\left[ f\right] &#x3D; f* h<br>$$ </p>
+<p>And, $h$ is called the <em><strong>impulse response</strong></em> function of the filter. </p>
+<p>$$<br>\mathcal{F}\left[\mathcal{L}\left[f\right]\right] &#x3D; \mathcal{F}\left[f\right]  \cdot \mathcal{F}\left[h \right]<br>$$</p>
+<h2 id="Graph-Laplacian"><a href="#Graph-Laplacian" class="headerlink" title="Graph Laplacian"></a>Graph Laplacian</h2><p>Why is so interesting about the Graph Laplacian (GL)?</p>
+<ul>
+<li>The GL is a symmetric matrix (real eigenvalues and eigenvectors, the latter forming an orthogonal basis)</li>
+<li>The GL is positive semidefinite (assuming non-negative edge weights)</li>
+<li>The eigenvectors are “nice” functions defined on the graph.</li>
+</ul>
+<p><em><strong>Property 3</strong></em> Supposing $G$ is connected, the eigenvector associated to the smallest non-zero eigenvalue (Fiedler Vector) provides the best one-dimensional <strong>embedding</strong> of $G$. </p>
+<p>In mathematical terms, we want to find $f : V \rightarrow \mathbb{R}, f_i &#x3D; f(v_i)$ for each node $v_i$ in $G$, so as to minimize</p>
+<p>$$<br>\begin{split}<br>\mathbf{f}^\top \mathbf{Lf} &amp; &#x3D;\sum_{(i,j) \in E} w_{ij} (f_i - f_j)^2  \<br>\text{s.t. } &amp; \mathbf{f}^\top \mathbf{1} &#x3D; 0 \<br>\end{split}<br>$$</p>
+<p>Imposing the additional constraint $\left| f \right| ^2 &#x3D; 1$, the Courant-Fiecher theorem ensures that the minimum is reached when $\mathbf{f}$ is the eigenvector associated to the second smallest eigenvalue. </p>
+<p><em><strong>Property 3+</strong></em> </p>
+<p>$$<br>\begin{split}<br>(Lf)<em>i &amp;&#x3D; \sum</em>{j}^{n}W_{ij}(f_i - f_j)  \<br>&amp;&#x3D; D_{ii} f_i - \sum_{j}^n W_{ij}f_j \<br>&amp;&#x3D; (Df - Wf)_i \<br>&amp;&#x3D; (Lf)_i \<br>\end{split}<br>$$</p>
+<p>For any $i$ holds, then it can be general form:</p>
+<p>$$<br>Lf &#x3D; (D-W) f<br>$$</p>
+<p>As a quadratic form:</p>
+<p>$$<br>f^\top L f &#x3D; \frac{1}{2} \sum_{e_{ij}} W_{ij}(f_i - f_j)^2<br>$$</p>
+<h2 id="Graph-Fourier-Transform"><a href="#Graph-Fourier-Transform" class="headerlink" title="Graph Fourier Transform"></a>Graph Fourier Transform</h2><p>Let $G &#x3D; (V, E)$ be a weighted graph, $\mathbf{L}$ be its corresponding graph Laplacian, and $f : V \rightarrow \mathbb{R}$ a function defined on the vertices of $G$. </p>
+<p><em><strong>Graph Fourier Transform</strong></em> The Graph Fourier Transform of $f$ is defined as </p>
+<p>$$<br>\mathcal{G} \mathcal{F} \left[f\right] (\lambda_l) &#x3D; \hat{f}(\lambda_l) &#x3D; \langle f, u_l \rangle &#x3D; \sum_{i&#x3D;1}^n f(i) u_l(i)<br>$$</p>
+<p><em><strong>Inverse Graph Fourier Transform</strong></em> </p>
+<p>$$<br>\mathcal{IG} \mathcal{F} \left[\hat{f}\right] (i) &#x3D; f(i) &#x3D; \sum_{l&#x3D;0}^{n-1} \hat{f}(\lambda_l) u_l(i)<br>$$</p>
+<p><em><strong>The eigenvalues of $\mathbf{L}$ play the role of frequencies and the eigenvectors the Fourier basis</strong></em>. The graph Fourier transform and its inverse gives a way to represent a signal in two different domains: the vertex domain and the graph spectral domain. </p>
+<p>If we think of $f$ and $\hat{f}$ as $N \times 1$ vectors, we then these definitions become:</p>
+<p>$$<br>\begin{split}<br>\hat{\mathbf{f}} &amp;&#x3D; \mathbf{U} * \mathbf{f} \<br>\mathbf{f} &amp;&#x3D;  \mathbf{U}  \hat{\mathbf{f}} \<br>\end{split}<br>$$</p>
+<h3 id="Graph-Fourier-Transform-Filtering"><a href="#Graph-Fourier-Transform-Filtering" class="headerlink" title="Graph Fourier Transform: Filtering"></a>Graph Fourier Transform: Filtering</h3><p>In classical signal processing, frequency filtering is given by amplifying or attenuating the contributions of some Fourier Basis.</p>
+<p>$$<br>\mathcal{L}\left[f\right] &#x3D; f * h \rightarrow \mathcal{F}\left[f * h \right] &#x3D; \mathcal{F}\left[f\right]  \cdot \mathcal{F}\left[h \right] &#x3D; \hat{f} \hat{h}<br>$$</p>
+<p>Taking the IGFT </p>
+<p>$$<br>\mathcal{L}\left[f\right] (i) &#x3D; \sum_{l&#x3D;0}^{n-1} \hat{f}(\lambda_l) \hat{h}(\lambda_l) u_l(i)<br>$$</p>
+<p>Suppose $\hat{h}(\lambda_l)$ and the definition of $\hat{f}(\lambda_l)$ in above, we get </p>
+<p>$$<br>\mathcal{L}\left[f\right] (i) &#x3D; \sum_{j&#x3D;1}^n f(j) \sum_{k&#x3D;0}^K a_k \sum_{l&#x3D;1}^n \lambda_l^k u_l(j) u_l(i)<br>$$</p>
+<p>Let $$(\mathbf{L}^k)<em>{ij} &#x3D; \sum</em>{l&#x3D;1}^n \lambda_l^k u_l(j) u_l(i)$$ and $$ b_{ij} &#x3D; \sum_{k&#x3D;0}^K a_k \mathbf{L}_{ij}^k$$, we get</p>
+<p>$$<br>\mathcal{L}\left[f\right] (i) &#x3D; \sum_{j \in N_k(i)}^n b_{ij}f(j)<br>$$</p>
+<p>Therefore, when the filter is a polynomial in the spectral domain, the filtered signal in each node i is a linear combination of the original signal in the neighborhood of i. </p>
+<p><em><strong>Theorem</strong></em> It can be shown that $(\mathbf{L}^k)_{ij} &#x3D; 0$ when the shortest distance between nodes i and j is greater than k. </p>
+<p><em><strong>Lemma 5.4, the localization result for integer powers of the Laplacian <a href="#2">[2]</a></strong></em> Let $G$ be a weighted graph, $\mathcal{L}$ the graph Laplacian and $s &gt; 0$ an integer. For any two vertices $m$ and $n$, if $ d_G (m,n) &gt; s$ then $(\mathcal{L}^s)_{m,n} &#x3D; 0$. </p>
+<h3 id="Graph-Fourier-Transform-Convolution"><a href="#Graph-Fourier-Transform-Convolution" class="headerlink" title="Graph Fourier Transform: Convolution"></a>Graph Fourier Transform: Convolution</h3><p>The definition of convolution between two functions $f$ and $g$ is</p>
+<p>$$<br>(f * g)(x) &#x3D; \int_{-\infty}^\infty f(x - t) g(t) dt<br>$$</p>
+<p>such definition can not be directly applied because the shift $f(x - t)$ (or signal translation) is not defined in the context of graphs. However, convolution can be defined as:</p>
+<p>$$<br>\begin{split}<br>(f * g) &amp;&#x3D; \mathcal{IGF}\left[\mathcal{GF} \left [ (f* g) \right] \right] \<br>&amp;&#x3D; \mathcal{IGF}\left[ \hat{f} \cdot \hat{g} \right] \<br>&amp;&#x3D; U \left[ \hat{f} \cdot \hat{g} \right] \<br>&amp;&#x3D; U \left[ (U f) \cdot (U g) \right] \<br>(f * g)(i) &amp;&#x3D; \sum_{l &#x3D; 1}^n \hat{f}(\lambda_l) \hat{g}(\lambda_l) u_l(i) \<br>\end{split}<br>$$</p>
+<p>Some properties of the convolution:</p>
+<ul>
+<li>$\widehat{f * g}&#x3D;\hat{f} \hat{g}$</li>
+<li>$f * g &#x3D; g * f$</li>
+<li>$f * (g + h) &#x3D; f * g + f * h$</li>
+<li>$\sum_{i&#x3D;1}^n (f * g)(i) &#x3D; \sqrt{n} \hat{f}(0) \hat{g}(0)$</li>
+</ul>
+<h3 id="Graph-Fourier-Transform-Translation"><a href="#Graph-Fourier-Transform-Translation" class="headerlink" title="Graph Fourier Transform: Translation"></a>Graph Fourier Transform: Translation</h3><p>The classical translation</p>
+<p>$$<br>(T_t f)(x) &#x3D; f(x-t)<br>$$</p>
+<p>cannot be directly generalized to the graph setting. However, translation can be seen as a convolution with the delta function</p>
+<p>$$<br>(T_t f)(x) &#x3D; (f * \delta_t) (x)<br>$$</p>
+<p>Recalling that $\mathcal{F}\left<a href="%5Clambda">\delta(t-a)\right</a> &#x3D; e^{-i2\pi \lambda a}$, we define translation to a vertex j as:</p>
+<p>$$<br>(T_j f)(i) &#x3D; \sqrt{n} (f * \delta_j)(i) &#x3D; \sqrt{n} \sum_{l&#x3D;0}^{n-1} \hat{f}(\lambda_l) u_l(j) u_l(i)<br>$$</p>
+<p>The normalizing constant $\sqrt{n}$ ensures that the translation operator preserves the mean of a signal, i.e. $\sum_{i&#x3D;1}^n (T_j f)(i) &#x3D; \sum_{i&#x3D;1}^n f(i)$. </p>
+<p>Some properties of translation:</p>
+<ul>
+<li>$T_j(f * g) &#x3D; (T_j f) * g &#x3D; f * (T_j g)$</li>
+<li>$T_j T_k f &#x3D; T_k T_j f$</li>
+<li>$\sum_{i&#x3D;1}^n (T_j f)(i) &#x3D; \sqrt{n} \hat{f}(0) &#x3D; \sum_{i&#x3D;1}^n f(i)$</li>
+<li>$\left| T_j f \right| \neq \left| f \right |$</li>
+</ul>
+<h3 id="Graph-Fourier-Transform-Dilation"><a href="#Graph-Fourier-Transform-Dilation" class="headerlink" title="Graph Fourier Transform: Dilation"></a>Graph Fourier Transform: Dilation</h3><p>$$<br>(D_s f) (x) &#x3D; \frac{1}{s} f(\frac{1}{s}) \Longrightarrow (\widehat{D_s f})(\lambda) &#x3D; \hat{f}(s\lambda)<br>$$</p>
+<p>in the graph setting, $\frac{t}{s}$ is not well defined, impairing the direct generalization of dilation in the graph domain. An alternative is to define dilation via GFT:</p>
+<p>$$<br>(D_s f)(i) &#x3D; \sum_{l &#x3D; 0}^{n-1} \hat{f}(s \cdot \lambda_l) u_l(i)<br>$$</p>
+<p>Notice that $\hat{f}(s \cdot \lambda_l)$ might not be in the interval $\left[0, \lambda_n \right]$. Therefore, dilation can only be used when $f$ is generated from a kernel defined in the whole spectral domain. </p>
+<h3 id="Graph-Fourier-Transform-Modulation"><a href="#Graph-Fourier-Transform-Modulation" class="headerlink" title="Graph Fourier Transform: Modulation"></a>Graph Fourier Transform: Modulation</h3><p>Continuous case:</p>
+<p>$$<br>M_\lambda f(t) &#x3D; e^{-(2\pi i \lambda t)} f(t)<br>$$</p>
+<p>In the graph setting we can define</p>
+<p>$$<br>M_{\lambda_l} f(i)  &#x3D; \sqrt{n} u_l(i) f(i)<br>$$</p>
+<p>In contrast to the continous case, modulation in the graph setting deos not correspond to a translation in the spectral domain. However, if $f$ is generated from a kernel localized in $0$, then $\widehat{M_{\lambda_l} f(i)}$ is concentrated in $\lambda_l$. </p>
+<h2 id="Wavelets-and-Graph-Wavelets"><a href="#Wavelets-and-Graph-Wavelets" class="headerlink" title="Wavelets and Graph Wavelets"></a>Wavelets and Graph Wavelets</h2><p><em><strong>The admissibility condition</strong></em> Let $\psi \in L^{2}(\mathbb{R})$ be a function satisfying the admissibility condition</p>
+<p>$$<br>C_\psi &#x3D; 2 \pi \int \frac{\lvert \hat{\psi}(\zeta) \rvert ^2}{\lvert \zeta \rvert} d\zeta &lt; \infty,  \quad \hat{\psi}(\zeta) &#x3D; \mathcal{F}(\psi)(\zeta)<br>$$</p>
+<p>The property above ensures that $\hat{\psi}(0) &#x3D; 0 $, and $\int \psi (x) dx &#x3D; 0$. Therefore, the admissibility condition allows for and effective localization in both time and frequency for the basis functions, contrary to the Fourier basis that are of infinite duration waves.</p>
+<h3 id="Wavelet-Transform-Continuous-Wavelet-Transform-CWT-and-Discrete-Wavelet-Transform-DWT"><a href="#Wavelet-Transform-Continuous-Wavelet-Transform-CWT-and-Discrete-Wavelet-Transform-DWT" class="headerlink" title="Wavelet Transform: Continuous Wavelet Transform (CWT) and Discrete Wavelet Transform (DWT)"></a>Wavelet Transform: Continuous Wavelet Transform (CWT) and Discrete Wavelet Transform (DWT)</h3><p>Consider the doubly-indexed family of functions:</p>
+<p>$$<br>\psi^{a,b}(x) &#x3D; \frac{1}{\sqrt{a}} \psi (\frac{x-b}{a})<br>$$</p>
+<p>where $a, b \in \mathbb{R}, a \geq 0$, and $\psi$ satisfies the admissibility condition. The normalization $\frac{1}{\sqrt{a}}$ ensures that $$\left| \psi ^{a,b} \right| &#x3D; \left| \psi \right|$$. The function $\psi^{a,b}$ are called <em><strong>wavelets</strong></em> and $\psi$ the <em><strong>mother wavelet</strong></em>. The <em><strong>CWT</strong></em> is defined as: </p>
+<p>$$<br>\mathcal{W}\left[ f \right] (a,b) &#x3D; \langle f, \psi^{a,b} \rangle &#x3D; \int f(x) \bar{\psi}^{a,b} dx<br>$$</p>
+<p>function $f$ can be recovered from coefficients $\mathcal{w}\left[f\right] (a,b)$ by </p>
+<p>$$<br>f &#x3D; \frac{1}{C_\psi} \int_0 ^\infty \int_{-\infty}^\infty \mathcal{W}\left[f\right] (a,b)\psi^{a,b} db da<br>$$</p>
+<p>The admissibility condition guarantees the reconstruction above. </p>
+<p><em><strong>Frames</strong></em> A family of functions $\psi_j$ (in a Hilbert space) is called a <strong>frame</strong> if there exist $A &gt; 0$ and $B &lt; \infty$ such that for all $f$</p>
+<p>$$<br>A \left| f \right| ^2 \leq \sum_j \lvert \langle f, \psi_j \rangle \rvert ^2 \leq B \left| f \right| ^2<br>$$</p>
+<p>If $A &#x3D; B$, the frame is called a tight frame. </p>
+<h3 id="Spectral-Graph-Wavelet-Transform-Hammond’s-Formualtion"><a href="#Spectral-Graph-Wavelet-Transform-Hammond’s-Formualtion" class="headerlink" title="Spectral Graph Wavelet Transform: Hammond’s Formualtion"></a>Spectral Graph Wavelet Transform: Hammond’s Formualtion</h3><p>Let $G &#x3D; (V, E, w)$ be a weighted graph and $\mathbf{L}$ the corresponding graph Laplacian. We will denote the eigenvalues and eigenvectors of $\mathbf{L}$ by $\lambda_i$ and $$\mathbf{u}<em>i$$, respectively. The main <strong>idea</strong> behind Hammond’s approach is to perform the wavelet transform by properly define a kernel function $g : \mathbb{R}^+ \rightarrow \mathbb{R}^+$ in the spectral domain, which plays to role of $\hat{\psi}$. The kernel $g$ should behave as a band-pass filter (similarly to scaled wavelets) satisfying $g(0) &#x3D; 0$ and $\operatorname{lim}</em>{\lambda \rightarrow \infty} g(\lambda) &#x3D; 0$. </p>
+<p>Analogous to Graph Fourier transform, <em><strong>Spectral Graph Wavelet Transform</strong></em> of a function $f$ defined on the vertices of $G$ as follows:</p>
+<p>$$<br>\begin{split}<br>\mathcal{W}<em>f (s, n) &amp; &#x3D; \langle f, \psi</em>{s,n} \rangle \<br>&amp;&#x3D; \sum_i \sum_l g(s \lambda_l) \mathbf{u}_l(n) \mathbf{u}_l(i) f(i) \<br>&amp;&#x3D; \sum_l g(s \lambda_l) \mathbf{u}_l(n) \sum_i \mathbf{u}_l(i) f(i) \<br>&amp;&#x3D; \sum_l g(s \lambda_l) \mathbf{u}_l(n) \hat{f}(\lambda_l) \<br>\end{split}<br>$$</p>
+<h3 id="SGWT-Reconstruction"><a href="#SGWT-Reconstruction" class="headerlink" title="SGWT Reconstruction"></a>SGWT Reconstruction</h3><h2 id="The-Laplacian-and-eigenvalues"><a href="#The-Laplacian-and-eigenvalues" class="headerlink" title="The Laplacian and eigenvalues"></a>The Laplacian and eigenvalues</h2><p>In a graph $G$, let $d_v$ denote the degree of the vertex $v$. We first define the Laplacian for graphs without loops and multiple edges. </p>
+<p>$$<br>\begin{equation}<br>L(u, v) &#x3D;<br>\begin{cases}<br>d_v &amp; \text{if }  u &#x3D; v, \<br>-1  &amp;\text{if } u  \text{ and }  v \text{ are adjacent,} \<br>0  &amp;\text{otherwise,}<br>\end{cases}<br>\end{equation}<br>$$</p>
+<p>Let $T$ denote the diagonal matrix with the $(v,v)$-th entry having value $d_v$. The <em>Laplacian</em> of $G$ is defined to be the matrix</p>
+<p>$$<br>\mathcal{L}(u,v)&#x3D;\left{\begin{array}{cl}<br>1 &amp; \text{ if } u &#x3D; v \text{ and } d_v \neq 0 \<br>-\frac{1}{\sqrt{d_u d_v}} &amp; \text{ if } u \text{ and } v \text{ are adjacent } \<br>0 &amp; \text{ otherwise }<br>\end{array}\right.<br>$$</p>
+<p>We can write </p>
+<p>$$<br>\mathcal{L} &#x3D; T^{-1&#x2F;2}LT^{-1&#x2F;2}<br>$$</p>
+<p>with the convention $T^{-1}(v,v) &#x3D; 0$ for $d_v&#x3D;0$. We say $v$ is an isolated vertex if $d_v&#x3D;0$. A graph is said to be nontrivial if it contains at least one edge. </p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>Luis Gustavo Nonato, 2017</p>
+<p><a id="2">[2]</a><br>@article{hammond2011wavelets,<br>  title&#x3D;{Wavelets on graphs via spectral graph theory},<br>  author&#x3D;{Hammond, David K and Vandergheynst, Pierre and Gribonval, R{&#39;e}mi},<br>  journal&#x3D;{Applied and Computational Harmonic Analysis},<br>  volume&#x3D;{30},<br>  number&#x3D;{2},<br>  pages&#x3D;{129–150},<br>  year&#x3D;{2011},<br>  publisher&#x3D;{Elsevier}<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Graph/" rel="tag"># Graph</a>
+              <a href="/tags/Laplacian/" rel="tag"># Laplacian</a>
+              <a href="/tags/Spectral/" rel="tag"># Spectral</a>
+              <a href="/tags/Eigenvalues/" rel="tag"># Eigenvalues</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2020/11/blog-post-13/" rel="prev" title="Graph Convolutional Networks">
+                  <i class="fa fa-chevron-left"></i> Graph Convolutional Networks
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2020/11/blog-post-15/" rel="next" title="Linear Matrix Inequalities (LMIs)">
+                  Linear Matrix Inequalities (LMIs) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

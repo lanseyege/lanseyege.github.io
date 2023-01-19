@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Gradient Descent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Convergence of Gradient Descent Methods">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/01/blog-post-33/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Gradient Descent">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-08T12:23:36.729Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Convergence">
+<meta property="article:tag" content="Gradient">
+<meta property="article:tag" content="Momentum">
+<meta property="article:tag" content="Nesterov">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/01/blog-post-33/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2021/01/blog-post-33/","path":"/posts/2021/01/blog-post-33/","title":"Convergence of Gradient Descent Methods"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Convergence of Gradient Descent Methods | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">1.</span> <span class="nav-text">Gradient Descent</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stochastic-Gradient-Descent"><span class="nav-number">1.1.</span> <span class="nav-text">Stochastic Gradient Descent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Momentum-based-Gradient-Descent"><span class="nav-number">1.2.</span> <span class="nav-text">Momentum-based Gradient Descent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nesterov-Accelerated-Gradient-Descent"><span class="nav-number">1.3.</span> <span class="nav-text">Nesterov Accelerated Gradient Descent</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/01/blog-post-33/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Convergence of Gradient Descent Methods | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Convergence of Gradient Descent Methods
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-24 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-24T00:00:00+08:00">2021-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-08 20:23:36" itemprop="dateModified" datetime="2021-02-08T20:23:36+08:00">2021-02-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h1><span id="more"></span>
+
+
+<p>Consider optimization problem:</p>
+<p>$$<br>\min f_w(x)<br>$$</p>
+<h2 id="Stochastic-Gradient-Descent"><a href="#Stochastic-Gradient-Descent" class="headerlink" title="Stochastic Gradient Descent"></a>Stochastic Gradient Descent</h2><p>Suppose $w$ is the parameter. The Stochastic Gradient Descent method is simplied as this:</p>
+<p>$$<br>w_{t+1} &#x3D; w_t - \eta \nabla f_w<br>$$</p>
+<p><strong>Theorem</strong> Suppose the function $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is convex and differentiable, and that its gradient is Lipschitz continuous with constant $L &gt; 0$, i.e. we have that $| \nabla f(x) - \nabla f(y) |_2 \leq L | x - y | _2$ for any $x, y$. Then if we run gradient descent for $k$ iterations with a fixed step size $ t \leq 1 &#x2F; L$, it will yield a solution $f^{(k)}$ which satisfies</p>
+<p>$$<br>f(x^{(k)}) - f(x^\star) \leq \frac{| x^{(0)} - x^\star |_2 ^2}{2tk} ,<br>$$</p>
+<p>where $f(x^\star)$ is the optimal value. Intuitively, this means that gradient descent is guaranteed to converge and that it converges with rate $O(1&#x2F;k)$. </p>
+<p><em><strong>Proof:</strong></em> Our assumption that $\nabla f$ is Lipschitz continuous with constant $L$ implies $\nabla^2 f(x) \preceq L I$, or equivalently that $\nabla^2 f(x) - LI$ is a negative semidefinite matrix. Using this fact, we can perform a quadratic expansion of $f$ around $f(x)$ and obtain the following inequality: </p>
+<p>$$<br>\begin{array}{ll}<br>f(y) &amp;\leq f(x) + \nabla f(x)^\top (y-x) +\frac{1}{2} \nabla^2 f(x) | y - x | _2^2 \<br>&amp;\leq f(x) + \nabla f(x)^\top (y - x) + \frac{1}{2} L | y - x | _2^2 \<br>\end{array}<br>$$</p>
+<p>Now let’s plug in the gradient descent update by letting $ y &#x3D; x^+ &#x3D; x - t \nabla f(x)$. We then get:</p>
+<p>$$<br>\begin{array}{ll}<br>f(x^+) &amp; \leq f(x) + \nabla f(x)^\top (x^+ - x) + \frac{1}{2} L | x^+ - x | _2^2 \<br>&amp;&#x3D; f(x) + \nabla f(x)^\top (x - t\nabla f(x) - x) + \frac{1}{2} L | x - t \nabla f(x) - x |_2^2 \<br>&amp;&#x3D; f(x) - \nabla f(x)^\top t \nabla f(x) + \frac{1}{2} L | t \nabla f(x) | _2^2 \<br>&amp;&#x3D; f(x) - t | \nabla f(x) | _2^2 + \frac{1}{2} L t^2 | \nabla f(x) | _2^2 \<br>&amp;&#x3D; f(x) - (1 - \frac{1}{2} L t) t | \nabla f(x) | _2^2 \<br>\end{array}<br>$$</p>
+<p>Using $t \leq 1 &#x2F; L$, we know that $-(1 - \frac{1}{2}Lt) &#x3D; \frac{1}{2}Lt - 1 \leq \frac{1}{2}L(1&#x2F;L) - 1 &#x3D; -\frac{1}{2}$. Plugging this in to above, we can conclude the following:</p>
+<p>$$<br>f(x^+) \leq f(x) - \frac{1}{2} t | \nabla f(x) | _2^2<br>$$</p>
+<p>Since $\frac{1}{2} t | \nabla f(x) | _2^2$ will always be positive unless $\nabla f(x) &#x3D; 0$, this inequality implies that the objective function value strictly decreases with each iteration of gradient descent until it reaches the optimal value $f(x) &#x3D; f(x^\star)$. Note that this convergence result only holds when we choose $t$ to be small enough, i.e., $t \leq 1 &#x2F;L$. This explains why we observe in practice that gradient descent diverges when the step size is too large. </p>
+<p>Next, we can bound $f(x^+)$, the objective value at the next iteration, in terms of $f(x^\star)$, the optimal objective value. Since $f$ is convex, we can write </p>
+<p>$$<br>\begin{array}{ll}<br>f(x^\star) &amp;\geq f(x) + \nabla f(x)^\top (x ^\star - x) \<br>f(x) &amp;\leq f(x^\star) + \nabla f(x)^\top (x  - x^\star) \<br>\end{array}<br>$$</p>
+<p>where the first inequality yields the second through simple rearrangement of terms. Plugging this in to above, we obtain:</p>
+<p>$$<br>\begin{array}{ll}<br>f(x^+) \leq f(x^\star) + \nabla f(x)^\top (x - x^\star) - \frac{t}{2} | \nabla f(x) | _2^2 \<br>f(x^+) - f(x^\star) \leq \frac{1}{2t} (2t \nabla f(x)^\top (x - x^\star) - t^2 | \nabla f(x) | _2^2)  \<br>f(x^+) - f(x^\star) \leq \frac{1}{2t} (2t \nabla f(x)^\top (x - x^\star) - t^2 | \nabla f(x) | _2^2 - | x - x^\star |_2^2 + | x - x^\star |_2^2) \<br>f(x^+) - f(x^\star) \leq \frac{1}{2t} (| x - x^\star | _2^2 - | x - t \nabla f(x) - x^\star |_2^2) \<br>\end{array}<br>$$</p>
+<p>where the final inequality is obtained by observing that expanding the square of $| x - t \nabla f(x) - x^\star | _2^2$ yields $| x - x^\star |_2^2 - 2t \nabla f(x)^\top (x - x^\star) + t^2 | \nabla f(x) |_2^2$. Notice that by definition we have $x^+ &#x3D; x - t \nabla f(x)$. Plugging this in to above, yields:</p>
+<p>$$<br>f(x^+) - f(x^\star) \leq \frac{1}{2t} ( | x - x^\star |_2^2 - | x^+ - x^\star | _2^2)<br>$$</p>
+<p>This inequality holds for $x^+$ on every iteration of gradient descent. Summing over iterations, we get:</p>
+<p>$$<br>\begin{array}{ll}<br>\sum_{i&#x3D;1}^k f(x^{(i)}) - f(x^\star) &amp;\leq \sum_{i&#x3D;1}^k \frac{1}{2t} (| x^{(i-1)} - x^\star |_2^2 - | x^{(i)} - x^\star |_2^2) \<br>&amp; &#x3D; \frac{1}{2t} (| x^{(0)} - x^\star |_2^2 - | x^{(k)} - x^\star |_2^2) \<br>&amp; \leq \frac{1}{2t} (| x^{(0)} - x^\star | _2^2)<br>\end{array}<br>$$</p>
+<p>where the summation on the right-hand side disappers because it is a telescoping sum. Finally, using the fact that $f$ decreasing on every iteration, we can conclude that </p>
+<p>$$<br>\begin{array}{ll}<br>f(x^{(k)}) - f(x^\star) &amp;\leq \frac{1}{k} \sum_{i&#x3D;1}^k f(x^{(i)}) - f(x^\star) \<br>&amp;\leq \frac{| x^{(0)} -x^\star |_2^2}{2tk} \<br>\end{array}<br>$$</p>
+<p>where in the final step, we plug in it to get the inequality from - that we were trying to prove. </p>
+<p><strong>Theorem</strong> Convergence of SGD for strongly convex problem; fixed stepsizes. Under the assumption of $\mu$-strongly convex, $L$-smooth, if $\eta_t &#x3D; \eta \leq \frac{1}{L c_g}$, then SGD achieves </p>
+<p>$$<br>\mathbb{E} [F(x^t) - F(x^\star)] \leq \frac{\eta L \sigma_g^2}{2\mu} + (1 - \eta \mu)^t (F(x^0) - F(x^\star))<br>$$</p>
+<h2 id="Momentum-based-Gradient-Descent"><a href="#Momentum-based-Gradient-Descent" class="headerlink" title="Momentum-based Gradient Descent"></a>Momentum-based Gradient Descent</h2><p>$$<br>\begin{array}{ll}<br>u^w_t &amp;&#x3D; \gamma \cdot u^w_{t-1} + \eta \nabla f_w \<br>w_{t+1} &amp;&#x3D; w_t - u^w_t \<br>\end{array}<br>$$</p>
+<h2 id="Nesterov-Accelerated-Gradient-Descent"><a href="#Nesterov-Accelerated-Gradient-Descent" class="headerlink" title="Nesterov Accelerated Gradient Descent"></a>Nesterov Accelerated Gradient Descent</h2><p>$$<br>\begin{array}{ll}<br>w_{la} &amp;&#x3D; w_t - \gamma \cdot u_{t-1} \<br>u_t &amp;&#x3D; \gamma \cdot u_{t-1} + \eta \nabla f_{w_{la}}\<br>w_{t+1} &amp;&#x3D; w_t - u_t \<br>\end{array}<br>$$</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br><a target="_blank" rel="noopener" href="https://towardsdatascience.com/manifold-learning-the-theory-behind-it-c34299748fec">https://towardsdatascience.com/manifold-learning-the-theory-behind-it-c34299748fec</a></p>
+<p><a id="2">[2]</a> </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Convergence/" rel="tag"># Convergence</a>
+              <a href="/tags/Gradient/" rel="tag"># Gradient</a>
+              <a href="/tags/Momentum/" rel="tag"># Momentum</a>
+              <a href="/tags/Nesterov/" rel="tag"># Nesterov</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-31/" rel="prev" title=" Manifold Leaning ">
+                  <i class="fa fa-chevron-left"></i>  Manifold Leaning 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-32/" rel="next" title="Optimization on Manifold ">
+                  Optimization on Manifold  <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Measure Thoery: Chp 10. Probability">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on book &quot;Measure Theory (2nd ed.) - Cohn Donald L.&quot; ">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/01/blog-post-30/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Measure Thoery: Chp 10. Probability">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T03:19:08.893Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Convergence">
+<meta property="article:tag" content="Probability">
+<meta property="article:tag" content="Large Number">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/01/blog-post-30/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2021/01/blog-post-30/","path":"/posts/2021/01/blog-post-30/","title":"Notes on book \"Measure Theory (2nd ed.) - Cohn Donald L.\" "}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Measure-Thoery-Chp-10-Probability"><span class="nav-number">1.</span> <span class="nav-text">Measure Thoery: Chp 10. Probability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-Basics"><span class="nav-number">1.1.</span> <span class="nav-text">10.1 Basics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-Laws-of-Large-Numbers"><span class="nav-number">1.2.</span> <span class="nav-text">10.2 Laws of Large Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-Convergence-in-Distribution-and-the-Central-Limit-Theorem"><span class="nav-number">1.3.</span> <span class="nav-text">10.3 Convergence in Distribution and the Central Limit Theorem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-Conditional-Distributions-and-Maringales"><span class="nav-number">1.4.</span> <span class="nav-text">10.4 Conditional Distributions and Maringales</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-Brownian-Motion"><span class="nav-number">1.5.</span> <span class="nav-text">10.5 Brownian Motion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-Construction-of-Probability-Measures"><span class="nav-number">1.6.</span> <span class="nav-text">10.6 Construction of Probability Measures</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.6.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/01/blog-post-30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-17 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-17T00:00:00+08:00">2021-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-04 11:19:08" itemprop="dateModified" datetime="2021-02-04T11:19:08+08:00">2021-02-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Measure-Thoery-Chp-10-Probability"><a href="#Measure-Thoery-Chp-10-Probability" class="headerlink" title="Measure Thoery: Chp 10. Probability"></a>Measure Thoery: Chp 10. Probability</h1><span id="more"></span>
+
+<h2 id="10-1-Basics"><a href="#10-1-Basics" class="headerlink" title="10.1 Basics"></a>10.1 Basics</h2><p>A <strong>probability space</strong> is a measure space $(\Omega, \mathscr{A} ,P)$ such that $P(\Omega) &#x3D; 1$. The elements of $\Omega$ are called the <strong>elementary outcomes</strong> or the <strong>sample points</strong> of our experiment, and the members of $\mathscr{A}$ are called <strong>events</strong>. If $A \in \mathscr{A} $, then $P(A)$ is the <strong>probability</strong> of the event A.</p>
+<p>A <strong>real-valued random variable</strong> on a probability space $(\Omega, \mathscr{A} ,P)$ is an $\mathscr{A}$-measurable function from $\Omega$ to $\mathbb{R}$. More generally, a <strong>random variable</strong> with values in a measurable space $(S, \mathscr{B})$ is a measurable function from $(\Omega, \mathscr{A} ,P)$ to $(S, \mathscr{B})$. </p>
+<p>If a real-valued random variable $X$ on a probability space $(\Omega, \mathscr{A} ,P)$ is integrable with respect to $P$, then its expected value, or <strong>expectation</strong>, written E(X), is the integral of X with respect to P.</p>
+<p>One calls the expected value of $(X −E(X))^2$ the variance of $X$; it gives a measure of the amount by which the values of $X$ differ from the expected value of $X$. </p>
+<p>Function $F_X : \mathbb{R} \rightarrow \mathbb{R}$ defined by</p>
+<p>$$<br>F_X (x) &#x3D; P_X((−\infty,x]) &#x3D; P(X\leq x)<br>$$</p>
+<p>The function $F_X$ is called the <strong>cumulative distribution function</strong>.</p>
+<h2 id="10-2-Laws-of-Large-Numbers"><a href="#10-2-Laws-of-Large-Numbers" class="headerlink" title="10.2 Laws of Large Numbers"></a>10.2 Laws of Large Numbers</h2><p>Let $X$ and $X_1, X_2, \ldots$ be random variables on the probability space $(\Omega, \mathscr{A} ,P)$. Then ${X_n}$ is said to <strong>converge in probability</strong> to $X$ if</p>
+<p>$$<br>\lim_n P(\lvert X_n - X \rvert &gt; \epsilon) &#x3D; 0<br>$$</p>
+<p>holds for each positive number $\epsilon$ and to <strong>converge almost surely</strong> to $X$ (or to converge a.s. to X) if </p>
+<p>$$<br>P(X &#x3D; \lim_n X_n) &#x3D; 1<br>$$</p>
+<p>In other words, ${X_n}$ converges to $X$ in probability if it converges to $X$ in measure, and ${X_n}$ converges to $X$ almost surely if it converges to $X$ almost everywhere. </p>
+<p><em><strong>Theorem 10.2.1 (Weak Law of Large Numbers).</strong></em> Let ${X_n}$ be a sequence of independent identically distributed real-valued random variables with finite second moments. For each $n$ let $S_n &#x3D; X_1 + \cdots + X_n$. Then $S_n &#x2F;n$ converges to $E(X_1)$ in probability.</p>
+<p><em><strong>Theorem 10.2.5 (Strong Law of Large Numbers).</strong></em> Let ${Xn}$ be a sequence of independent identically distributed random variables with finite expected values. For each $n $ let $S_n &#x3D; X_1 + \cdots +X_n$. Then ${S_n &#x2F; n}$ converges to $E(X_1)$ almost surely.</p>
+<p><em><strong>Proposition 10.2.6 (Kolmogorov’s Inequality).</strong></em> Let $X_1, X_2, \cdots , X_n$ be independent random variables, each of which has mean $0$ and a finite second moment, and for each $i$ let $S_i &#x3D; X_1+ \cdots +X_i$. Then</p>
+<p>$$<br>P(\max_{1\leq i \leq n} \lvert S_i \rvert &gt; \epsilon) \leq (\frac{1}{\epsilon^2})\sum_{i&#x3D;1}^n E(X_i^2)<br>$$</p>
+<p>holds for each positive $\epsilon$. </p>
+<p><em><strong>Theorem 10.2.8 (Converse to the Strong Law of Large Numbers).</strong></em> Let ${X_n}$ be a sequence of independent identically distributed random variables that do not have finite expected values. For each $n$ let $S_n &#x3D; X_1+ \cdots +X_n$. Then $\lim \sup_n \lvert S_n&#x2F;n \rvert &#x3D;+\infty$ almost surely.</p>
+<h2 id="10-3-Convergence-in-Distribution-and-the-Central-Limit-Theorem"><a href="#10-3-Convergence-in-Distribution-and-the-Central-Limit-Theorem" class="headerlink" title="10.3 Convergence in Distribution and the Central Limit Theorem"></a>10.3 Convergence in Distribution and the Central Limit Theorem</h2><p><em><strong>Theorem 10.3.16 (Central Limit Theorem).</strong></em> Let $X_1, X_2, \ldots$ be a sequence of independent identically distributed random variables, with common mean $\mu$ and variance $\sigma^2$, and for each $n$ let $S_n &#x3D; X_1 + \cdots +X_n$. Then the normalized sequence ${(S_n − n \mu)&#x2F;\sigma \sqrt n }$ converges in distribution to a normal (i.e., Gaussian) distribution with mean $0$ and variance $1$.</p>
+<h2 id="10-4-Conditional-Distributions-and-Maringales"><a href="#10-4-Conditional-Distributions-and-Maringales" class="headerlink" title="10.4 Conditional Distributions and Maringales"></a>10.4 Conditional Distributions and Maringales</h2><p><em><strong>Theorem 10.4.8 (Doob’s Martingale Convergence Theorem).</strong></em> Let $(\Omega, \mathscr{A} ,P)$ be a probability space, and let $({X_n}^\infty <em>{n&#x3D;0}, {F_n}^\infty</em>{n&#x3D;0})$ be a submartingale on $(\Omega, \mathscr{A} , P)$ such that $\sup_n E(X^+ _n ) &lt; +\infty$. Then the limit $\lim_n X_n$ exists almost surely, and $E(\lvert \lim_n X_n \rvert) &lt; +\infty$.</p>
+<h2 id="10-5-Brownian-Motion"><a href="#10-5-Brownian-Motion" class="headerlink" title="10.5 Brownian Motion"></a>10.5 Brownian Motion</h2><p>Suppose that $(\Omega,\mathscr{A} ,P)$ is a probability space and that $T$ is either $[0,1]$ or $[0,+\infty)$. A stochastic process ${X_t} _{t\in T}$ with values in $\mathbb{R}$ is a <strong>Brownian motion</strong> if</p>
+<ul>
+<li>$X_0(\omega) &#x3D; 0, \forall \omega \in \Omega$,</li>
+<li>for each choice of $t_0, t_1, \ldots, t_n \in T$ such that $t_0 &lt; t_1 &lt; \cdots &lt; t_n$ the increments $X_{t_i} - X_{t_{i-1}}, i &#x3D; 1, \ldots, n$, are independent, with $X_{t_i} - X_{t_{i-1}}$ having distribution $N(0, t_i - t_{i-1})$, that is, a normal distribution with mean $0$ and variance $t_i - t_{i-1}$, and</li>
+<li>for each $\omega \in \Omega$ the function $X_{\bullet}(\omega): T\rightarrow \mathbb{R}$ defined by $t \rightarrow X_t(\omega)$ is continuous.</li>
+</ul>
+<p><em><strong>Theorem 10.5.1.</strong></em> Let $T &#x3D; [0, 1]$. Then a one-dimensional Brownian motion with parameter set $T$ exists. That is, there exist a probability space $(\Omega, \mathscr{A} ,P)$ and random variables $X_t, t \in T$, on $\Omega$ such that the stochastic process ${X_t} _{t \in T}$ is a Brownian motion.</p>
+<h2 id="10-6-Construction-of-Probability-Measures"><a href="#10-6-Construction-of-Probability-Measures" class="headerlink" title="10.6 Construction of Probability Measures"></a>10.6 Construction of Probability Measures</h2><p><em><strong>Theorem 10.6.2 (Kolmogorov Consistency Theorem).</strong></em> Let $I$ be a nonempty set, let ${(\Omega_i, \mathscr{A}<em>i)}</em>{i \in I} $ be an indexed family of measurable spaces, and let $I$ be the collection of all nonempty finite subsets of $I$. As in the discussion above, define product measurable spaces $(\Omega, \mathscr{A} )$ and ${(\Omega_{I_0} , \mathscr{A}<em>{I_0})}</em>{I_0 \in \mathscr{I}}$ , plus projections $X_{I_0} : \Omega \rightarrow \Omega_{I_0}$ and $\text{proj}<em>{I_2, I_1} : \Omega</em>{I_1} \rightarrow \Omega_{I_2}$, where $I_0 , I_1, I_2 \in \mathscr{I}$ and $I_2 \in I_1$. Let ${P_{I_0} }<em>{I_0 \in \mathscr{I}}$ be an indexed family of probability measures on the spaces ${(\Omega</em>{I_0} , \mathscr{A}<em>{I_0})}</em>{I_0 \in \mathscr{I}}$. If</p>
+<ul>
+<li>the measurable spaces ${ (\Omega_i, \mathscr{A}_i)}$ are all standard, and </li>
+<li>the measures ${ P_{I_0}}_{I_0 \in \mathscr{I}} $ are consistent, in the sense that they satisfy condition (2)</li>
+</ul>
+<p>then there is a unique probability measure $P$ on $(\Omega, \mathscr{A} )$ such that for each $I_0$ in $\mathscr{I}$ the distribution of $X_{I_0}$ is $P_{I_0}$.</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>@book{cohn2013measure,<br>  title&#x3D;{Measure theory},<br>  author&#x3D;{Cohn, Donald L},<br>  year&#x3D;{2013},<br>  publisher&#x3D;{Springer}<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Convergence/" rel="tag"># Convergence</a>
+              <a href="/tags/Probability/" rel="tag"># Probability</a>
+              <a href="/tags/Large-Number/" rel="tag"># Large Number</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-25/" rel="prev" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
+                  <i class="fa fa-chevron-left"></i> Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-29/" rel="next" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
+                  Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

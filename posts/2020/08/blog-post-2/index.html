@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Soft Reinforcement Learning: More Details">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Soft Reinforcement Learning: More Details">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2020/08/blog-post-2/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Soft Reinforcement Learning: More Details">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-07T19:38:31.027Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="soft">
+<meta property="article:tag" content="entropy-regularized">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2020/08/blog-post-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2020/08/blog-post-2/","path":"/posts/2020/08/blog-post-2/","title":"Soft Reinforcement Learning: More Details"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Soft Reinforcement Learning: More Details | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-Reinforcement-Learning-More-Details"><span class="nav-number">1.</span> <span class="nav-text">Soft Reinforcement Learning: More Details</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Soft-Q-iteration"><span class="nav-number">1.1.</span> <span class="nav-text">Soft Q-iteration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9CSoft%E2%80%9D-Bellman-Operator"><span class="nav-number">1.2.</span> <span class="nav-text">“Soft” Bellman Operator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-from-the-Soft-Q-function"><span class="nav-number">1.3.</span> <span class="nav-text">Simple from the Soft Q-function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-Actor-Critic-Demystified-4"><span class="nav-number">2.</span> <span class="nav-text">Soft Actor-Critic Demystified ([4])</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SAC-architecture"><span class="nav-number">2.1.</span> <span class="nav-text">SAC architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#We-train-the-value-network-by-minimizing-the-following-error"><span class="nav-number">2.1.1.</span> <span class="nav-text">We train the value network by minimizing the following error:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#We-train-the-Q-network-by-minimizing-the-following-error"><span class="nav-number">2.1.2.</span> <span class="nav-text">We train the Q network by minimizing the following error:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#We-train-the-policy-network-pi-by-minimizing-the-following-error"><span class="nav-number">2.1.3.</span> <span class="nav-text">We train the policy network $\pi$ by minimizing the following error</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2020/08/blog-post-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Soft Reinforcement Learning: More Details | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Soft Reinforcement Learning: More Details
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-05 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-05T00:00:00+08:00">2020-08-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-08 03:38:31" itemprop="dateModified" datetime="2021-02-08T03:38:31+08:00">2021-02-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Soft-Reinforcement-Learning-More-Details"><a href="#Soft-Reinforcement-Learning-More-Details" class="headerlink" title="Soft Reinforcement Learning: More Details"></a>Soft Reinforcement Learning: More Details</h1><span id="more"></span>
+
+<p>Soft Q-learning learns policies for continuous state and actions. The soft Q-learning meets contraction property, hence, it can converge to the optimal policy. Here, we look into the certify process. </p>
+<h2 id="Soft-Q-iteration"><a href="#Soft-Q-iteration" class="headerlink" title="Soft Q-iteration"></a>Soft Q-iteration</h2><p><em><strong>Theorem: soft Q-iteration.</strong></em> Let $Q_\text{soft}(\cdot, \cdot)$ and $V_\text{soft}(\cdot)$ be bounded and assume that $\int_A \exp (\frac{1}{\alpha}Q_\text{soft}(\cdot, a^\prime))da^\prime &lt; \infty$ and that $Q_\text{soft}^\star &lt; \infty$ exists. Then the fixed-point iteration</p>
+<p>$$<br>\begin{equation}<br>Q_\text{soft}(s_t, a_t) \leftarrow r_t + \gamma \mathbb{E}<em>{s</em>{t+1}\sim p_s}[V_\text{soft}(s_{t+1})], \forall s_t, a_t<br>\end{equation}<br>$$</p>
+<p>$$<br>\begin{equation}<br>V_\text{soft}(s_t) \leftarrow \alpha \log \int_A \exp (\frac{1}{\alpha}Q_\text{soft}(s_t, a^\prime))da^\prime, \forall s_t<br>\end{equation}<br>$$</p>
+<p>converges to $Q^\star_\text{soft}$ and $V_\text{soft}^\star$, respectively. </p>
+<h2 id="“Soft”-Bellman-Operator"><a href="#“Soft”-Bellman-Operator" class="headerlink" title="“Soft” Bellman Operator"></a>“Soft” Bellman Operator</h2><p>Soft value iteration operator $\mathcal{T}$ is defined as</p>
+<p>$$<br>\begin{equation}<br>\mathcal{T} Q(s, a) \triangleq r(s, a) + \gamma \mathbb{E}_{s^\prime \sim p_s}[\log \int \exp Q(s^\prime, a^\prime) da^\prime]<br>\end{equation}<br>$$</p>
+<p>This is a contraction mapping. This result is certified in <a href="#1">[1]</a>, that we can get  $\left|\mathcal{T} Q_{1}-\mathcal{T} Q_{2}\right| \leq \gamma \varepsilon&#x3D;\gamma | Q_{1}-Q_{2} \mid$. Since the soft Bellman backup is a contraction, the optimal value function is the fixed point of the Bellman backup, and it can be found by optimizing for a Q-function for which the soft Bellman error $|\mathcal{T}Q-Q|$ is minimized at all states and actions. </p>
+<h2 id="Simple-from-the-Soft-Q-function"><a href="#Simple-from-the-Soft-Q-function" class="headerlink" title="Simple from the Soft Q-function"></a>Simple from the Soft Q-function</h2><p>Soft Q-learning needs to sample from the policy, $\pi(a_t|s_t) \propto \exp (\frac{1}{\alpha}Q_\text{soft}^\theta(s_t, a_t))$, both to take on-policy actions and to generate action samples for estimating the soft value function. Since the form of the policy is so general, the direct sampling is intractable. The paper adopt an approximate way to do this, let’s see, Stein variational gradient descent (SVGD) <a href="#3">[3]</a>. <em><strong>firstly</strong></em>, they learn a state-conditioned stochastic neural network $a_t &#x3D; f^\phi(\xi; s_t)$, parametrized by $\phi$, that maps noise samples $\xi$ drawn from a distribution into unbiased action samples from the target EBM corresponding to $Q_\text{soft}^\theta$. (<strong>secondly,</strong>) The induced distribution of the actions are $\pi^\phi(a_t | s_t)$, the goal is to find parameters $\phi$ so that the induced distribution approximates the energy-based distribution in terms of the KL divergence. <strong>We will list the details of SVGD in another blog.</strong> The paper also indicates the relation of their algos $f^\phi(\xi;s_t)$ and policy-gradient based methods, which you can find more details in<br> <a href="#2">[2]</a> (maybe we will organize these in another blog). </p>
+<h1 id="Soft-Actor-Critic-Demystified-4"><a href="#Soft-Actor-Critic-Demystified-4" class="headerlink" title="Soft Actor-Critic Demystified ([4])"></a>Soft Actor-Critic Demystified (<a href="#4">[4]</a>)</h1><p><em><strong>SAC</strong></em> is defined for RL tasks involving continuous actions. The biggest feature of SAC is that it uses a modified RL objective function. Instead of only seeking to maximize the lifetime rewards, SAC seeks to also maximize the entropy of the policy. A high entropy in the policy will explicitly encourage exploration, to ensure that it does not collapse into repeatedly selecting a particular action that could exploit some inconsistency in the approximated Q-function. </p>
+<h2 id="SAC-architecture"><a href="#SAC-architecture" class="headerlink" title="SAC architecture"></a>SAC architecture</h2><p>The optimization objective:</p>
+<p>$$<br>J(\pi) &#x3D; \sum_{t&#x3D;0}^T \mathbb{E}_{(s_t, a_t)\sim \rho_\pi}[r(s_t, a_t) + \alpha \mathcal{H}(\pi(\cdot | s_t))]<br>$$</p>
+<p>SAC makes use of three networks: </p>
+<ul>
+<li>a state value function $V$ parameterized by $\psi$</li>
+<li>a soft Q-function $Q$ parameterized by $\theta$</li>
+<li>and a policy function $\pi$ parameterized by $\phi$</li>
+</ul>
+<h3 id="We-train-the-value-network-by-minimizing-the-following-error"><a href="#We-train-the-value-network-by-minimizing-the-following-error" class="headerlink" title="We train the value network by minimizing the following error:"></a>We train the value network by minimizing the following error:</h3><p>$$<br>J_V(\psi) &#x3D; \mathbb{E}<em>{s_t \sim \mathcal{D}}[\frac{1}{2}(V</em>{\psi}(s_t) - \mathbb{E}_{a_t \sim \pi_\phi}[Q_\theta (s_t, a_t) - \log \pi_\phi (a_t | s_t)])^2]<br>$$</p>
+<p>The approximation of the derivative of the above objective to update the parameters of the V function:</p>
+<p>$$<br>\hat{\nabla}<em>{\psi}J_V(\psi) &#x3D; \nabla_\psi V</em>{\psi}(s_t) (V_{\psi}(s_t) - Q_\theta (s_t, a_t) + \log \pi_{\phi}(a_t | s_t))<br>$$</p>
+<h3 id="We-train-the-Q-network-by-minimizing-the-following-error"><a href="#We-train-the-Q-network-by-minimizing-the-following-error" class="headerlink" title="We train the Q network by minimizing the following error:"></a>We train the Q network by minimizing the following error:</h3><p>$$<br>J_Q(\theta) &#x3D; \mathbb{E}_{(s_t, a_t ) \sim \mathcal{D}}\left[ \frac{1}{2}\left(Q_\theta (s_t, a_t) - \hat{Q}(s_t, a_t)\right)^2 \right]<br>$$</p>
+<p>where </p>
+<p>$$<br>\hat{Q}(s_t, a_t) &#x3D; r(s_t, a_t) + \gamma \mathbb{E}<em>{s</em>{t+1} \sim p} [V_{\bar{\psi}}(s_{t+1})]<br>$$</p>
+<p>For all s-a pairs in the experience replay buffer, we want to minimize the squared difference between the prediction of our Q function and the immediate (one time-step) reward plus teh discounted expected Value of the next state. $V_{\bar{\psi}}$ is the target value function. </p>
+<p>We use the below approximation of the derivative of the above objective is to update the parameters of the Q function:</p>
+<p>$$<br>\hat{\nabla}<em>{\theta} J_Q (\theta) &#x3D; \nabla</em>{\theta}Q_{\theta}(a_t, s_t) (Q_\theta (s_t, a_t) - r(s_t, a_t) - \gamma V_{\bar{\psi}}(s_{t+1}))<br>$$</p>
+<h3 id="We-train-the-policy-network-pi-by-minimizing-the-following-error"><a href="#We-train-the-policy-network-pi-by-minimizing-the-following-error" class="headerlink" title="We train the policy network $\pi$ by minimizing the following error"></a>We train the policy network $\pi$ by minimizing the following error</h3><p>$$<br>J_{\pi}(\phi) &#x3D; \mathbb{E}<em>{s_t \sim \mathcal{D}} \left[D</em>{KL}\left(\pi(\cdot | s_t) || \frac{\exp (Q_\theta (s_t, \cdot))}{Z_\theta (s_t)}\right)\right]<br>$$</p>
+<p>In order to minimize this objective, the authors use something called the reparameterization trick. This trick is used to make sure that sampling from the policy is a differentiable process so that there are no problems in backpropagating the errors. The policy is now parameterized as follows:</p>
+<p>$$<br>a_t &#x3D; f_{\phi} (\epsilon_t ; s_t)<br>$$</p>
+<p>The epsilon term is a noise vector sampled from a Gaussian distribution. Now we can express the objective function as follows:</p>
+<p>$$<br>J_{\pi} (\phi) &#x3D; \mathbb{E}<em>{s_t \sim \mathcal{D}, \epsilon_t \sim \mathcal{N}}[\log \pi</em>{\phi}(f_{\phi}(\epsilon_t ; s_t) | s_t) - Q_{\theta}(s_t , f_{\phi} (\epsilon_t ; s_t))]<br>$$</p>
+<p>The normalizing function $Z$ is dropped since it does not depend on the parameter $\phi$. An unbiased estimator for the gradient of the above objective is given as follows:</p>
+<p>$$<br>\begin{array}{ll}<br>\hat{\nabla}<em>{\phi} J</em>{\pi}  (\phi)  &amp;&#x3D; \nabla_{\phi} \log \pi_{\phi}(a_t | s_t) \<br>&amp; + (\nabla_{a_t} \log \pi_{\phi} (a_t | s_t) - \nabla_{a_t} Q(s_t, a_t))\nabla_{\phi} f_{\phi}(\epsilon_t ; s_t) \<br>\end{array}<br>$$</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br>Fox, R., Pakman, A., and Tishby, N. Taming the noise in reinforcement learning via soft updates. In Conf. on Uncertainty in Artificial Intelligence, 2016.</p>
+<p><a id="2">[2]</a><br>Schulman, J., Abbeel, P., and Chen, X.  Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
+<p><a id="3">[3]</a><br>Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
+<p><a id="4">[4]</a><br><a target="_blank" rel="noopener" href="https://towardsdatascience.com/soft-actor-critic-demystified-b8427df61665">https://towardsdatascience.com/soft-actor-critic-demystified-b8427df61665</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/soft/" rel="tag"># soft</a>
+              <a href="/tags/entropy-regularized/" rel="tag"># entropy-regularized</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/01/2020-08-01-blog-post-1/" rel="prev" title="Soft Reinforcement Learning: A Shallow Overview ">
+                  <i class="fa fa-chevron-left"></i> Soft Reinforcement Learning: A Shallow Overview 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2020/08/blog-post-4/" rel="next" title="程序员数学防忽悠备忘录：测度论">
+                  程序员数学防忽悠备忘录：测度论 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

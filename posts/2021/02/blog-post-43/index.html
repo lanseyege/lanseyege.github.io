@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Legendre-Fenchel transforms and application in RL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Legendre-Fenchel transforms and application in RL">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/02/blog-post-43/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Legendre-Fenchel transforms and application in RL">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-27T11:21:04.413Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Legendre">
+<meta property="article:tag" content="Fenchel">
+<meta property="article:tag" content="transform">
+<meta property="article:tag" content="Dulaity">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/02/blog-post-43/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2021/02/blog-post-43/","path":"/posts/2021/02/blog-post-43/","title":"Legendre-Fenchel transforms and application in RL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Legendre-Fenchel transforms and application in RL | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Legendre-Fenchel-transforms-and-application-in-RL"><span class="nav-number">1.</span> <span class="nav-text">Legendre-Fenchel transforms and application in RL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Legendre-Fenchel-Transform-1"><span class="nav-number">1.1.</span> <span class="nav-text">Legendre-Fenchel Transform [1]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#supporting-lines"><span class="nav-number">1.1.1.</span> <span class="nav-text">supporting lines</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Legendre-Fenchel-transform-2"><span class="nav-number">1.2.</span> <span class="nav-text">Legendre-Fenchel transform [2]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/02/blog-post-43/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Legendre-Fenchel transforms and application in RL | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Legendre-Fenchel transforms and application in RL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-26 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-26T00:00:00+08:00">2021-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-27 19:21:04" itemprop="dateModified" datetime="2021-02-27T19:21:04+08:00">2021-02-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Legendre-Fenchel-transforms-and-application-in-RL"><a href="#Legendre-Fenchel-transforms-and-application-in-RL" class="headerlink" title="Legendre-Fenchel transforms and application in RL"></a>Legendre-Fenchel transforms and application in RL</h1><span id="more"></span>
+
+<p>Legendre-Frenchel transform is a generalization of the Legendre transform. </p>
+<h2 id="Legendre-Fenchel-Transform-1"><a href="#Legendre-Fenchel-Transform-1" class="headerlink" title="Legendre-Fenchel Transform [1]"></a>Legendre-Fenchel Transform <a href="#1">[1]</a></h2><p><em><strong>Definition</strong></em> Consider a function $f(x) : \mathbb{R} \rightarrow \mathbb{R}$. We define the Legendre-Fenchel (LF) transform of $f(x)$ by the variational formula</p>
+<p>$$<br>f^\star (k) &#x3D; \sup_{x \in \mathbb{R}} \left{ kx - f(x) \right}<br>$$</p>
+<h3 id="supporting-lines"><a href="#supporting-lines" class="headerlink" title="supporting lines"></a>supporting lines</h3><p>We say that the function $f : \mathbb{R} \rightarrow \mathbb{R}$ has or admits a <strong>supporting line</strong> at $x \in \mathbb{R}$ if there exists $\alpha \in \mathbb{R}$ such that</p>
+<p>$$<br>f(y) \geq f(x) + \alpha (y - x)<br>$$</p>
+<p>for all $y \in \mathbb{R}$. The parameter $\alpha$ is the slope of the supporting line. We further say that a supporting line is <strong>strictly supporting</strong> at $x$ if </p>
+<p>$$<br>f(y) &gt; f(x) + \alpha (y - x)<br>$$</p>
+<p>holds for all $ y \neq x, f &lt; \infty$.</p>
+<p>If $f$ admits a supporting line at $x$ and $f^\prime (x)$ exists, then the slope $\alpha$ of the supporting line must be equal to $f^\prime (x)$. In other words, for differentiable functions, a supporting line is also a <strong>tangent</strong> line.</p>
+<p><em><strong>Theorem</strong></em> $f(x) &#x3D; f^{\star \star} (x)$ if and only if $f$ admits a supporting line at $x$. </p>
+<h2 id="Legendre-Fenchel-transform-2"><a href="#Legendre-Fenchel-transform-2" class="headerlink" title="Legendre-Fenchel transform [2]"></a>Legendre-Fenchel transform <a href="#2">[2]</a></h2><p>Let $\Omega : \nabla_\mathcal{A} \rightarrow \mathbb{R}$ be a strongly convex function. The Legendre-Fenchel transform (or convex conjugate) of $\Omega$ is $\Omega^\star : \mathbb{R}^\mathcal{A} \rightarrow \mathbb{R}$, defined as:</p>
+<p>$$<br>\forall q_s \in \mathbb{R}^\mathcal{A}, \Omega^\star(q_s) &#x3D; \max_{\pi_s \in \nabla_{\mathcal{A}}} \langle \pi_s , q_s \rangle - \Omega (\pi_s)<br>$$</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br>@article{touchette2005legendre,<br>  title&#x3D;{Legendre-Fenchel transforms in a nutshell},<br>  author&#x3D;{Touchette, Hugo}<br>}</p>
+<p><a id="2">[2]</a><br>@inproceedings{mensch2018differentiable,<br>  title&#x3D;{Differentiable dynamic programming for structured prediction and attention},<br>  author&#x3D;{Mensch, Arthur and Blondel, Mathieu},<br>  booktitle&#x3D;{International Conference on Machine Learning},<br>  pages&#x3D;{3462–3471},<br>  year&#x3D;{2018},<br>  organization&#x3D;{PMLR}<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Legendre/" rel="tag"># Legendre</a>
+              <a href="/tags/Fenchel/" rel="tag"># Fenchel</a>
+              <a href="/tags/transform/" rel="tag"># transform</a>
+              <a href="/tags/Dulaity/" rel="tag"># Dulaity</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2021/02/blog-post-40/" rel="prev" title="Notes on "AlphaGo"">
+                  <i class="fa fa-chevron-left"></i> Notes on "AlphaGo"
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2021/02/blog-post-42/" rel="next" title="Notes on "Regularized MDP and IRL" ">
+                  Notes on "Regularized MDP and IRL"  <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

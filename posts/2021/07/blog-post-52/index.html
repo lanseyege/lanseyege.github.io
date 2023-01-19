@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Fictitious Self-PlayFictitious play is a popular game-theoretic model of learning in games. This paper aims at efficiently computing Nash equilibria of imperfect-information games.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fictitious Self-Play">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/07/blog-post-52/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Fictitious Self-PlayFictitious play is a popular game-theoretic model of learning in games. This paper aims at efficiently computing Nash equilibria of imperfect-information games.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-27T08:43:54.499Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Fictitious">
+<meta property="article:tag" content="Self-Play">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/07/blog-post-52/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2021/07/blog-post-52/","path":"/posts/2021/07/blog-post-52/","title":"Fictitious Self-Play"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Fictitious Self-Play | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Fictitious-Self-Play"><span class="nav-number">1.</span> <span class="nav-text">Fictitious Self-Play</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Background"><span class="nav-number">1.1.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Extensive-Form"><span class="nav-number">1.1.1.</span> <span class="nav-text">Extensive-Form</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal-Form"><span class="nav-number">1.2.</span> <span class="nav-text">Normal-Form</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Realization-equivalence"><span class="nav-number">1.3.</span> <span class="nav-text">Realization-equivalence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fictitious-Play"><span class="nav-number">1.4.</span> <span class="nav-text">Fictitious Play</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reinforcement-Learning"><span class="nav-number">1.5.</span> <span class="nav-text">Reinforcement Learning</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Extensive-Form-Fictitious-Play"><span class="nav-number">2.</span> <span class="nav-text">Extensive-Form Fictitious Play</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/07/blog-post-52/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Fictitious Self-Play | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Fictitious Self-Play
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-09 00:00:00" itemprop="dateCreated datePublished" datetime="2021-07-09T00:00:00+08:00">2021-07-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-07-27 16:43:54" itemprop="dateModified" datetime="2021-07-27T16:43:54+08:00">2021-07-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Fictitious-Self-Play"><a href="#Fictitious-Self-Play" class="headerlink" title="Fictitious Self-Play"></a>Fictitious Self-Play</h1><p>Fictitious play is a popular game-theoretic model of learning in games. This paper aims at <em><strong>efficiently computing Nash equilibria of imperfect-information games</strong></em>.</p>
+<span id="more"></span>
+
+<p>In fictitious play, players repeatedly play a game, at each iteration choosing a best repsonse to their opponents’ average strategies. The average strategy profile of fictitious players converges to a <strong>Nash equilibrium</strong> in certain classes of games.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Extensive-Form"><a href="#Extensive-Form" class="headerlink" title="Extensive-Form"></a>Extensive-Form</h3><p><strong>Extensive-form games</strong> are a model of sequential interaction involving multiple agents. </p>
+<ul>
+<li>$\mathcal{N}&#x3D;\left{1,\cdots,n\right}$ denotes the set of players. </li>
+<li>$\mathcal{S}$ is a set of <strong>states</strong> corresponding to nodes in a finite rooted game tree. </li>
+<li>For each state node $s \in \mathcal{S}$ the edges to its successor states define a set of <strong>actions</strong> $\mathcal{A}(s)$ available to a player or chance in state $s$. </li>
+<li>The player function $P : \mathcal{S} \rightarrow \mathcal{N} \cup \left{c\right}$, with $c$ denoting chance, determines who is to act at a given state.</li>
+<li><strong>Chance</strong> is considered to be a particular player that follows a fixed randomized strategy that determins the distribution of chance events at chance nodes. </li>
+<li>For each player $i$ there is a corresponding set of <strong>information states</strong> $\mathcal{U}^i$ and an information function $I^i : \mathcal{S} \rightarrow \mathcal{U}^i$ that determines which states are indistinguishable for the player by mapping them on the same information state $u \in \mathcal{U}^i$.</li>
+<li>We assume games with <strong>perfect recall</strong></li>
+<li>$R : \mathcal{S} \rightarrow \mathbb{R}^n$ maps terminal states to a vector whose components correspond to each player’s payoff. </li>
+<li>A player’s <strong>behavioural strategy</strong>, $\pi^i(u) \in \Delta (\mathcal{A}(u)), \forall u \in \mathcal{U}^i$, determines a probability distribution over actions given an information state, and $\Delta_b^i$ is the set of all behavioural strategies of player $i$. </li>
+<li>A <strong>strategy profile</strong> $\pi &#x3D; (\pi^1 , \ldots, \pi^n)$ is a collection of strategies for all players. </li>
+<li>$\pi^{-i}$ refers to all strategies in $\pi$ except $\pi^i$.</li>
+<li>$R^i(\pi)$ is the expected payoff of player $i$ if all players follow the strategy profile $\pi$.</li>
+<li>The set of <strong>best responses</strong> of player $i$ to their opponents’ strategies $\pi^{-i}$ is $b^i (\pi^{-i}) &#x3D; \arg \max _{\pi^i \in \Delta_b^i} R^i (\pi^i, \pi^{-i})$.</li>
+<li>For $\epsilon &gt; 0, b^i_{\epsilon} (\pi^{-i}) &#x3D; \left{ \pi^i \in \Delta_b^i : R^i(\pi^i, \pi^{-i}) \geq R^i(b^i(\pi^{-i}), \pi^{-i}) - \epsilon \right}$ defines the set of $\epsilon$<strong>-best responses</strong> to the strategy profile $\pi^{-i}$.</li>
+<li><strong>A Nash equilibrium</strong> of an extensive-form game is a strategy profile $\pi$ such that $\pi^i \in b^i (\pi^{-i}), \forall i \in \mathcal{N}$. </li>
+<li>An $\epsilon$<strong>-Nash equilibrium</strong> is a strategy profile $\pi$ such that $\pi^i \in b^i _{\epsilon}(\pi^{-i}) \forall i \in \mathcal{N}$.</li>
+</ul>
+<h2 id="Normal-Form"><a href="#Normal-Form" class="headerlink" title="Normal-Form"></a>Normal-Form</h2><ul>
+<li>An extensive-form game induces an equivalent <strong>normal-form game</strong> as follows. </li>
+<li>For each player $i \in \mathcal{N}$ their deterministic strategies, $\Delta_p^i \sub \Delta_b^i$, define a set of normal-form actions, called <strong>pure strategies</strong>. </li>
+<li>A <strong>mixed strategy</strong> $\Pi^i$ for player $i$ is a probability distribution over their pure strategies. </li>
+<li>$\Delta^i$ denote the set of all mixed strategies available to player $i$.</li>
+<li>A mixed strategy profile $\Pi \in \times_{i \in \mathcal{N}}\Delta^i$ specifies a mixed strategy for each player</li>
+<li>$R^i : \times _{i \in \mathcal{N}}\Delta^i \rightarrow \mathbb{R}$ determines the expected payoff of player $i$ given a mixed strategy profile.</li>
+</ul>
+<h2 id="Realization-equivalence"><a href="#Realization-equivalence" class="headerlink" title="Realization-equivalence"></a>Realization-equivalence</h2><p>The sequence-form of a game decomposes players’ strategies into sequences of actions and probabilities of realizing these sequences. </p>
+<ul>
+<li>For any player $i \in \mathcal{N}$ of a perfect-recall extensive-form game, each of their information states $u^i \in \mathcal{N}^i$ uniquely defines a <strong>sequence</strong> $\sigma_{u^i}$ of actions</li>
+<li>$\sum^i &#x3D; {\sigma_u : u \in \mathcal{U}^i }$ denote the set of such sequences of player $i$.</li>
+<li>$\sigma_u a$ denote the sequence that extends $\sigma_u$ with action $a$.</li>
+</ul>
+<p><strong>Definition 1</strong>. A <strong>realization plan</strong> of player $i \in \mathcal{N}$ is a function, $x : \sum^i \rightarrow [0, 1]$, such that $x(\emptyset) &#x3D; 1$ and $\forall \sigma_u \in \mathcal{U}^i : x(\sigma_u) &#x3D; \sum _{a \in \mathcal{A}(u)} x(\sigma_u a)$.</p>
+<ul>
+<li>A behavioural strategy $\pi$ induces a realization plan $x_\pi(\sigma_u) &#x3D; \prod_{\left(u^{\prime}, a\right) \in \sigma_{u}} \pi\left(u^{\prime}, a\right)$</li>
+<li>A realization plan induces a behavioural strategy, $\pi(u, a) &#x3D; \frac{x(\sigma_u a)}{x(\sigma_u)}$</li>
+</ul>
+<p><strong>Definition 2</strong>. Two strategies $\pi_1$ and $\pi_2$ of a player are <strong>realization-equivalent</strong> if for any fixed strategy profile of the other players both strategies, $\pi_1$ and $\pi_2$, define the same probability distribution over the states of the game. </p>
+<p><strong>Theorem 3</strong> Two strategies are realization-equivalent if and only if they have the same realization plan. </p>
+<p><strong>Theorem 4</strong> For a player with perfect recall, any mixed strategy is realization-equivalent to a behavioural strategy, and vice versa. </p>
+<h2 id="Fictitious-Play"><a href="#Fictitious-Play" class="headerlink" title="Fictitious Play"></a>Fictitious Play</h2><p><strong>Definition 5</strong>. A generalised weakened <strong>fictitious play</strong> is a process of mixed strategies, ${ \Pi_t }, \Pi_t \in \times_{i \in \mathcal{N}} \Delta^i$, s.t.</p>
+<p>$$<br>\Pi^i <em>{t+1} \in (1 - \alpha</em>{t+1})\Pi^i_t + \alpha_{t+1} (b^i_{\epsilon_t}(\Pi_t^{-t}) + M^i_{t+1} ), \forall i \in \mathcal{N}<br>$$</p>
+<p>with $\alpha_t \rightarrow 0$ and $\epsilon_t \rightarrow 0$ as $t \rightarrow \infty , \sum_{t&#x3D;1}^\infty \alpha_t &#x3D; \infty$, ${M_t}$ a sequence of perturbations that satisfies $\forall T &gt; 0$</p>
+<p>$$<br>\lim_{t \rightarrow \infty} \sup_k \left{ |\sum_{i&#x3D;t}^{k-1} \alpha_{i+1} M_{i+1} | s.t. \sum_{i&#x3D;t}^{k-1} \alpha_{i+1} \leq T \right} &#x3D; 0<br>$$</p>
+<h2 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h2><p>An agent is learning <strong>on-policy</strong> if it gathers these transition tuples by following its own policy. In the <strong>off-policy</strong> setting an agent is learning from experience of another agent or another policy. </p>
+<h1 id="Extensive-Form-Fictitious-Play"><a href="#Extensive-Form-Fictitious-Play" class="headerlink" title="Extensive-Form Fictitious Play"></a>Extensive-Form Fictitious Play</h1><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br>@inproceedings{heinrich2015fictitious,<br>  title&#x3D;{Fictitious self-play in extensive-form games},<br>  author&#x3D;{Heinrich, Johannes and Lanctot, Marc and Silver, David},<br>  booktitle&#x3D;{International conference on machine learning},<br>  pages&#x3D;{805–813},<br>  year&#x3D;{2015},<br>  organization&#x3D;{PMLR}<br>}</p>
+<p><a id="2">[2]</a> </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Fictitious/" rel="tag"># Fictitious</a>
+              <a href="/tags/Self-Play/" rel="tag"># Self-Play</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2021/07/blog-post-51/" rel="prev" title="Generative Adversarial Nets">
+                  <i class="fa fa-chevron-left"></i> Generative Adversarial Nets
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2022/01/blog-post-53/" rel="next" title="NIPS 2020 Reinforcement Learning Paper: Imitation Learning">
+                  NIPS 2020 Reinforcement Learning Paper: Imitation Learning <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

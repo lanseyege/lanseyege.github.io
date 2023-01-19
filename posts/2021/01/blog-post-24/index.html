@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lanseyege.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Measure Thoery: Chp 4. Signed and Complex MeasuresIn this chapter we study signed and complex measures, which are defined to be the countably additive functions from a $\sigma$-algebra to $[−\infty, +">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on book &quot;Measure Theory (2nd ed.) - Cohn Donald L.&quot; ">
+<meta property="og:url" content="http://lanseyege.github.io/posts/2021/01/blog-post-24/index.html">
+<meta property="og:site_name" content="Ye Yuan">
+<meta property="og:description" content="Measure Thoery: Chp 4. Signed and Complex MeasuresIn this chapter we study signed and complex measures, which are defined to be the countably additive functions from a $\sigma$-algebra to $[−\infty, +">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T03:17:51.862Z">
+<meta property="article:author" content="Ye Yuan">
+<meta property="article:tag" content="Signed Measure">
+<meta property="article:tag" content="Complex Measure">
+<meta property="article:tag" content="Radon-Nikodym">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://lanseyege.github.io/posts/2021/01/blog-post-24/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://lanseyege.github.io/posts/2021/01/blog-post-24/","path":"/posts/2021/01/blog-post-24/","title":"Notes on book \"Measure Theory (2nd ed.) - Cohn Donald L.\" "}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ye Yuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Measure-Thoery-Chp-4-Signed-and-Complex-Measures"><span class="nav-number">1.</span> <span class="nav-text">Measure Thoery: Chp 4. Signed and Complex Measures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Signed-and-Complex-Measures"><span class="nav-number">1.1.</span> <span class="nav-text">Signed and Complex Measures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Absolute-Continuity"><span class="nav-number">1.2.</span> <span class="nav-text">Absolute Continuity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Singularity"><span class="nav-number">1.3.</span> <span class="nav-text">Singularity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functions-of-Finite-Variation"><span class="nav-number">1.4.</span> <span class="nav-text">Functions of Finite Variation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Duals-of-the-L-p-Spaces"><span class="nav-number">1.5.</span> <span class="nav-text">The Duals of the $L^p$ Spaces</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.5.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ye Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">116</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://lanseyege.github.io/posts/2021/01/blog-post-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ye Yuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  | Ye Yuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-14 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-14T00:00:00+08:00">2021-01-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-04 11:17:51" itemprop="dateModified" datetime="2021-02-04T11:17:51+08:00">2021-02-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Measure-Thoery-Chp-4-Signed-and-Complex-Measures"><a href="#Measure-Thoery-Chp-4-Signed-and-Complex-Measures" class="headerlink" title="Measure Thoery: Chp 4. Signed and Complex Measures"></a>Measure Thoery: Chp 4. Signed and Complex Measures</h1><p>In this chapter we study signed and complex measures, which are defined to be the countably additive functions from a $\sigma$-algebra to $[−\infty, +\infty]$ or to $C$ that have value $0$ on the empty set.</p>
+<span id="more"></span>
+
+<h2 id="Signed-and-Complex-Measures"><a href="#Signed-and-Complex-Measures" class="headerlink" title="Signed and Complex Measures"></a>Signed and Complex Measures</h2><p>Let $(X, \mathscr{A} )$ be a measurable space, and let $\mu$ be a function on $\mathscr{A}$ with values in $[−\infty, +\infty]$. If $\mu$ is countably additive and satisfies $\mu(\varnothing) &#x3D; 0$, then it is a <strong>signed measure</strong>. </p>
+<p>A <strong>complex measure</strong> on $(X, \mathscr{A} )$ is a function $\mu$ from $\mathscr{A}$ to $\mathbb{C}$ that satisfies $\mu(\varnothing) &#x3D; 0$ and is countably additive. </p>
+<p><em><strong>Theorem 4.1.5 (Hahn Decomposition Theorem).</strong></em> Let $(X, \mathscr{A})$ be a measurable space, and let $\mu$ be a signed measure on $(X, \mathscr{A} )$. Then there are disjoint subsets $P$ and $N$ of $X$ such that $P$ is a positive set for $\mu$, $N$ is a negative set for $\mu$, and $X &#x3D; P \cup N$.</p>
+<p><em><strong>Corollary 4.1.6 (Jordan Decomposition Theorem).</strong></em> Every signed measure is the difference of two positive measures, at least one of which is finite.</p>
+<h2 id="Absolute-Continuity"><a href="#Absolute-Continuity" class="headerlink" title="Absolute Continuity"></a>Absolute Continuity</h2><p>Let $(X, \mathscr{A})$ be a measurable space, and let $\mu$ and $v$ be positive measures on $(X, \mathscr{A} )$. Then $ν$ is <strong>absolutely continuous</strong> with respect to $\mu$ if each set $A$ that belongs to $\mathscr{A}$ and satisfies $\mu(A) &#x3D; 0$ also satisfies $ν(A) &#x3D; 0$. One sometimes writes $ν \ll \mu$ to indicate that $ν$ is absolutely continuous with respect to $\mu$.</p>
+<p><em><strong>Theorem 4.2.2 (Radon–Nikodym Theorem).</strong></em> Let $(X, \mathscr{A})$ be a measurable space, and let $\mu$ and $ν$ be $\sigma$-finite positive measures on $(X, \mathscr{A})$. If $ν$ is absolutely continuous with respect to $\mu$, then there is an $\mathscr{A}$-measurable function $g: X \rightarrow [0,+\infty)$ such that $ν(A) &#x3D; \int_A g d\mu$ holds for each A in $\mathscr{A}$. The function $g$ is unique up to $\mu$-almost everywhere equality. </p>
+<h2 id="Singularity"><a href="#Singularity" class="headerlink" title="Singularity"></a>Singularity</h2><p>Let $(X, \mathscr{A})$ be a measurable space. A positive measure $\mu$ on $(X, \mathscr{A})$ is <strong>concentrated</strong> on the $\mathscr{A}$-measurable set $E$ if $\mu (E^c) &#x3D; 0$. </p>
+<p>Suppose that $\mu$ and $ν$ are positive, signed, or complex measures on $(X, \mathscr{A} )$. Then $\mu$ and $ν$ are <strong>mutually singular</strong> if there is an $\mathscr{A}$-measurable set $E$ such that $\mu$ is concentrated on $E$ and $ν$ is concentrated on $E^c$. ($\mu \perp v$)</p>
+<p><em><strong>Theorem 4.3.2 (Lebesgue Decomposition Theorem).</strong></em> Let $(X, \mathscr{A} )$ be a measurable space, let $\mu$ be a positive measure on $(X, \mathscr{A} )$, and let $ν$ be a finite signed, complex, or $\sigma$-finite positive measure on $(X, \mathscr{A} )$. Then there are unique finite signed, complex, or positive measures $ν_a$ and $ν_s$ on $(X, \mathscr{A} )$ such that</p>
+<ul>
+<li>$ν_a$ is absolutely continuous with respect to $\mu$,</li>
+<li>$ν_s$ is singular with respect to $\mu$, and</li>
+<li>$v &#x3D; v_a + v_s$</li>
+</ul>
+<p>The decomposition $ν &#x3D;ν_a + ν_s$ is called the <strong>Lebesgue decomposition</strong> of $ν$, while $ν_a$ and $ν_s$ are called the <strong>absolutely continuous</strong> and <strong>singular</strong> parts of $ν$.</p>
+<h2 id="Functions-of-Finite-Variation"><a href="#Functions-of-Finite-Variation" class="headerlink" title="Functions of Finite Variation"></a>Functions of Finite Variation</h2><h2 id="The-Duals-of-the-L-p-Spaces"><a href="#The-Duals-of-the-L-p-Spaces" class="headerlink" title="The Duals of the $L^p$ Spaces"></a>The Duals of the $L^p$ Spaces</h2><p><em><strong>Theorem 4.5.1.</strong></em> Let $(X, \mathscr{A} ,\mu)$ be a measure space, let $p$ satisfy $1 \leq p &lt; +\infty$, and let $q$ be defined by $1&#x2F;p+1&#x2F;q&#x3D; 1$. If $p &#x3D; 1$ and $\mu$ is $\sigma$-finite, or if $1 &lt; p &lt; +\infty$ and $\mu$ is arbitrary, then the operator $T$ defined above is an isometric isomorphism of $L^q(X, \mathscr{A} ,\mu)$ onto $(L^p(X, \mathscr{A} , \mu))^\star$.</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>@book{cohn2013measure,<br>  title&#x3D;{Measure theory},<br>  author&#x3D;{Cohn, Donald L},<br>  year&#x3D;{2013},<br>  publisher&#x3D;{Springer}<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Signed-Measure/" rel="tag"># Signed Measure</a>
+              <a href="/tags/Complex-Measure/" rel="tag"># Complex Measure</a>
+              <a href="/tags/Radon-Nikodym/" rel="tag"># Radon-Nikodym</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-20/" rel="prev" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
+                  <i class="fa fa-chevron-left"></i> Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2021/01/blog-post-26/" rel="next" title="Notes on book "Measure Theory (2nd ed.) - Cohn Donald L." ">
+                  Notes on book "Measure Theory (2nd ed.) - Cohn Donald L."  <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
