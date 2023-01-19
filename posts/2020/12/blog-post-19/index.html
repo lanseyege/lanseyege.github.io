@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="Wavelets on Graphs via Spectral Graph Theory">
@@ -80,7 +80,119 @@
   </style>
 </noscript>
 
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -121,9 +233,29 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
 
   </li>
   </ul>
@@ -200,13 +332,13 @@
       
         <h1 id="Wavelets-on-Graphs-via-Spectral-Graph-Theory"><a href="#Wavelets-on-Graphs-via-Spectral-Graph-Theory" class="headerlink" title="Wavelets on Graphs via Spectral Graph Theory"></a>Wavelets on Graphs via Spectral Graph Theory</h1><span id="more"></span>
 
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>We propose a novel method for constructing wavelet transforms of functions dened on the vertices of an arbitrary nite weighted graph. Our approach is based on dening scaling using the the graph analogue of the Fourier domain, namely the spectral decomposition of the discrete graph Laplacian $\mathcal{L}$. Given a wavelet generating kernel $g$ and a scale parameter $t$, we define the scaled wavelet operator $T_g^t &#x3D; g(t\mathcal{L})$. The spectral graph wavelets are then formed by localizing this operator by applying it to an indicator function. We explore the localization properties of the wavelets in the limit of ne scales. Additionally, we present a fast Chebyshev polynomial approximation algorithm for computing the transform that avoids the need for diagonalizing $\mathcal{L}$. </p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>We propose a novel method for constructing wavelet transforms of functions dened on the vertices of an arbitrary nite weighted graph. Our approach is based on dening scaling using the the graph analogue of the Fourier domain, namely the spectral decomposition of the discrete graph Laplacian <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="1.561ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 690 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4C" d="M62 -22T47 -22T32 -11Q32 -1 56 24T83 55Q113 96 138 172T180 320T234 473T323 609Q364 649 419 677T531 705Q559 705 578 696T604 671T615 645T618 623V611Q618 582 615 571T598 548Q581 531 558 520T518 509Q503 509 503 520Q503 523 505 536T507 560Q507 590 494 610T452 630Q423 630 410 617Q367 578 333 492T271 301T233 170Q211 123 204 112L198 103L224 102Q281 102 369 79T509 52H523Q535 64 544 87T579 128Q616 152 641 152Q656 152 656 142Q656 101 588 40T433 -22Q381 -22 289 1T156 28L141 29L131 20Q111 0 87 -11Z"></path></g></g></g></g></svg></mjx-container>. Given a wavelet generating kernel <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex;" xmlns="http://www.w3.org/2000/svg" width="1.079ex" height="1.464ex" role="img" focusable="false" viewBox="0 -442 477 647"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g></g></g></svg></mjx-container> and a scale parameter <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="0.817ex" height="1.441ex" role="img" focusable="false" viewBox="0 -626 361 637"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g></svg></mjx-container>, we define the scaled wavelet operator <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.887ex;" xmlns="http://www.w3.org/2000/svg" width="10.719ex" height="2.71ex" role="img" focusable="false" viewBox="0 -805.6 4737.8 1197.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msubsup"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(793,363) scale(0.707)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="mi" transform="translate(617,-247) scale(0.707)"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g></g><g data-mml-node="mo" transform="translate(1376,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mi" transform="translate(2431.8,0)"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g><g data-mml-node="mo" transform="translate(2908.8,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(3297.8,0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(3658.8,0)"><g data-mml-node="mi"><path data-c="4C" d="M62 -22T47 -22T32 -11Q32 -1 56 24T83 55Q113 96 138 172T180 320T234 473T323 609Q364 649 419 677T531 705Q559 705 578 696T604 671T615 645T618 623V611Q618 582 615 571T598 548Q581 531 558 520T518 509Q503 509 503 520Q503 523 505 536T507 560Q507 590 494 610T452 630Q423 630 410 617Q367 578 333 492T271 301T233 170Q211 123 204 112L198 103L224 102Q281 102 369 79T509 52H523Q535 64 544 87T579 128Q616 152 641 152Q656 152 656 142Q656 101 588 40T433 -22Q381 -22 289 1T156 28L141 29L131 20Q111 0 87 -11Z"></path></g></g><g data-mml-node="mo" transform="translate(4348.8,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>. The spectral graph wavelets are then formed by localizing this operator by applying it to an indicator function. We explore the localization properties of the wavelets in the limit of ne scales. Additionally, we present a fast Chebyshev polynomial approximation algorithm for computing the transform that avoids the need for diagonalizing <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="1.561ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 690 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4C" d="M62 -22T47 -22T32 -11Q32 -1 56 24T83 55Q113 96 138 172T180 320T234 473T323 609Q364 649 419 677T531 705Q559 705 578 696T604 671T615 645T618 623V611Q618 582 615 571T598 548Q581 531 558 520T518 509Q503 509 503 520Q503 523 505 536T507 560Q507 590 494 610T452 630Q423 630 410 617Q367 578 333 492T271 301T233 170Q211 123 204 112L198 103L224 102Q281 102 369 79T509 52H523Q535 64 544 87T579 128Q616 152 641 152Q656 152 656 142Q656 101 588 40T433 -22Q381 -22 289 1T156 28L141 29L131 20Q111 0 87 -11Z"></path></g></g></g></g></svg></mjx-container>. </p>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Some data are defined on regular Euclidean spaces, such as time seriers data, image or videos. However, many interesting applications involve data defined on more topologically complicated domains. </p>
-<h2 id="Classical-Wavelet-Transform"><a href="#Classical-Wavelet-Transform" class="headerlink" title="Classical Wavelet Transform"></a>Classical Wavelet Transform</h2><h2 id="Weighted-Graphs-and-Spectral-Graph-Theory"><a href="#Weighted-Graphs-and-Spectral-Graph-Theory" class="headerlink" title="Weighted Graphs and Spectral Graph Theory"></a>Weighted Graphs and Spectral Graph Theory</h2><h2 id="Spectral-Graph-Wavelet-Transform"><a href="#Spectral-Graph-Wavelet-Transform" class="headerlink" title="Spectral Graph Wavelet Transform"></a>Spectral Graph Wavelet Transform</h2><h2 id="Transform-properties"><a href="#Transform-properties" class="headerlink" title="Transform properties"></a>Transform properties</h2><h2 id="Polynomial-Approximation-and-Fast-SGWT"><a href="#Polynomial-Approximation-and-Fast-SGWT" class="headerlink" title="Polynomial Approximation and Fast SGWT"></a>Polynomial Approximation and Fast SGWT</h2><h2 id="Reconstruction"><a href="#Reconstruction" class="headerlink" title="Reconstruction"></a>Reconstruction</h2><h2 id="Implementation-and-examples"><a href="#Implementation-and-examples" class="headerlink" title="Implementation and examples"></a>Implementation and examples</h2><h2 id="Conclusions-and-Future-Work"><a href="#Conclusions-and-Future-Work" class="headerlink" title="Conclusions and Future Work"></a>Conclusions and Future Work</h2><h1 id="Spectral-Networks-and-Deep-Locally-Connected-Networks-on-Graphs"><a href="#Spectral-Networks-and-Deep-Locally-Connected-Networks-on-Graphs" class="headerlink" title="Spectral Networks and Deep Locally Connected Networks on Graphs"></a>Spectral Networks and Deep Locally Connected Networks on Graphs</h1><h1 id="Convolutional-Neural-Networks-on-Graphs-with-Fast-Localized-Spectral-Filtering"><a href="#Convolutional-Neural-Networks-on-Graphs-with-Fast-Localized-Spectral-Filtering" class="headerlink" title="Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering"></a>Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>@inproceedings{defferrard2016convolutional,<br>  title&#x3D;{Convolutional neural networks on graphs with fast localized spectral filtering},<br>  author&#x3D;{Defferrard, Micha{&quot;e}l and Bresson, Xavier and Vandergheynst, Pierre},<br>  booktitle&#x3D;{Advances in neural information processing systems},<br>  pages&#x3D;{3844–3852},<br>  year&#x3D;{2016}<br>}</p>
-<p><a id="2">[2]</a><br>@article{kipf2016semi,<br>  title&#x3D;{Semi-supervised classification with graph convolutional networks},<br>  author&#x3D;{Kipf, Thomas N and Welling, Max},<br>  journal&#x3D;{arXiv preprint arXiv:1609.02907},<br>  year&#x3D;{2016}<br>}</p>
-<p><a id="3">[3]</a><br>@article{bruna2013spectral,<br>  title&#x3D;{Spectral networks and locally connected networks on graphs},<br>  author&#x3D;{Bruna, Joan and Zaremba, Wojciech and Szlam, Arthur and LeCun, Yann},<br>  journal&#x3D;{arXiv preprint arXiv:1312.6203},<br>  year&#x3D;{2013}<br>}</p>
-<p><a id="4">[4]</a><br>@inproceedings{defferrard2016convolutional,<br>  title&#x3D;{Convolutional neural networks on graphs with fast localized spectral filtering},<br>  author&#x3D;{Defferrard, Micha{&quot;e}l and Bresson, Xavier and Vandergheynst, Pierre},<br>  booktitle&#x3D;{Advances in neural information processing systems},<br>  pages&#x3D;{3844–3852},<br>  year&#x3D;{2016}<br>}</p>
-<p><a id="5">[5]</a><br>@article{hammond2011wavelets,<br>  title&#x3D;{Wavelets on graphs via spectral graph theory},<br>  author&#x3D;{Hammond, David K and Vandergheynst, Pierre and Gribonval, R{&#39;e}mi},<br>  journal&#x3D;{Applied and Computational Harmonic Analysis},<br>  volume&#x3D;{30},<br>  number&#x3D;{2},<br>  pages&#x3D;{129–150},<br>  year&#x3D;{2011},<br>  publisher&#x3D;{Elsevier}<br>}</p>
+<h2 id="Classical-Wavelet-Transform"><a href="#Classical-Wavelet-Transform" class="headerlink" title="Classical Wavelet Transform"></a>Classical Wavelet Transform</h2><h2 id="Weighted-Graphs-and-Spectral-Graph-Theory"><a href="#Weighted-Graphs-and-Spectral-Graph-Theory" class="headerlink" title="Weighted Graphs and Spectral Graph Theory"></a>Weighted Graphs and Spectral Graph Theory</h2><h2 id="Spectral-Graph-Wavelet-Transform"><a href="#Spectral-Graph-Wavelet-Transform" class="headerlink" title="Spectral Graph Wavelet Transform"></a>Spectral Graph Wavelet Transform</h2><h2 id="Transform-properties"><a href="#Transform-properties" class="headerlink" title="Transform properties"></a>Transform properties</h2><h2 id="Polynomial-Approximation-and-Fast-SGWT"><a href="#Polynomial-Approximation-and-Fast-SGWT" class="headerlink" title="Polynomial Approximation and Fast SGWT"></a>Polynomial Approximation and Fast SGWT</h2><h2 id="Reconstruction"><a href="#Reconstruction" class="headerlink" title="Reconstruction"></a>Reconstruction</h2><h2 id="Implementation-and-examples"><a href="#Implementation-and-examples" class="headerlink" title="Implementation and examples"></a>Implementation and examples</h2><h2 id="Conclusions-and-Future-Work"><a href="#Conclusions-and-Future-Work" class="headerlink" title="Conclusions and Future Work"></a>Conclusions and Future Work</h2><h1 id="Spectral-Networks-and-Deep-Locally-Connected-Networks-on-Graphs"><a href="#Spectral-Networks-and-Deep-Locally-Connected-Networks-on-Graphs" class="headerlink" title="Spectral Networks and Deep Locally Connected Networks on Graphs"></a>Spectral Networks and Deep Locally Connected Networks on Graphs</h1><h1 id="Convolutional-Neural-Networks-on-Graphs-with-Fast-Localized-Spectral-Filtering"><a href="#Convolutional-Neural-Networks-on-Graphs-with-Fast-Localized-Spectral-Filtering" class="headerlink" title="Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering"></a>Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>@inproceedings{defferrard2016convolutional,<br>  title={Convolutional neural networks on graphs with fast localized spectral filtering},<br>  author={Defferrard, Micha{"e}l and Bresson, Xavier and Vandergheynst, Pierre},<br>  booktitle={Advances in neural information processing systems},<br>  pages={3844–3852},<br>  year={2016}<br>}</p>
+<p><a id="2">[2]</a><br>@article{kipf2016semi,<br>  title={Semi-supervised classification with graph convolutional networks},<br>  author={Kipf, Thomas N and Welling, Max},<br>  journal={arXiv preprint arXiv:1609.02907},<br>  year={2016}<br>}</p>
+<p><a id="3">[3]</a><br>@article{bruna2013spectral,<br>  title={Spectral networks and locally connected networks on graphs},<br>  author={Bruna, Joan and Zaremba, Wojciech and Szlam, Arthur and LeCun, Yann},<br>  journal={arXiv preprint arXiv:1312.6203},<br>  year={2013}<br>}</p>
+<p><a id="4">[4]</a><br>@inproceedings{defferrard2016convolutional,<br>  title={Convolutional neural networks on graphs with fast localized spectral filtering},<br>  author={Defferrard, Micha{"e}l and Bresson, Xavier and Vandergheynst, Pierre},<br>  booktitle={Advances in neural information processing systems},<br>  pages={3844–3852},<br>  year={2016}<br>}</p>
+<p><a id="5">[5]</a><br>@article{hammond2011wavelets,<br>  title={Wavelets on graphs via spectral graph theory},<br>  author={Hammond, David K and Vandergheynst, Pierre and Gribonval, R{'e}mi},<br>  journal={Applied and Computational Harmonic Analysis},<br>  volume={30},<br>  number={2},<br>  pages={129–150},<br>  year={2011},<br>  publisher={Elsevier}<br>}</p>
 
     </div>
 
@@ -345,7 +477,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Ye Yuan</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
         
@@ -372,7 +504,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
