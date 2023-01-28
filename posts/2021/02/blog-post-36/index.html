@@ -330,11 +330,14 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Anomaly-Detection"><a href="#Anomaly-Detection" class="headerlink" title="Anomaly Detection"></a>Anomaly Detection</h1><span id="more"></span>
-
-<h2 id="Why-IL-and-IRL-Can-Work-on-Anomaly-Detection"><a href="#Why-IL-and-IRL-Can-Work-on-Anomaly-Detection" class="headerlink" title="Why IL and IRL Can Work on Anomaly Detection?"></a>Why IL and IRL Can Work on Anomaly Detection?</h2><p>If the states and actions in a new observed behavior are compared to the policy or soft Q-function learned using MaxCausalEnt IRL, it can be determined how probable the new behavior is under the model. If the new trajectory does not follow the learned policy or takes actions that have low Q-function value, then it can be deemed anomalous. </p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br>@inproceedings{oh2019sequential,<br>  title={Sequential anomaly detection using inverse reinforcement learning},<br>  author={Oh, Min-hwan and Iyengar, Garud},<br>  booktitle={Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining},<br>  pages={1480–1490},<br>  year={2019}<br>}</p>
-<p><a id="2">[2]</a> </p>
+        <h1 id="anomaly-detection">Anomaly Detection</h1>
+<span id="more"></span>
+<h2 id="why-il-and-irl-can-work-on-anomaly-detection">Why IL and IRL Can Work on Anomaly Detection?</h2>
+<p>If the states and actions in a new observed behavior are compared to the policy or soft Q-function learned using MaxCausalEnt IRL, it can be determined how probable the new behavior is under the model. If the new trajectory does not follow the learned policy or takes actions that have low Q-function value, then it can be deemed anomalous.</p>
+<h2 id="section"></h2>
+<h1 id="references">References</h1>
+<p><a id="1">[1]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{oh2019sequential, title={Sequential anomaly detection using inverse reinforcement learning}, author={Oh, Min-hwan and Iyengar, Garud}, booktitle={Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining}, pages={1480--1490}, year={2019} }</p>
+<p><a id="2">[2]</a></p>
 
     </div>
 
@@ -421,7 +424,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Anomaly-Detection"><span class="nav-number">1.</span> <span class="nav-text">Anomaly Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-IL-and-IRL-Can-Work-on-Anomaly-Detection"><span class="nav-number">1.1.</span> <span class="nav-text">Why IL and IRL Can Work on Anomaly Detection?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#anomaly-detection"><span class="nav-number">1.</span> <span class="nav-text">Anomaly Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#why-il-and-irl-can-work-on-anomaly-detection"><span class="nav-number">1.1.</span> <span class="nav-text">Why IL and IRL Can Work on Anomaly Detection?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-number">1.2.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -585,6 +588,61 @@ window.addEventListener('pjax:success', () => {
 
     <div id="pjax">
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

@@ -329,24 +329,26 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Policy-Iteration-and-Value-Iteration"><a href="#Policy-Iteration-and-Value-Iteration" class="headerlink" title="Policy Iteration and Value Iteration"></a>Policy Iteration and Value Iteration</h1><span id="more"></span>
-
+        <h1 id="policy-iteration-and-value-iteration">Policy Iteration and Value Iteration</h1>
+<span id="more"></span>
 <p>Policy iteration and value iteration are two iteration approaches to obtain the optimal policy when the environment dynamics are known for agent.</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><em><strong>Policy Iteration</strong></em> <a href="#1">[1]</a></p>
+<h2 id="section"></h2>
+<p><strong><em>Policy Iteration</em></strong> <a href="#1">[1]</a></p>
 <ul>
 <li>Start with a random policy;</li>
 <li>Then find the value function of that policy (<strong>policy evaluation step</strong>);</li>
 <li>Then find a new (improved) policy based on the previous value function (<strong>policy improvement step</strong>).</li>
 </ul>
-<p>In this process, each policy is guaranteed to be a strict improvement over the previous one (unless it is already optimal). Given a policy, its value function can be obtained using the <strong>Bellman operator</strong>. </p>
-<p><em><strong>Value Iteration</strong></em> <a href="#1">[1]</a></p>
+<p>In this process, each policy is guaranteed to be a strict improvement over the previous one (unless it is already optimal). Given a policy, its value function can be obtained using the <strong>Bellman operator</strong>.</p>
+<p><strong><em>Value Iteration</em></strong> <a href="#1">[1]</a></p>
 <ul>
 <li>Start with a random value function;</li>
 <li>Then find a new (improved) value function in an iterative process, until reaching the optimal value function.</li>
 </ul>
-<p>The optimal policy can be easily derived from the optimal value function. This process is based on the <strong>optimality Bellman operator</strong>*. </p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/37370015/what-is-the-difference-between-value-iteration-and-policy-iteration">https://stackoverflow.com/questions/37370015/what-is-the-difference-between-value-iteration-and-policy-iteration</a></p>
-<p><a id="2">[2]</a> </p>
+<p>The optimal policy can be easily derived from the optimal value function. This process is based on the <strong>optimality Bellman operator</strong>*.</p>
+<h1 id="references">References</h1>
+<p><a id="1">[1]</a> https://stackoverflow.com/questions/37370015/what-is-the-difference-between-value-iteration-and-policy-iteration</p>
+<p><a id="2">[2]</a></p>
 
     </div>
 
@@ -432,7 +434,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Policy-Iteration-and-Value-Iteration"><span class="nav-number">1.</span> <span class="nav-text">Policy Iteration and Value Iteration</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#policy-iteration-and-value-iteration"><span class="nav-number">1.</span> <span class="nav-text">Policy Iteration and Value Iteration</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -596,6 +598,61 @@ window.addEventListener('pjax:success', () => {
 
     <div id="pjax">
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

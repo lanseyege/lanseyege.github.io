@@ -329,16 +329,13 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="程序员数学防忽悠备忘录"><a href="#程序员数学防忽悠备忘录" class="headerlink" title="程序员数学防忽悠备忘录"></a>程序员数学防忽悠备忘录</h1><span id="more"></span>
-
+        <h1 id="程序员数学防忽悠备忘录">程序员数学防忽悠备忘录</h1>
+<span id="more"></span>
 <p>（未完待续。。。）</p>
-<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>本系列blog将涉猎一下内容</p>
-<ul>
-<li>测度论</li>
-<li>（勒贝格）积分</li>
-<li>泛函分析</li>
-</ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a id="1">[1]</a></p>
+<h2 id="内容">内容</h2>
+<p>本系列blog将涉猎一下内容 - 测度论 - （勒贝格）积分 - 泛函分析</p>
+<h3 id="参考">参考</h3>
+<p><a id="1">[1]</a></p>
 
     </div>
 
@@ -588,6 +585,61 @@ window.addEventListener('pjax:success', () => {
 
     <div id="pjax">
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

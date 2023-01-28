@@ -329,17 +329,18 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Offline-Reinforcement-Learning"><a href="#Offline-Reinforcement-Learning" class="headerlink" title="Offline Reinforcement Learning"></a>Offline Reinforcement Learning</h1><span id="more"></span>
-
-<p>The goal of Offline Reinforcement Learning to to learn near-optimal policies from previously collectd data<a href="#1">[1]</a>. The following picture shows the difference among online RL, off-poliyc RL and offline RL. </p>
-<img src="/images/pic/off.png">
-
-<p>In a lot of practical scenes, the huge amount on-time interaction between agent and environments is impossible, either because data collection is expensive (e.g., in robotics, educational agents, or healthcare) and dangerous (e.g., in autonomous driving, or healthcare). That’s why the offline RL is gathering people’s eyes. </p>
-<h2 id="The-Difficulties-of-Offline-RL"><a href="#The-Difficulties-of-Offline-RL" class="headerlink" title="The Difficulties of Offline RL"></a>The Difficulties of Offline RL</h2><p>The most <strong>obvious challenge</strong> with offline RL is that, because the learning algorithm must rely entirely on the static dataset, there is no possibility of improving exploration: exploration is outside the scope of the algorithm. </p>
-<p>A another challenge with offline RL is that RL is about making and answering <strong>counterfactual queries</strong>.  We expect the learned policy to perform better than the behavior seen in the dataset, so we must execute a sequence of actions that is in some way different. The fundamental challenge with making counterfactual queries is <strong>distributional shift</strong>, the learned policy is trained under one distribution, it will be evaluated on a different distribution. </p>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>Levine, Sergey, et al. “Offline reinforcement learning: Tutorial, review, and perspectives on open problems.” arXiv preprint arXiv:2005.01643 (2020).</p>
-<p><a id="2">[2]</a><br>Schulman, J., Abbeel, P., and Chen, X.  Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
-<p><a id="3">[3]</a><br>Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
+        <h1 id="offline-reinforcement-learning">Offline Reinforcement Learning</h1>
+<span id="more"></span>
+<p>The goal of Offline Reinforcement Learning to to learn near-optimal policies from previously collectd data<a href="#1">[1]</a>. The following picture shows the difference among online RL, off-poliyc RL and offline RL.</p>
+<p><img src="/images/pic/off.png"></p>
+<p>In a lot of practical scenes, the huge amount on-time interaction between agent and environments is impossible, either because data collection is expensive (e.g., in robotics, educational agents, or healthcare) and dangerous (e.g., in autonomous driving, or healthcare). That's why the offline RL is gathering people's eyes.</p>
+<h2 id="the-difficulties-of-offline-rl">The Difficulties of Offline RL</h2>
+<p>The most <strong>obvious challenge</strong> with offline RL is that, because the learning algorithm must rely entirely on the static dataset, there is no possibility of improving exploration: exploration is outside the scope of the algorithm.</p>
+<p>A another challenge with offline RL is that RL is about making and answering <strong>counterfactual queries</strong>. We expect the learned policy to perform better than the behavior seen in the dataset, so we must execute a sequence of actions that is in some way different. The fundamental challenge with making counterfactual queries is <strong>distributional shift</strong>, the learned policy is trained under one distribution, it will be evaluated on a different distribution.</p>
+<h3 id="references">References</h3>
+<p><a id="1">[1]</a> Levine, Sergey, et al. "Offline reinforcement learning: Tutorial, review, and perspectives on open problems." arXiv preprint arXiv:2005.01643 (2020).</p>
+<p><a id="2">[2]</a> Schulman, J., Abbeel, P., and Chen, X. Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
+<p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
 
     </div>
 
@@ -423,7 +424,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Offline-Reinforcement-Learning"><span class="nav-number">1.</span> <span class="nav-text">Offline Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Difficulties-of-Offline-RL"><span class="nav-number">1.1.</span> <span class="nav-text">The Difficulties of Offline RL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.1.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#offline-reinforcement-learning"><span class="nav-number">1.</span> <span class="nav-text">Offline Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-difficulties-of-offline-rl"><span class="nav-number">1.1.</span> <span class="nav-text">The Difficulties of Offline RL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.1.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -587,6 +588,61 @@ window.addEventListener('pjax:success', () => {
 
     <div id="pjax">
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

@@ -331,16 +331,12 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="A-Generalized-Algorithm-for-Multi-ObjectiveReinforcement-Learning-and-Policy-Adaptation"><a href="#A-Generalized-Algorithm-for-Multi-ObjectiveReinforcement-Learning-and-Policy-Adaptation" class="headerlink" title="A Generalized Algorithm for Multi-ObjectiveReinforcement Learning and Policy Adaptation"></a>A Generalized Algorithm for Multi-ObjectiveReinforcement Learning and Policy Adaptation</h1><span id="more"></span>
-
-<h2 id="Multi-Objective-Reinforcement-Learning-MORL"><a href="#Multi-Objective-Reinforcement-Learning-MORL" class="headerlink" title="Multi-Objective Reinforcement Learning (MORL)"></a>Multi-Objective Reinforcement Learning (MORL)</h2><p>Multi-objective RL deals with learning control policies to simultaneously optimize over several criteria. In it, the optimal policy depends on the <code>relative preferences</code> among competing criteria. The MORL framework provides two distinct advanrages: </p>
-<ul>
-<li>reduced dependence on scalar reward design </li>
-<li>dynamic adaption or transfer to related tasks with different preferences<br>In this paper, the author’s algorithm is based on two key insights</li>
-<li>the optimality operator for a generalized version of Bellman equation with preferences is a valid contraction</li>
-<li>optimizing for the convex envelope of multi-objective Q-values ensure an efficient alignment between preferences and corresponding optimal policies.</li>
-</ul>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a id="1">[1]</a><br>Yang, Runzhe, Xingyuan Sun, and Karthik Narasimhan. “A generalized algorithm for multi-objective reinforcement learning and policy adaptation.” Advances in Neural Information Processing Systems. 2019.</p>
+        <h1 id="a-generalized-algorithm-for-multi-objectivereinforcement-learning-and-policy-adaptation">A Generalized Algorithm for Multi-ObjectiveReinforcement Learning and Policy Adaptation</h1>
+<span id="more"></span>
+<h2 id="multi-objective-reinforcement-learning-morl">Multi-Objective Reinforcement Learning (MORL)</h2>
+<p>Multi-objective RL deals with learning control policies to simultaneously optimize over several criteria. In it, the optimal policy depends on the <code>relative preferences</code> among competing criteria. The MORL framework provides two distinct advanrages: - reduced dependence on scalar reward design - dynamic adaption or transfer to related tasks with different preferences In this paper, the author's algorithm is based on two key insights - the optimality operator for a generalized version of Bellman equation with preferences is a valid contraction - optimizing for the convex envelope of multi-objective Q-values ensure an efficient alignment between preferences and corresponding optimal policies.</p>
+<h3 id="references">References</h3>
+<p><a id="1">[1]</a> Yang, Runzhe, Xingyuan Sun, and Karthik Narasimhan. "A generalized algorithm for multi-objective reinforcement learning and policy adaptation." Advances in Neural Information Processing Systems. 2019.</p>
 
     </div>
 
@@ -428,7 +424,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-Generalized-Algorithm-for-Multi-ObjectiveReinforcement-Learning-and-Policy-Adaptation"><span class="nav-number">1.</span> <span class="nav-text">A Generalized Algorithm for Multi-ObjectiveReinforcement Learning and Policy Adaptation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-Objective-Reinforcement-Learning-MORL"><span class="nav-number">1.1.</span> <span class="nav-text">Multi-Objective Reinforcement Learning (MORL)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">1.1.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#a-generalized-algorithm-for-multi-objectivereinforcement-learning-and-policy-adaptation"><span class="nav-number">1.</span> <span class="nav-text">A Generalized Algorithm for Multi-ObjectiveReinforcement Learning and Policy Adaptation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-objective-reinforcement-learning-morl"><span class="nav-number">1.1.</span> <span class="nav-text">Multi-Objective Reinforcement Learning (MORL)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.1.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -592,6 +588,61 @@ window.addEventListener('pjax:success', () => {
 
     <div id="pjax">
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

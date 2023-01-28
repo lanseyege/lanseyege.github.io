@@ -329,13 +329,16 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Regularized-MDP-and-IRL"><a href="#Regularized-MDP-and-IRL" class="headerlink" title="Regularized MDP and IRL"></a>Regularized MDP and IRL</h1><span id="more"></span>
-
-<p>Many recent successful deep reinforcement learning algorithms make use of regularization, generally based on entropy or KL divergence. The paper <a href="#1">[1]</a> propose a general theory of regularized MDP that generalizes these approaches in two directions: consider a larger class of regularizers, and consider the general modified policy iteration approach. <a href="#3">[3]</a> propose a general framework for entropy-regularized average-reward reinforcement learning in MDPs. <a href="#2">[2]</a> adopts the regularized theory into inverse reinforcement learning. </p>
-<h2 id="Entropy-Regularized-MDPs"><a href="#Entropy-Regularized-MDPs" class="headerlink" title="Entropy-Regularized MDPs"></a>Entropy-Regularized MDPs</h2><p>The optimal behavior policy can be formulated as the solution of the Bellman optimality equations. In unknown environments with partially known or misspecified models, greeedily solving these equations often results in policies that far from optimal in the true environment. The notion regularization offers a principled way of dealing with this issue; in particular, entropy regularization has proven to be one of the most successful tools. </p>
-<h2 id="Regularized-MDP"><a href="#Regularized-MDP" class="headerlink" title="Regularized MDP"></a>Regularized MDP</h2><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a id="1">[1]</a><br>@inproceedings{geist2019theory,<br>  title={A theory of regularized markov decision processes},<br>  author={Geist, Matthieu and Scherrer, Bruno and Pietquin, Olivier},<br>  booktitle={International Conference on Machine Learning},<br>  pages={2160–2169},<br>  year={2019},<br>  organization={PMLR}<br>}</p>
-<p><a id="2">[2]</a><br>@article{jeon2020regularized,<br>  title={Regularized Inverse Reinforcement Learning},<br>  author={Jeon, Wonseok and Su, Chen-Yang and Barde, Paul and Doan, Thang and Nowrouzezahrai, Derek and Pineau, Joelle},<br>  journal={arXiv preprint arXiv:2010.03691},<br>  year={2020}<br>}</p>
-<p><a id="3">[3]</a><br>@article{neu2017unified,<br>  title={A unified view of entropy-regularized markov decision processes},<br>  author={Neu, Gergely and Jonsson, Anders and G{'o}mez, Vicen{\c{c}}},<br>  journal={arXiv preprint arXiv:1705.07798},<br>  year={2017}<br>}</p>
+        <h1 id="regularized-mdp-and-irl">Regularized MDP and IRL</h1>
+<span id="more"></span>
+<p>Many recent successful deep reinforcement learning algorithms make use of regularization, generally based on entropy or KL divergence. The paper <a href="#1">[1]</a> propose a general theory of regularized MDP that generalizes these approaches in two directions: consider a larger class of regularizers, and consider the general modified policy iteration approach. <a href="#3">[3]</a> propose a general framework for entropy-regularized average-reward reinforcement learning in MDPs. <a href="#2">[2]</a> adopts the regularized theory into inverse reinforcement learning.</p>
+<h2 id="entropy-regularized-mdps">Entropy-Regularized MDPs</h2>
+<p>The optimal behavior policy can be formulated as the solution of the Bellman optimality equations. In unknown environments with partially known or misspecified models, greeedily solving these equations often results in policies that far from optimal in the true environment. The notion regularization offers a principled way of dealing with this issue; in particular, entropy regularization has proven to be one of the most successful tools.</p>
+<h2 id="regularized-mdp">Regularized MDP</h2>
+<h1 id="references">References</h1>
+<p><a id="1">[1]</a> <span class="citation" data-cites="inproceedings">@inproceedings</span>{geist2019theory, title={A theory of regularized markov decision processes}, author={Geist, Matthieu and Scherrer, Bruno and Pietquin, Olivier}, booktitle={International Conference on Machine Learning}, pages={2160--2169}, year={2019}, organization={PMLR} }</p>
+<p><a id="2">[2]</a> <span class="citation" data-cites="article">@article</span>{jeon2020regularized, title={Regularized Inverse Reinforcement Learning}, author={Jeon, Wonseok and Su, Chen-Yang and Barde, Paul and Doan, Thang and Nowrouzezahrai, Derek and Pineau, Joelle}, journal={arXiv preprint arXiv:2010.03691}, year={2020} }</p>
+<p><a id="3">[3]</a> <span class="citation" data-cites="article">@article</span>{neu2017unified, title={A unified view of entropy-regularized markov decision processes}, author={Neu, Gergely and Jonsson, Anders and G{'o}mez, Vicen{}}, journal={arXiv preprint arXiv:1705.07798}, year={2017} }</p>
 
     </div>
 
@@ -421,7 +424,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Regularized-MDP-and-IRL"><span class="nav-number">1.</span> <span class="nav-text">Regularized MDP and IRL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Entropy-Regularized-MDPs"><span class="nav-number">1.1.</span> <span class="nav-text">Entropy-Regularized MDPs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regularized-MDP"><span class="nav-number">1.2.</span> <span class="nav-text">Regularized MDP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#regularized-mdp-and-irl"><span class="nav-number">1.</span> <span class="nav-text">Regularized MDP and IRL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#entropy-regularized-mdps"><span class="nav-number">1.1.</span> <span class="nav-text">Entropy-Regularized MDPs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regularized-mdp"><span class="nav-number">1.2.</span> <span class="nav-text">Regularized MDP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -585,6 +588,61 @@ window.addEventListener('pjax:success', () => {
 
     <div id="pjax">
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
