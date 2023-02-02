@@ -1,4 +1,14 @@
+---
+useMath: true
+title: 'Asking-Qustions-Seeking-Answers 第一章 什么是哲学？'
+mathjax: true
+date: 2023-02-02
+permalink: /posts/2023/02/blog-post-72/
+---
+
 # 第一章 什么是哲学？
+
+<!-- more -->
 
 ## 1.哲学，无处不在
 
