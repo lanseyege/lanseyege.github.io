@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"lanseyege.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Offline Reinforcement Learning">
+  <meta name="description" content="Offline Reinforcement Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Offline Reinforcement Learning">
 <meta property="og:url" content="http://lanseyege.github.io/posts/2020/08/blog-post-7/index.html">
 <meta property="og:site_name" content="Ye Yuan">
-<meta property="og:description" content="Offline Reinforcement Learning">
+<meta property="og:description" content="Offline Reinforcement Learning">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://lanseyege.github.io/images/pic/off.png">
 <meta property="article:published_time" content="2020-08-26T16:00:00.000Z">
@@ -329,18 +329,43 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="offline-reinforcement-learning">Offline Reinforcement Learning</h1>
+        <h1 id="offline-reinforcement-learning">Offline Reinforcement
+Learning</h1>
 <span id="more"></span>
-<p>The goal of Offline Reinforcement Learning to to learn near-optimal policies from previously collectd data<a href="#1">[1]</a>. The following picture shows the difference among online RL, off-poliyc RL and offline RL.</p>
+<p>The goal of Offline Reinforcement Learning to to learn near-optimal
+policies from previously collectd data<a href="#1">[1]</a>. The
+following picture shows the difference among online RL, off-poliyc RL
+and offline RL.</p>
 <p><img src="/images/pic/off.png"></p>
-<p>In a lot of practical scenes, the huge amount on-time interaction between agent and environments is impossible, either because data collection is expensive (e.g., in robotics, educational agents, or healthcare) and dangerous (e.g., in autonomous driving, or healthcare). That's why the offline RL is gathering people's eyes.</p>
-<h2 id="the-difficulties-of-offline-rl">The Difficulties of Offline RL</h2>
-<p>The most <strong>obvious challenge</strong> with offline RL is that, because the learning algorithm must rely entirely on the static dataset, there is no possibility of improving exploration: exploration is outside the scope of the algorithm.</p>
-<p>A another challenge with offline RL is that RL is about making and answering <strong>counterfactual queries</strong>. We expect the learned policy to perform better than the behavior seen in the dataset, so we must execute a sequence of actions that is in some way different. The fundamental challenge with making counterfactual queries is <strong>distributional shift</strong>, the learned policy is trained under one distribution, it will be evaluated on a different distribution.</p>
+<p>In a lot of practical scenes, the huge amount on-time interaction
+between agent and environments is impossible, either because data
+collection is expensive (e.g., in robotics, educational agents, or
+healthcare) and dangerous (e.g., in autonomous driving, or healthcare).
+That's why the offline RL is gathering people's eyes.</p>
+<h2 id="the-difficulties-of-offline-rl">The Difficulties of Offline
+RL</h2>
+<p>The most <strong>obvious challenge</strong> with offline RL is that,
+because the learning algorithm must rely entirely on the static dataset,
+there is no possibility of improving exploration: exploration is outside
+the scope of the algorithm.</p>
+<p>A another challenge with offline RL is that RL is about making and
+answering <strong>counterfactual queries</strong>. We expect the learned
+policy to perform better than the behavior seen in the dataset, so we
+must execute a sequence of actions that is in some way different. The
+fundamental challenge with making counterfactual queries is
+<strong>distributional shift</strong>, the learned policy is trained
+under one distribution, it will be evaluated on a different
+distribution.</p>
 <h3 id="references">References</h3>
-<p><a id="1">[1]</a> Levine, Sergey, et al. "Offline reinforcement learning: Tutorial, review, and perspectives on open problems." arXiv preprint arXiv:2005.01643 (2020).</p>
-<p><a id="2">[2]</a> Schulman, J., Abbeel, P., and Chen, X. Equivalence be-tween policy gradients and soft Q-learning.arXiv preprintarXiv:1704.06440, 2017a.</p>
-<p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2370–2378, 2016</p>
+<p><a id="1">[1]</a> Levine, Sergey, et al. "Offline reinforcement
+learning: Tutorial, review, and perspectives on open problems." arXiv
+preprint arXiv:2005.01643 (2020).</p>
+<p><a id="2">[2]</a> Schulman, J., Abbeel, P., and Chen, X. Equivalence
+be-tween policy gradients and soft Q-learning.arXiv
+preprintarXiv:1704.06440, 2017a.</p>
+<p><a id="3">[3]</a> Liu, Q. and Wang, D. Stein variational gradient
+descent: A general purpose bayesian inference algorithm. In Advances In
+Neural Information Processing Systems, pp. 2370–2378, 2016</p>
 
     </div>
 
@@ -424,7 +449,9 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#offline-reinforcement-learning"><span class="nav-number">1.</span> <span class="nav-text">Offline Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-difficulties-of-offline-rl"><span class="nav-number">1.1.</span> <span class="nav-text">The Difficulties of Offline RL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.1.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#offline-reinforcement-learning"><span class="nav-number">1.</span> <span class="nav-text">Offline Reinforcement
+Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-difficulties-of-offline-rl"><span class="nav-number">1.1.</span> <span class="nav-text">The Difficulties of Offline
+RL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#references"><span class="nav-number">1.1.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -438,12 +465,12 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">73</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">123</span>
+        <span class="site-state-item-count">124</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
